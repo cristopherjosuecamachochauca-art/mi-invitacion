@@ -4,202 +4,243 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wilson & Erika | Nuestra Unión</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@200;300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --fondo: #FDFBF8;
-            --dorado: #9C7C38;
-            --texto: #2D2A26;
+            --crema-claro: #FDF5E6;
             --blanco: #FFFFFF;
+            --dorado-bronce: #A68942;
+            --texto: #4A443F;
+            --sombra: rgba(0, 0, 0, 0.08);
         }
 
-        * { box-sizing: border-box; scroll-behavior: smooth; }
+        * { box-sizing: border-box; }
         body { 
-            margin: 0; background-color: var(--fondo); color: var(--texto); 
-            font-family: 'Montserrat', sans-serif; overflow-x: hidden;
-            text-align: center;
+            margin: 0; background-color: #EFEBE7; color: var(--texto); 
+            font-family: 'Cormorant Garamond', serif; overflow: hidden;
+            display: flex; justify-content: center; align-items: center; height: 100vh;
         }
 
-        /* --- ANIMACIONES DE ENTRADA --- */
-        .fade-in { opacity: 0; transform: translateY(30px); transition: all 1.4s cubic-bezier(0.25, 1, 0.5, 1); }
-        .visible { opacity: 1; transform: translateY(0); }
-
-        .container { max-width: 650px; margin: 0 auto; padding: 60px 25px; }
-
-        /* --- CABECERA --- */
-        .intro-grace { font-family: 'Bodoni Moda', serif; font-size: 1.1rem; letter-spacing: 2px; color: var(--dorado); margin-bottom: 20px; }
-        .intro-desc { font-weight: 300; font-size: 0.95rem; line-height: 1.8; max-width: 85%; margin: 0 auto 40px; }
-
-        .celebration-title { font-family: 'Bodoni Moda', serif; font-size: 1.2rem; letter-spacing: 4px; color: var(--dorado); margin: 40px 0 10px; }
-        .names-main { font-family: 'Great Vibes', cursive; font-size: 5rem; color: var(--dorado); margin: 0; }
-        .and-text { font-family: 'Bodoni Moda', serif; font-size: 1.2rem; margin: 5px 0; }
-        .daughter-name { font-family: 'Great Vibes', cursive; font-size: 4rem; color: var(--dorado); margin: 10px 0 40px; }
-
-        /* --- FOTO --- */
-        .photo-frame {
-            margin: 50px auto; width: 100%; max-width: 500px;
-            padding: 15px; background: var(--blanco);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.05);
-        }
-        .photo-frame img { width: 100%; display: block; border: 1px solid #f9f9f9; }
-
-        /* --- SECCIÓN PADRINOS --- */
-        .section-label { font-size: 0.8rem; letter-spacing: 4px; color: var(--dorado); font-weight: 600; text-transform: uppercase; margin-bottom: 25px; }
-        .padrinos-card {
-            margin: 40px 0; padding: 50px 20px;
-            border-top: 1px solid rgba(156, 124, 56, 0.2);
-            border-bottom: 1px solid rgba(156, 124, 56, 0.2);
-        }
-        .padrino-item { margin-bottom: 35px; }
-        .padrino-item:last-child { margin-bottom: 0; }
-        .padrino-item h3 { font-family: 'Bodoni Moda', serif; font-size: 0.9rem; letter-spacing: 2px; color: var(--dorado); margin-bottom: 10px; }
-        .padrino-item p { font-size: 1.05rem; font-weight: 400; text-transform: uppercase; letter-spacing: 1px; margin: 5px 0; }
-
-        /* --- DETALLES LOGÍSTICOS --- */
-        .details-box { margin: 60px 0; }
-        .detail-row { margin: 20px 0; font-size: 1.1rem; letter-spacing: 2px; }
-        .detail-row b { color: var(--dorado); font-family: 'Bodoni Moda', serif; font-size: 1.3rem; }
-
-        /* --- BOTONES --- */
-        .btn {
-            display: block; width: 100%; max-width: 340px; margin: 20px auto;
-            padding: 22px; text-decoration: none; font-size: 0.8rem;
-            letter-spacing: 3px; font-weight: 600; transition: 0.4s;
-            text-transform: uppercase;
-        }
-        .btn-gold { background: var(--dorado); color: var(--blanco); border: none; box-shadow: 0 10px 25px rgba(156, 124, 56, 0.2); }
-        .btn-outline { border: 1px solid var(--dorado); color: var(--dorado); }
-        .btn:hover { background: var(--texto); color: var(--blanco); transform: translateY(-3px); }
-
-        /* --- FRASE FINAL CENTRALIZADA --- */
-        .final-quote-container {
-            margin-top: 100px; padding: 80px 20px;
-            background: rgba(156, 124, 56, 0.04);
+        /* --- ESCENA DEL SOBRE (CARTA REALISTA) --- */
+        #envelope-container {
+            position: relative; width: 100%; max-width: 420px; height: 300px;
+            background-color: var(--crema-claro); border-radius: 5px;
+            box-shadow: 0 20px 40px var(--sombra); cursor: pointer;
+            z-index: 2000; transition: transform 0.8s ease, opacity 0.8s ease;
             display: flex; justify-content: center; align-items: center;
         }
+
+        /* Solapa del sobre */
+        .flap {
+            position: absolute; top: 0; left: 0; width: 0; height: 0;
+            border-left: 210px solid transparent; border-right: 210px solid transparent;
+            border-top: 160px solid #E5DED0; z-index: 3;
+            transform-origin: top; transition: transform 0.6s ease;
+        }
+
+        .envelope-body {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--crema-claro); border: 1px solid #E2D9C8; z-index: 2;
+        }
+
+        .seal {
+            position: absolute; top: 120px; left: calc(50% - 40px);
+            width: 80px; height: 80px; background-color: var(--dorado-bronce);
+            border-radius: 50%; z-index: 4; display: flex; justify-content: center;
+            align-items: center; color: white; font-family: 'Cinzel', serif;
+            font-size: 0.8rem; letter-spacing: 2px; font-weight: 700;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: transform 0.4s;
+        }
+        .seal:hover { transform: scale(1.1); }
+
+        .envelope-text {
+            font-family: 'Cinzel', serif; font-size: 1.5rem; letter-spacing: 3px;
+            color: var(--dorado-bronce); margin-top: 60px; z-index: 5; position: relative;
+        }
+
+        /* Animación de apertura */
+        .open-envelope .flap { transform: rotateX(180deg); z-index: 1; }
+        .open-envelope { transform: translateY(300px); opacity: 0; pointer-events: none; }
+
+        /* --- CONTENIDO DE LA INVITACIÓN --- */
+        #main-card {
+            opacity: 0; visibility: hidden; width: 95%; max-width: 600px;
+            height: 90vh; background-color: var(--blanco); overflow-y: auto;
+            position: absolute; z-index: 1; border: 1px solid var(--dorado-bronce);
+            padding: 60px 30px; transition: opacity 1s ease 0.5s, visibility 1s;
+            box-shadow: 0 0 50px rgba(0,0,0,0.05);
+        }
+
+        /* --- FLORES ANIMADAS (MOVIMIENTO REAL) --- */
+        .flower {
+            position: fixed; width: 200px; opacity: 0.4; pointer-events: none;
+            z-index: 500; animation: sway 8s infinite ease-in-out;
+        }
+        .f1 { top: -40px; left: -40px; }
+        .f2 { bottom: -40px; right: -40px; transform: rotate(180deg); }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-5deg) scale(1); }
+            50% { transform: rotate(5deg) scale(1.05) translate(10px, 10px); }
+        }
+
+        /* --- DISEÑO DE TITULOS Y TEXTO --- */
+        .fade-in { opacity: 0; transform: translateY(25px); transition: 1.2s all ease-out; }
+        .visible { opacity: 1; transform: translateY(0); }
+
+        .title-gold {
+            font-family: 'Cinzel', serif; font-size: 1rem; letter-spacing: 5px;
+            color: var(--dorado-bronce); font-weight: 700; margin-bottom: 20px;
+        }
+
+        .names {
+            font-family: 'Cinzel', serif; font-size: 3rem; color: var(--texto);
+            margin: 15px 0; font-weight: 700; border-top: 1px solid var(--dorado-bronce);
+            border-bottom: 1px solid var(--dorado-bronce); display: inline-block; padding: 10px 20px;
+        }
+
+        .daughter {
+            font-family: 'Cinzel', serif; font-size: 2.2rem; color: var(--dorado-bronce);
+            margin: 10px 0 40px;
+        }
+
+        .photo-frame {
+            border: 1px solid var(--dorado-bronce); padding: 10px; margin: 40px auto;
+            max-width: 450px; background: white;
+        }
+        .photo-frame img { width: 100%; display: block; }
+
+        .padrinos-section {
+            background-color: var(--crema-claro); padding: 40px 20px; margin: 50px 0;
+            border-radius: 2px; border: 1px solid rgba(166, 137, 66, 0.1);
+        }
+
+        .btn {
+            display: inline-block; width: 100%; max-width: 300px; padding: 20px;
+            margin: 15px 0; text-decoration: none; font-family: 'Cinzel', serif;
+            font-size: 0.8rem; letter-spacing: 3px; font-weight: 700;
+            transition: 0.4s; text-transform: uppercase;
+        }
+        .btn-gold { background: var(--dorado-bronce); color: white; border: none; }
+        .btn-outline { border: 1px solid var(--dorado-bronce); color: var(--dorado-bronce); }
+        .btn:hover { background: var(--texto); color: white; transform: translateY(-3px); }
+
         .final-quote {
-            font-family: 'Bodoni Moda', serif; font-style: italic;
-            font-size: 2.2rem; color: var(--dorado);
-            line-height: 1.4; max-width: 580px;
+            font-size: 2.2rem; font-style: italic; color: var(--dorado-bronce);
+            margin: 100px auto 40px; line-height: 1.4; max-width: 500px;
         }
 
         /* --- MÚSICA --- */
         .music-btn {
-            position: fixed; bottom: 30px; left: 30px; z-index: 1000;
-            background: var(--blanco); padding: 12px 25px; border-radius: 2px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08); display: flex; align-items: center;
-            border-left: 4px solid var(--dorado); cursor: pointer;
+            position: fixed; bottom: 20px; left: 20px; z-index: 3000;
+            background: white; border: 1px solid var(--dorado-bronce);
+            padding: 10px 20px; font-family: 'Cinzel', serif; font-size: 0.6rem;
+            cursor: pointer; display: none;
         }
-        .music-btn span { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; margin-left: 10px; color: var(--dorado); }
 
         @media (max-width: 600px) {
-            .names-main { font-size: 3.8rem; }
-            .daughter-name { font-size: 3.2rem; }
+            .names { font-size: 1.8rem; }
+            .daughter { font-size: 1.5rem; }
             .final-quote { font-size: 1.6rem; }
+            .flower { width: 130px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div id="envelope-container" onclick="openLetter()">
+        <div class="flap"></div>
+        <div class="envelope-body">
+            <div class="envelope-text">W & E</div>
+        </div>
+        <div class="seal">CLICK</div>
+    </div>
+
+    <div id="main-card">
+        <img src="https://i.postimg.cc/k47vBq3Y/pampas-floral.png" class="flower f1">
+        <img src="https://i.postimg.cc/k47vBq3Y/pampas-floral.png" class="flower f2">
+
         <header class="fade-in">
-            <div class="intro-grace">CON PROFUNDA ALEGRÍA Y BAJO LA GRACIA DE DIOS</div>
-            <div class="intro-desc">
-                Nos complace invitarte a ser parte de un momento único e inolvidable en nuestras vidas, donde el amor y la fe se unen en una sola celebración:
-            </div>
+            <div class="title-gold">CON PROFUNDA ALEGRÍA Y BAJO LA GRACIA DE DIOS</div>
+            <p style="font-size: 1.1rem; max-width: 80%; margin: 0 auto;">Nos complace invitarte a ser parte de un momento único en nuestras vidas, donde el amor y la fe se unen:</p>
         </header>
 
-        <div class="fade-in">
-            <div class="celebration-title">NUESTRA BODA</div>
-            <h1 class="names-main">Wilson & Erika</h1>
-            <div class="and-text">Junto al Bautizo de nuestra amada hija</div>
-            <div class="daughter-name">Ailany Cataleya</div>
+        <div class="fade-in" style="margin-top: 50px;">
+            <div class="title-gold" style="font-size: 0.8rem;">💍 NUESTRA BODA</div>
+            <h1 class="names">WILSON & ERIKA</h1>
+            <div style="margin-top: 30px;">Y el bautizo de nuestra amada hija</div>
+            <h2 class="daughter">AILANY CATALEYA</h2>
         </div>
 
         <div class="photo-frame fade-in">
             <img src="https://i.postimg.cc/5yrRY29V/Whats-App-Image-2026-04-18-at-3-53-29-PM.jpg" alt="Wilson y Erika">
         </div>
 
-        <div class="padrinos-card fade-in">
-            <div class="section-label">Acompañados con cariño por:</div>
-            
-            <div class="padrino-item">
-                <h3>PADRINOS DE BODA</h3>
-                <p>José María Chauca</p>
-                <p>Blanca Guallpa</p>
+        <div class="padrinos-section fade-in">
+            <div class="title-gold" style="font-size: 0.7rem;">ACOMPAÑADOS CON CARIÑO POR:</div>
+            <div style="margin-bottom: 30px;">
+                <b style="letter-spacing: 2px;">PADRINOS DE BODA</b><br>
+                JOSE MARÍA CHAUCA<br>BLANCA GUALLPA
             </div>
-            
-            <div class="padrino-item">
-                <h3>PADRINOS DE BAUTIZO</h3>
-                <p>Carlos Fajardo</p>
-                <p>Teresa Chauca</p>
+            <div>
+                <b style="letter-spacing: 2px;">PADRINOS DE BAUTIZO</b><br>
+                CARLOS FAJARDO<br>TERESA CHAUCA
             </div>
         </div>
 
-        <div class="details-box fade-in">
-            <div class="detail-row">FECHA: <b>22 de Agosto 2026</b></div>
-            <div class="detail-row">HORA: <b>3:30 PM</b></div>
-            <div class="detail-row">LUGAR: <b>Santuario de la Virgen del Rocío</b></div>
-            <p style="font-size: 0.8rem; letter-spacing: 1px; color: #888;">BIBLIÁN, ECUADOR</p>
+        <div class="fade-in" style="margin: 60px 0;">
+            <p>FECHA: <b>22 DE AGOSTO 2026</b></p>
+            <p>HORA: <b>3:30 PM</b></p>
+            <p style="margin-top: 30px; letter-spacing: 2px; color: var(--dorado-bronce); font-weight: 700;">SANTUARIO DE LA VIRGEN DEL ROCÍO</p>
+            <p style="font-size: 0.9rem;">BIBLIÁN</p>
         </div>
 
         <div class="fade-in">
-            <a href="https://www.google.com/maps/search/?api=1&query=Santuario+de+la+Virgen+del+Roc%C3%ADo+Bibli%C3%A1n" target="_blank" class="btn btn-gold">VER UBICACIÓN EN MAPAS</a>
-            <a href="https://wa.me/593987311469?text=Es+un+honor+confirmar+nuestra+asistencia+a+vuestro+evento." target="_blank" class="btn btn-outline">CONFIRMAR ASISTENCIA</a>
+            <a href="https://maps.app.goo.gl/wK44q4E8S9f9W2F76" target="_blank" class="btn btn-gold">VER UBICACIÓN EN GPS</a>
+            <a href="https://wa.me/593987311469" target="_blank" class="btn btn-outline">CONFIRMAR ASISTENCIA</a>
         </div>
 
-        <div class="final-quote-container fade-in">
-            <div class="final-quote">
-                "El amor nos ha llevado a este momento mágico. Los invitamos a ser testigos de nuestra promesa de amor."
-            </div>
+        <div class="final-quote fade-in">
+            "El amor nos ha llevado a este momento mágico. Los invitamos a ser testigos de nuestra promesa de amor eterno."
         </div>
     </div>
 
-    <div class="music-btn" onclick="toggleMusic()">
-        <div id="playBtn" style="width: 0; height: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 10px solid var(--dorado);"></div>
-        <span>ESCUCHAR MELODÍA</span>
-    </div>
+    <button class="music-btn" id="mBtn" onclick="toggleMusic()">MÚSICA: ON/OFF</button>
 
     <div id="youtube-player"></div>
 
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-        // Aparición suave al deslizar
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add("visible");
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+        function openLetter() {
+            document.getElementById('envelope-container').classList.add('open-envelope');
+            const card = document.getElementById('main-card');
+            card.style.visibility = 'visible';
+            card.style.opacity = '1';
+            document.body.style.overflow = 'auto';
+            document.getElementById('mBtn').style.display = 'block';
+            
+            // Iniciar animaciones de aparición
+            setTimeout(() => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) entry.target.classList.add("visible");
+                    });
+                }, { threshold: 0.1 });
+                document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+            }, 600);
+        }
 
         let player;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
                 height: '0', width: '0', videoId: 'ISrzMO-F53w',
-                playerVars: { 
-                    'autoplay': 0, 
-                    'loop': 1, 
-                    'playlist': 'ISrzMO-F53w',
-                    'modestbranding': 1,
-                    'controls': 0
-                }
+                playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': 'ISrzMO-F53w' }
             });
         }
 
         function toggleMusic() {
-            const btn = document.getElementById('playBtn');
-            if (player.getPlayerState() === 1) {
-                player.pauseVideo();
-                btn.style.border = "none";
-                btn.style.width = "10px"; btn.style.height = "10px"; btn.style.background = "var(--dorado)";
-            } else {
-                player.playVideo();
-                btn.style.background = "none";
-                btn.style.borderTop = "6px solid transparent";
-                btn.style.borderBottom = "6px solid transparent";
-                btn.style.borderLeft = "10px solid var(--dorado)";
-            }
+            if (player.getPlayerState() === 1) { player.pauseVideo(); } 
+            else { player.playVideo(); }
         }
     </script>
 </body>
