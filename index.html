@@ -6,10 +6,9 @@
 
 <title>Wilson & Erika</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Great+Vibes&family=Cormorant+Garamond:wght@300;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@500;700&family=Cormorant+Garamond:wght@300;500&display=swap" rel="stylesheet">
 
 <style>
-
 :root{
     --crema:#fdfaf6;
     --blanco:#ffffff;
@@ -19,9 +18,19 @@
 
 body{
     margin:0;
-    background: var(--crema);
+    background:var(--crema);
     font-family:'Cormorant Garamond', serif;
     overflow:hidden;
+}
+
+/* FLORES */
+body::before{
+    content:"";
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:url('https://www.transparenttextures.com/patterns/floral-white.png');
+    opacity:0.25;
 }
 
 /* SOBRE */
@@ -37,100 +46,93 @@ body{
 }
 
 .carta{
-    width:320px;
-    padding:40px;
     background:var(--blanco);
+    padding:50px;
     border:1px solid #eee;
-    box-shadow:0 15px 40px rgba(0,0,0,0.1);
+    box-shadow:0 20px 50px rgba(0,0,0,0.1);
     text-align:center;
     cursor:pointer;
-    transition:.3s;
+    transition:.4s;
 }
 
 .carta:hover{
-    transform:scale(1.03);
+    transform:scale(1.05);
 }
 
 .carta h1{
     font-family:'Great Vibes', cursive;
-    font-size:40px;
+    font-size:45px;
     color:var(--dorado);
-}
-
-.carta p{
-    letter-spacing:3px;
-    font-size:12px;
 }
 
 /* CONTENIDO */
 #contenido{
     display:none;
-    padding:50px 20px;
-    max-width:700px;
+    padding:60px 20px;
+    max-width:750px;
     margin:auto;
     text-align:center;
+    animation:fade 1.5s ease;
 }
 
-/* FLORES SUAVES */
-body::before{
-    content:"";
-    position:fixed;
-    width:100%;
-    height:100%;
-    background:url('https://www.transparenttextures.com/patterns/white-floral.png');
-    opacity:0.2;
+@keyframes fade{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1;}
 }
 
 /* TEXTOS */
 .titulo{
     font-family:'Playfair Display', serif;
-    letter-spacing:2px;
     color:var(--dorado);
 }
 
 .nombres{
     font-family:'Great Vibes', cursive;
-    font-size:60px;
+    font-size:65px;
     color:var(--dorado);
 }
 
 .bebe{
     font-family:'Playfair Display', serif;
-    font-size:35px;
-    color:#444;
+    font-size:38px;
 }
 
-.detalles{
-    margin-top:30px;
-    line-height:2;
+/* FOTO */
+.foto{
+    margin:40px auto;
+    max-width:450px;
+    padding:10px;
+    background:white;
+    box-shadow:0 15px 40px rgba(0,0,0,0.1);
+}
+.foto img{
+    width:100%;
 }
 
 /* MARCO */
 .marco{
+    margin:40px 0;
+    padding:25px;
+    background:white;
     border:1px solid #eee;
-    padding:20px;
-    margin:30px 0;
-    background:var(--blanco);
-    box-shadow:0 10px 30px rgba(0,0,0,0.05);
 }
 
-/* BOTONES */
+/* BOTÓN */
 .btn{
     display:block;
-    margin:15px auto;
+    margin:20px auto;
     padding:15px;
     width:250px;
-    text-decoration:none;
     border:1px solid var(--dorado);
     color:var(--dorado);
-    transition:.3s;
+    text-decoration:none;
 }
-
 .btn:hover{
     background:var(--dorado);
     color:white;
 }
 
+/* FRASE */
 .frase{
     margin-top:60px;
     font-style:italic;
@@ -162,6 +164,11 @@ body::before{
 
     <div class="bebe">Ailany Cataleya</div>
 
+    <!-- FOTO AQUÍ -->
+    <div class="foto">
+        <img src="Foto.jpeg" alt="Foto especial">
+    </div>
+
     <div class="marco">
         <p><b>Padrinos de boda</b></p>
         <p>José María Chauca</p>
@@ -172,19 +179,25 @@ body::before{
         <p>Teresa Chauca</p>
     </div>
 
-    <div class="detalles">
-        <p><b>Fecha:</b> 22 de agosto 2026</p>
-        <p><b>Hora:</b> 3:30 PM</p>
-        <p><b>Lugar:</b> Santuario de la Virgen del Rocío</p>
-    </div>
+    <p><b>Fecha:</b> 22 de agosto 2026</p>
+    <p><b>Hora:</b> 3:30 PM</p>
+    <p><b>Lugar:</b> Santuario de la Virgen del Rocío</p>
 
-    <a class="btn" href="https://wa.me/593987311469">Confirmar asistencia</a>
+    <a class="btn" href="https://wa.me/593987311469">
+        Confirmar asistencia
+    </a>
 
     <div class="frase">
-        "El amor nos ha llevado a este momento mágico. Los invitamos a ser testigos de nuestra promesa de amor."
+        "El amor nos ha llevado a este momento mágico. 
+        Los invitamos a ser testigos de nuestra promesa de amor."
     </div>
 
 </div>
+
+<!-- MÚSICA -->
+<iframe width="0" height="0"
+src="https://www.youtube.com/embed/ISrzMO-F53w?autoplay=1&loop=1&playlist=ISrzMO-F53w"
+frameborder="0" allow="autoplay"></iframe>
 
 <script>
 function abrir(){
