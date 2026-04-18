@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Boda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0; padding: 0; font-family: 'Montserrat', sans-serif;
+            background-color: #fffaf0; text-align: center; color: #4a4a4a;
+        }
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+            url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+            height: 80vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; color: white;
+        }
+        h1 { font-family: 'Great Vibes', cursive; font-size: 5rem; margin: 0; }
+        .section { padding: 50px 20px; }
+        .date { font-size: 1.5rem; letter-spacing: 3px; color: #d4af37; font-weight: bold; }
+        .btn {
+            display: inline-block; padding: 15px 30px; background: #d4af37;
+            color: white; text-decoration: none; border-radius: 50px;
+            margin-top: 20px; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .countdown { font-size: 2rem; margin: 20px 0; color: #d4af37; }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <p>ESTÁS INVITADO A LA BODA DE</p>
+        <h1>Tú & Tu Pareja</h1>
+        <p>¡NOS CASAMOS!</p>
+    </div>
+
+    <div class="section">
+        <div class="date">15 . MAYO . 2026</div>
+        <p>A las 18:00 horas</p>
+        
+        <div id="reloj" class="countdown"></div>
+
+        <h3>Lugar</h3>
+        <p>Hacienda Los Olivos<br>Calle Principal #123, Ciudad</p>
+        
+        <a href="https://wa.me/TUNUMERO?text=Confirmamos+asistencia" class="btn">Confirmar por WhatsApp</a>
+    </div>
+
+    <script>
+        const weddingDate = new Date("May 15, 2026 18:00:00").getTime();
+        setInterval(function() {
+            const now = new Date().getTime();
+            const d = weddingDate - now;
+            const days = Math.floor(d / (1000 * 60 * 60 * 24));
+            document.getElementById("reloj").innerHTML = days + " días para el gran día";
+        }, 1000);
+    </script>
+</body>
+</html>
