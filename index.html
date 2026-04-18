@@ -4,186 +4,156 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wilson & Erika | Una Unión Sagrada</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@200;300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
         :root {
-            --crema-seda: #FAF5EF;
+            --fondo: #FDFBF8;
+            --dorado: #9C7C38;
+            --dorado-brillo: #D4AF37;
+            --texto: #2D2A26;
             --blanco: #FFFFFF;
-            --dorado-mate: #C5A059;
-            --texto-oscuro: #3A3530;
-            --lineas: rgba(197, 160, 89, 0.2);
         }
 
         * { box-sizing: border-box; scroll-behavior: smooth; }
         
         body { 
-            margin: 0; background-color: var(--crema-seda); color: var(--texto-oscuro); 
-            font-family: 'Cormorant Garamond', serif; overflow: hidden; /* Evita scroll antes de abrir */
+            margin: 0; background-color: var(--fondo); color: var(--texto); 
+            font-family: 'Montserrat', sans-serif; overflow: hidden; /* Evita scroll antes de abrir */
             text-align: center; display: flex; justify-content: center; align-items: center; height: 100vh;
         }
 
-        /* --- PANTALLA DE INICIO: SOBRE DE CARTA ANIMADO (ESPAÑOL) --- */
+        /* --- PANTALLA DE INICIO (SOBRE) --- */
         #envelope-scene {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--crema-seda); display: flex; justify-content: center; align-items: center;
+            background-color: var(--fondo); display: flex; justify-content: center; align-items: center;
             z-index: 1000; transition: opacity 1s ease, transform 1s ease;
-            cursor: pointer;
         }
 
-        .envelope-wrapper {
-            width: 90%; max-width: 450px; position: relative;
-            transition: transform 1s ease;
+        .envelope {
+            width: 90%; max-width: 400px; padding: 30px;
+            background: #f8f1e7; border: 1px solid rgba(156, 124, 56, 0.3);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            position: relative; cursor: pointer;
+            transition: transform 0.3s;
         }
+        .envelope:hover { transform: scale(1.02); }
 
-        /* Solapa Triangular del Sobre */
-        .envelope-flap {
-            width: 0; height: 0;
-            border-left: 225px solid transparent;
-            border-right: 225px solid transparent;
-            border-top: 150px solid rgba(197, 160, 89, 0.4); /* Dorado sutil */
-            position: absolute; top: -150px; left: 0;
-            transform-origin: bottom;
-            transition: transform 1s ease;
-            z-index: 2;
-        }
-
-        .envelope-body {
-            width: 100%; height: 250px;
-            background: var(--blanco); border: 1px solid var(--lineas);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-            position: relative; z-index: 1; display: flex; justify-content: center; align-items: center; flex-direction: column;
-        }
-
-        .envelope-names { font-family: 'Cinzel', serif; font-size: 2rem; color: var(--dorado-mate); font-weight: 700; letter-spacing: 3px; }
-        .open-text { font-family: 'Cormorant Garamond', serif; font-size: 1rem; letter-spacing: 3px; text-transform: uppercase; color: #888; margin-top: 15px; }
-
-        /* Sello de Cera Metálico */
+        /* Sello de Cera Animado */
         .seal {
-            width: 80px; height: 80px; background-color: var(--dorado-mate);
+            width: 80px; height: 80px; background-color: var(--dorado);
             border-radius: 50%; color: white; display: flex; justify-content: center; align-items: center;
-            font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: 700;
+            font-family: 'Bodoni Moda', serif; font-size: 1.5rem; font-weight: 700;
             position: absolute; bottom: -40px; left: calc(50% - 40px);
-            box-shadow: 0 5px 15px rgba(197, 160, 89, 0.3);
-            z-index: 3; animation: pulse-seal 2.5s infinite;
+            box-shadow: 0 5px 15px rgba(156, 124, 56, 0.4);
+            animation: pulse-seal 2s infinite;
         }
-        @keyframes pulse-seal { 0% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.5); } 70% { box-shadow: 0 0 0 15px rgba(197, 160, 89, 0); } 100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); } }
+        @keyframes pulse-seal { 0% { box-shadow: 0 0 0 0 rgba(156, 124, 56, 0.6); } 70% { box-shadow: 0 0 0 15px rgba(156, 124, 56, 0); } 100% { box-shadow: 0 0 0 0 rgba(156, 124, 56, 0); } }
 
-        /* Estado Abierto del Sobre */
-        .open .envelope-flap { transform: rotateX(180deg); z-index: 0; }
-        .open .envelope-wrapper { transform: translateY(50px); }
+        .names-on-envelope { font-family: 'Great Vibes', cursive; font-size: 3rem; color: var(--dorado); margin-bottom: 10px; }
+        .open-text { font-size: 0.7rem; letter-spacing: 3px; font-weight: 600; text-transform: uppercase; color: #888; }
 
-        /* --- CONTENIDO PRINCIPAL (CREMA Y BLANCO, SIN VERDE) --- */
+        /* --- CONTENIDO PRINCIPAL (OCULTO INICIALMENTE) --- */
         #main-content {
-            opacity: 0; width: 100%; max-width: 650px;
+            opacity: 0; width: 100%; max-width: 650px; padding: 60px 25px;
             overflow-y: auto; height: 100vh; position: relative; z-index: 1;
-            transition: opacity 1s ease 1s;
-            background-color: var(--crema-seda);
-            padding: 80px 25px;
+            transition: opacity 1s ease 0.5s;
         }
-
-        /* --- DECORACIONES FLORALES BLANCAS EN MOVIMIENTO ANIMADO --- */
-        .flower-dec {
-            position: fixed; width: 180px; opacity: 0.5; z-index: 0;
-            animation: sway 7s infinite ease-in-out;
-        }
-        .flower-top-left { top: -30px; left: -30px; }
-        .flower-bottom-right { bottom: -30px; right: -30px; transform: rotate(180deg); }
-
-        @keyframes sway { 0%, 100% { transform: rotate(-3deg) translate(0,0); } 50% { transform: rotate(3deg) translate(8px, 8px); } }
 
         /* --- ANIMACIONES DE CONTENIDO --- */
-        .fade-in { opacity: 0; transform: translateY(20px); transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
+        .fade-in { opacity: 0; transform: translateY(30px); transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
         .visible { opacity: 1; transform: translateY(0); }
 
-        /* --- DISEÑO DE TARJETA CON FILOS Y BORDES DORADOS --- */
-        .card-structure {
-            background-color: var(--blanco);
-            padding: 60px 40px;
-            border: 1px solid var(--dorado-mate); /* Filo dorado principal */
-            box-shadow: 0 15px 45px rgba(0,0,0,0.04);
-            position: relative; z-index: 2;
+        /* --- ESTILOS DE TEXTO (TODO EL CODIGO ANTERIOR) --- */
+        .intro-grace { font-family: 'Bodoni Moda', serif; font-size: 1.1rem; letter-spacing: 2px; color: var(--dorado); margin-bottom: 20px; text-transform: uppercase; }
+        .intro-desc { font-weight: 300; font-size: 0.95rem; line-height: 1.8; max-width: 85%; margin: 0 auto 40px; }
+
+        .celebration-type { font-family: 'Bodoni Moda', serif; font-size: 1.2rem; letter-spacing: 4px; color: var(--dorado); margin: 40px 0 10px; text-transform: uppercase; }
+        .names-script { font-family: 'Great Vibes', cursive; font-size: 5rem; color: var(--dorado); margin: 0; }
+        .daughter-intro { font-family: 'Bodoni Moda', serif; font-size: 1.1rem; margin: 15px 0; }
+        .daughter-name { font-family: 'Great Vibes', cursive; font-size: 4rem; color: var(--dorado); margin: 5px 0 40px; }
+
+        /* FOTO */
+        .photo-frame {
+            margin: 50px auto; width: 100%; max-width: 500px;
+            padding: 15px; background: var(--blanco);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.06);
+            border: 1px solid rgba(156, 124, 56, 0.15);
         }
+        .photo-frame img { width: 100%; display: block; filter: contrast(1.01); }
 
-        /* --- JUEGO DE LETRAS ELEGANTES Y LEGIBLES (CINZEL Y GARAMOND) --- */
-        .intro-grace { font-family: 'Cinzel', serif; font-size: 0.95rem; letter-spacing: 5px; color: var(--dorado-mate); margin-bottom: 30px; font-weight: 700; }
-        .intro-desc { font-weight: 300; font-size: 1.15rem; line-height: 1.8; max-width: 90%; margin: 0 auto 50px; font-style: italic; }
-
-        .celebration-label { font-family: 'Cinzel', serif; font-size: 1rem; letter-spacing: 4px; color: var(--texto-oscuro); margin: 60px 0 15px; }
-        
-        /* NOMBRES PRINCIPALES: LETRA ROMANA ELEGANTE, GRANDE Y LEIBLE (SIN CURSIVA) */
-        .names-elegant { font-family: 'Cinzel', serif; font-size: 3.5rem; color: var(--dorado-mate); margin: 0; font-weight: 700; line-height: 1.1; letter-spacing: 2px; text-transform: uppercase; }
-        .daughter-intro { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; margin: 20px 0; letter-spacing: 1px; }
-        .daughter-name-elegant { font-family: 'Cinzel', serif; font-size: 2.8rem; color: var(--dorado-mate); margin: 5px 0 50px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* PADRINOS (ORDENADO Y SIN EMOJIS) */
-        .padrinos-box {
-            margin: 60px 0; padding: 50px 20px;
-            border-top: 1px solid var(--lineas);
-            border-bottom: 1px solid var(--lineas);
+        /* PADRINOS (ORDENADO Y COHERENTE) */
+        .padrinos-section {
+            margin: 50px 0; padding: 40px 20px;
+            border-top: 1px solid rgba(156, 124, 56, 0.2);
+            border-bottom: 1px solid rgba(156, 124, 56, 0.2);
+            background-color: rgba(255,255,255,0.3);
         }
-        .section-label { font-family: 'Cinzel', serif; font-size: 0.85rem; letter-spacing: 4px; color: var(--dorado-mate); font-weight: 700; margin-bottom: 35px; }
-        .padrino-group { margin-bottom: 35px; }
+        .section-label { font-size: 0.8rem; letter-spacing: 4px; color: var(--dorado); font-weight: 600; text-transform: uppercase; margin-bottom: 30px; }
+        .padrino-group { margin-bottom: 30px; }
         .padrino-group:last-child { margin-bottom: 0; }
-        .padrino-group h3 { font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 3px; color: var(--texto-oscuro); margin-bottom: 12px; font-weight: 700; }
-        .padrino-group p { font-size: 1.1rem; font-weight: 400; text-transform: uppercase; letter-spacing: 1.5px; margin: 4px 0; }
+        .padrino-group h3 { font-family: 'Bodoni Moda', serif; font-size: 0.85rem; letter-spacing: 2px; color: var(--dorado); margin-bottom: 12px; text-transform: uppercase; }
+        .padrino-group p { font-size: 1rem; font-weight: 400; text-transform: uppercase; letter-spacing: 1px; margin: 4px 0; }
 
-        /* DETALLES LOGÍSTICOS CON MARCO Y FILO DORADO */
-        .details-framed {
-            margin: 70px 0; padding: 40px;
-            border: 3px solid var(--dorado-mate); /* Filo dorado grueso */
-            display: inline-block;
-        }
-        .details-framed p { margin: 12px 0; font-size: 1.2rem; letter-spacing: 2px; }
-        .details-framed b { color: var(--dorado-mate); font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: 700; }
+        /* DETALLES LOGÍSTICOS */
+        .details-box { margin: 60px 0; font-size: 1.1rem; letter-spacing: 2px; line-height: 2; }
+        .details-box b { color: var(--dorado); font-family: 'Bodoni Moda', serif; font-size: 1.3rem; font-weight: 700; }
 
-        /* BOTONES DE CALIDAD SUPREMA */
+        /* BOTONES PREMIUM */
         .btn {
-            display: block; width: 100%; max-width: 340px; margin: 25px auto;
-            padding: 22px; text-decoration: none; font-family: 'Cinzel', serif;
-            font-size: 0.85rem; letter-spacing: 3px; font-weight: 700;
-            transition: 0.5s; text-transform: uppercase; border-radius: 2px;
+            display: block; width: 100%; max-width: 320px; margin: 20px auto;
+            padding: 22px; text-decoration: none; font-size: 0.8rem;
+            letter-spacing: 3px; font-weight: 600; transition: 0.4s;
+            text-transform: uppercase; position: relative; overflow: hidden;
         }
-        .btn-gold { background: var(--dorado-mate); color: var(--blanco); border: none; box-shadow: 0 10px 25px rgba(197, 160, 89, 0.25); }
-        .btn-outline { border: 1px solid var(--dorado-mate); color: var(--dorado-mate); background: transparent; }
-        .btn-gold:hover { background: var(--texto-oscuro); box-shadow: 0 15px 35px rgba(0,0,0,0.1); transform: translateY(-4px); }
-        .btn-outline:hover { background: var(--dorado-mate); color: var(--blanco); transform: translateY(-4px); }
+        .btn-gold { background: var(--dorado); color: var(--blanco); border: none; box-shadow: 0 10px 25px rgba(156, 124, 56, 0.2); }
+        .btn-outline { border: 1px solid var(--dorado); color: var(--dorado); background: transparent; }
+        
+        .btn:hover { background: var(--texto); color: var(--blanco); transform: translateY(-3px); }
 
-        /* FRASE FINAL GRANDE, CENTRALIZADA Y ELEGANTE */
-        .final-quote-box { margin-top: 120px; padding: 60px 20px; background-color: rgba(250,245,239,0.5); }
-        .final-quote { 
-            font-family: 'Cormorant Garamond', serif; font-style: italic; 
-            font-size: 2.3rem; color: var(--dorado-mate); 
-            line-height: 1.5; max-width: 580px; margin: 0 auto;
+        /* FRASE FINAL GRANDE Y CENTRALIZADA */
+        .final-quote-box {
+            margin-top: 100px; padding: 80px 20px;
+            background: rgba(156, 124, 56, 0.04);
+            display: flex; justify-content: center; align-items: center;
+        }
+        .final-quote {
+            font-family: 'Bodoni Moda', serif; font-style: italic;
+            font-size: 2.3rem; color: var(--dorado);
+            line-height: 1.4; max-width: 550px;
         }
 
-        /* Responsive */
+        /* --- MÚSICA SOFISTICADA --- */
+        .music-toggle {
+            position: fixed; bottom: 30px; right: 30px; z-index: 1100;
+            background: var(--blanco); padding: 12px 25px; border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); display: flex; align-items: center;
+            border-left: 4px solid var(--dorado); cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .music-toggle:hover { transform: scale(1.05); }
+        .music-toggle span { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; margin-left: 10px; color: var(--dorado); text-transform: uppercase; }
+
         @media (max-width: 600px) {
-            .names-elegant { font-size: 2.5rem; }
-            .daughter-name-elegant { font-size: 2.2rem; }
-            .final-quote { font-size: 1.7rem; }
-            .flower-dec { width: 120px; }
-            .envelope-flap { border-left: 175px solid transparent; border-right: 175px solid transparent; border-top: 120px solid rgba(197, 160, 89, 0.4); top: -120px; }
+            .names-script { font-size: 3.8rem; }
+            .daughter-name { font-size: 3.2rem; }
+            .final-quote { font-size: 1.6rem; }
+            .btn { width: 90%; }
         }
     </style>
 </head>
 <body>
 
-    <div id="envelope-scene">
-        <div class="envelope-wrapper" onclick="openInvitation()">
-            <div class="envelope-flap"></div>
-            <div class="envelope-body">
-                <div class="envelope-names">W & E</div>
-                <div class="open-text">Haz click para abrir</div>
-                <div class="seal">amor</div>
-            </div>
+    <div id="envelope-scene" onclick="openInvitation()">
+        <div class="envelope">
+            <div class="save-date" style="font-size: 0.7rem; letter-spacing: 4px; color: var(--dorado); font-weight: 600;">SAVE THE DATE</div>
+            <div class="names-on-envelope">Wilson & Erika</div>
+            <div class="open-text">Haz click para abrir</div>
+            <div class="seal">W & E</div>
         </div>
     </div>
 
     <div id="main-content">
-        <img src="https://i.postimg.cc/k47vBq3Y/pampas-floral.png" class="flower-dec flower-top-left" alt="decoración floral">
-        <img src="https://i.postimg.cc/k47vBq3Y/pampas-floral.png" class="flower-dec flower-bottom-right" alt="decoración floral">
-
-        <div class="card-structure">
+        <div class="container">
             <header class="fade-in">
                 <div class="intro-grace">CON PROFUNDA ALEGRÍA Y BAJO LA GRACIA DE DIOS</div>
                 <div class="intro-desc">
@@ -192,13 +162,17 @@
             </header>
 
             <div class="fade-in">
-                <div class="celebration-label">NUESTRA BODA</div>
-                <h1 class="names-elegant">Wilson & Erika</h1>
+                <div class="celebration-type">NUESTRA BODA</div>
+                <h1 class="names-script">Wilson & Erika</h1>
                 <div class="daughter-intro">Junto al Bautizo de nuestra amada hija</div>
-                <div class="daughter-name-elegant">Ailany Cataleya</div>
+                <div class="daughter-name">Ailany Cataleya</div>
             </div>
 
-            <div class="padrinos-box fade-in">
+            <div class="photo-frame fade-in">
+                <img src="https://i.postimg.cc/5yrRY29V/Whats-App-Image-2026-04-18-at-3-53-29-PM.jpg" alt="Wilson y Erika">
+            </div>
+
+            <div class="padrinos-section fade-in">
                 <div class="section-label">Acompañados con cariño por:</div>
                 
                 <div class="padrino-group">
@@ -214,54 +188,63 @@
                 </div>
             </div>
 
-            <div class="details-framed fade-in">
-                <p>FECHA: <b>22 DE AGOSTO 2026</b></p>
-                <p>HORA: <b>15:30 HORAS</b></p>
-                <p style="margin-top: 25px;">LUGAR:</p>
-                <p style="font-family: 'Cinzel', serif; font-size: 1.4rem; color: var(--texto-oscuro); font-weight: 700; letter-spacing: 2px;">
+            <div class="details-box fade-in">
+                <p>Te esperamos para compartir este día lleno de bendiciones y felicidad.</p>
+                <div>FECHA: <b>22 de Agosto 2026</b></div>
+                <div>HORA: <b>15:30 HORAS</b></div>
+                <div style="margin-top: 15px;">LUGAR:</div>
+                <div style="font-family: 'Bodoni Moda', serif; font-size: 1.4rem; color: var(--dorado); font-weight: 700; border-top: 1px solid rgba(156, 124, 56, 0.2); border-bottom: 1px solid rgba(156, 124, 56, 0.2); display: inline-block; padding: 10px 30px;">
                     Santuario de la Virgen del Rocío
-                </p>
-                <p style="font-size: 1rem; letter-spacing: 2px; color: #666; font-weight: 300;">BIBLIÁN</p>
+                </div>
+                <p style="font-size: 0.8rem; letter-spacing: 1px; color: #888; font-weight: 300;">BIBLIÁN, ECUADOR</p>
             </div>
 
             <div class="fade-in">
-                <a href="https://maps.app.goo.gl/uXv2H6W8X9E1M7R47" target="_blank" class="btn btn-gold">VER UBICACIÓN EN GPS</a>
-                <a href="https://wa.me/593987311469?text=Hola!+Es+un+honor+confirmar+nuestra+asistencia+a+vuestro+evento." target="_blank" class="btn btn-outline">CONFIRMAR ASISTENCIA</a>
+                <a href="http://googleusercontent.com/maps.google.com/7" target="_blank" class="btn btn-gold">VER UBICACIÓN EN GPS</a>
+                <a href="https://wa.me/593987311469?text=Hola!+Es+un+honor+confirmar+nuestra+asistencia+con+mucho+gusto." target="_blank" class="btn btn-outline">CONFIRMAR ASISTENCIA</a>
             </div>
 
             <div class="final-quote-box fade-in">
                 <div class="final-quote">
-                    "El amor nos ha llevado a este momento mágico. Los invitamos a ser testigos de nuestra promesa de amor eterno."
+                    "El amor nos ha llevado a este momento mágico. Los invitamos a ser testigos de nuestra promesa de amor."
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="music-toggle" id="musicToggle" onclick="toggleMusic()" style="display: none;">
+        <div id="playBtn" style="width: 0; height: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 10px solid var(--dorado);"></div>
+        <span>PLAY MELODÍA - ARCANO</span>
+    </div>
+
+    <div id="youtube-player"></div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-        // Función para abrir la invitación animadamente
+        // Función para abrir la invitación
         function openInvitation() {
-            const envelopeScene = document.getElementById('envelope-scene');
+            const envelope = document.getElementById('envelope-scene');
             const content = document.getElementById('main-content');
+            const musicBtn = document.getElementById('musicToggle');
             
-            // Añade la clase 'open' para iniciar la animación del sobre
-            envelopeScene.classList.add('open');
+            // Animación de desaparición del sobre
+            envelope.style.opacity = '0';
+            envelope.style.transform = 'scale(1.2)';
             
-            // Espera a que termine la animación del sobre (1s) para mostrar el contenido
+            // Muestra el contenido principal
+            content.style.opacity = '1';
+            content.style.zIndex = '10'; // Trae el contenido al frente
+            document.body.style.overflow = 'auto'; // Habilita el scroll
+            
+            // Activa el botón de música
+            musicBtn.style.display = 'flex';
+            
+            // Oculta el sobre por completo después de la animación
             setTimeout(() => {
-                envelopeScene.style.opacity = '0';
-                envelopeScene.style.transform = 'scale(1.2)';
-                
-                content.style.opacity = '1';
-                content.style.zIndex = '10'; // Trae el contenido al frente
-                document.body.style.overflow = 'auto'; // Habilita el scroll
-                
-                // Oculta el sobre por completo después de 1s adicional
-                setTimeout(() => {
-                    envelopeScene.style.display = 'none';
-                    // Inicia el Intersection Observer para las animaciones fade-in de la tarjeta
-                    initObserver();
-                }, 1000);
-            }, 1000); // Duración de la animación del sobre
+                envelope.style.display = 'none';
+                // Inicia el Intersection Observer para las animaciones fade-in
+                initObserver();
+            }, 1000);
         }
 
         // Animaciones fade-in al hacer scroll
@@ -273,6 +256,36 @@
             }, { threshold: 0.1 });
 
             document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+        }
+
+        // Configuración de Música (Arcano)
+        let player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '0', width: '0', videoId: 'ISrzMO-F53w',
+                playerVars: { 
+                    'autoplay': 0, 
+                    'loop': 1, 
+                    'playlist': 'ISrzMO-F53w',
+                    'modestbranding': 1,
+                    'controls': 0
+                }
+            });
+        }
+
+        function toggleMusic() {
+            const btn = document.getElementById('playBtn');
+            if (player.getPlayerState() === 1) {
+                player.pauseVideo();
+                btn.style.border = "none";
+                btn.style.width = "10px"; btn.style.height = "10px"; btn.style.background = "var(--dorado)";
+            } else {
+                player.playVideo();
+                btn.style.background = "none";
+                btn.style.borderTop = "6px solid transparent";
+                btn.style.borderBottom = "6px solid transparent";
+                btn.style.borderLeft = "10px solid var(--dorado)";
+            }
         }
     </script>
 </body>
