@@ -3,187 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wilson & Erika | Boda y Bautizo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Wilson & Erika | Nuestra Unión Mágica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --crema-seda: #FAF5EF;
-            --dorado-champagne: #C5A059;
-            --texto-oscuro: #3A3530;
-            --blanco: #FFFFFF;
+            --crema: #FAF5EF;
+            --dorado: #B8860B;
+            --dorado-suave: #D4AF37;
+            --texto: #4A443F;
         }
 
         * { box-sizing: border-box; scroll-behavior: smooth; }
-
-        body {
-            margin: 0; padding: 0;
-            background-color: var(--crema-seda);
-            color: var(--texto-oscuro);
-            font-family: 'Montserrat', sans-serif;
-            text-align: center;
-            overflow-x: hidden;
+        body { 
+            margin: 0; background-color: var(--crema); color: var(--texto); 
+            font-family: 'Montserrat', sans-serif; overflow-x: hidden;
         }
 
-        .floral-corner {
-            position: fixed; width: 300px; z-index: 10; pointer-events: none; opacity: 0.6;
+        /* --- ANIMACIONES --- */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes sway { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
+        @keyframes shine { 0% { left: -100%; } 100% { left: 100%; } }
+
+        .reveal { animation: fadeIn 1.5s ease-out forwards; }
+
+        /* --- DECORACIÓN --- */
+        .pampas {
+            position: fixed; width: 200px; z-index: 1; opacity: 0.5;
+            animation: sway 4s infinite ease-in-out;
         }
-        .top-left { top: -40px; left: -40px; }
-        .bottom-right { bottom: -40px; right: -40px; transform: rotate(180deg); }
+        .pampas-tl { top: -20px; left: -20px; }
+        .pampas-br { bottom: -20px; right: -20px; transform: rotate(180deg); }
 
-        .main-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 60px 20px 100px;
-            opacity: 0;
-            animation: openingEffect 2s ease-out forwards;
+        /* --- CONTENEDOR --- */
+        .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; position: relative; z-index: 2; }
+
+        header { margin-bottom: 40px; text-align: center; }
+        .save-date { font-family: 'Cinzel', serif; letter-spacing: 5px; font-size: 0.9rem; margin-bottom: 10px; color: var(--dorado); }
+        h1 { font-family: 'Great Vibes', cursive; font-size: 4.5rem; margin: 0; color: var(--dorado); text-shadow: 1px 1px 2px rgba(0,0,0,0.05); }
+
+        /* --- FOTO PROTAGONISTA --- */
+        .photo-box {
+            position: relative; margin: 40px auto; width: 90%;
+            border: 1px solid var(--dorado-suave); padding: 10px;
+            background: white; box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        .photo-box img { width: 100%; display: block; filter: sepia(10%); }
+        .photo-box::after {
+            content: ""; position: absolute; top: -15px; right: -15px;
+            width: 50px; height: 50px; border-top: 2px solid var(--dorado); border-right: 2px solid var(--dorado);
         }
 
-        @keyframes openingEffect {
-            0% { opacity: 0; transform: translateY(30px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        .header-section { margin-bottom: 40px; }
-        .header-section p { font-family: 'Cinzel', serif; font-size: 1rem; letter-spacing: 5px; color: var(--texto-oscuro); margin-bottom: 10px; }
-        .main-title { font-family: 'Great Vibes', cursive; font-size: 5rem; color: var(--dorado-champagne); margin: 0; line-height: 1.1; }
-        .date-top { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; font-weight: 300; letter-spacing: 3px; margin-top: 15px; }
-
-        .photo-frame {
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto 50px;
-            background-color: var(--blanco);
-            padding: 12px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
-            border: 1px solid rgba(197, 160, 89, 0.2);
-        }
-
-        .couple-photo { width: 100%; height: auto; display: block; }
-
-        .blessing { font-style: italic; color: var(--dorado-champagne); margin-bottom: 30px; font-weight: 400; font-size: 1.1rem; padding: 0 20px; }
+        /* --- CONTENIDO --- */
+        .blessing { font-style: italic; font-weight: 300; margin: 30px 0; line-height: 1.6; }
+        .child-name { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: var(--dorado); margin: 10px 0; }
         
-        h2 { font-family: 'Cinzel', serif; color: var(--texto-oscuro); font-size: 1.8rem; margin: 40px 0 10px; font-weight: 700; }
-        .names-child { font-family: 'Great Vibes', cursive; font-size: 3.8rem; color: var(--dorado-champagne); margin: 10px 0; }
+        .divider { width: 80px; height: 1px; background: var(--dorado); margin: 30px auto; opacity: 0.5; }
 
-        .details-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin: 40px auto;
-            border-top: 1px solid rgba(197, 160, 89, 0.2);
-            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
-            padding: 30px 0;
-            max-width: 650px;
+        .padrinos-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+            background: rgba(255,255,255,0.4); padding: 25px 15px;
+            border-radius: 15px; margin: 30px 0;
         }
+        .padrinos-item h3 { font-family: 'Cinzel', serif; font-size: 0.8rem; color: var(--dorado); margin-bottom: 5px; }
+        .padrinos-item p { font-size: 0.85rem; margin: 0; font-weight: 500; }
 
-        .padrinos-sec { font-size: 0.9rem; line-height: 1.8; color: var(--texto-oscuro); }
-        .padrinos-sec b { color: var(--dorado-champagne); display: block; margin-bottom: 5px; font-family: 'Cinzel', serif; letter-spacing: 1px; }
-
-        /* Botones */
+        /* --- BOTONES PREMIUM --- */
+        .actions { margin-top: 50px; display: flex; flex-direction: column; gap: 15px; }
         .btn {
-            display: inline-block; padding: 18px 40px;
-            background: var(--dorado-champagne); color: white;
-            text-decoration: none; border-radius: 0;
-            font-family: 'Cinzel', serif; font-weight: bold;
-            transition: 0.4s; margin: 15px 5px;
-            letter-spacing: 2px; font-size: 0.85rem;
-            box-shadow: 0 10px 30px rgba(197, 160, 89, 0.2);
-            min-width: 250px;
+            position: relative; overflow: hidden; display: block;
+            padding: 18px; text-decoration: none; font-family: 'Cinzel', serif;
+            font-weight: 700; letter-spacing: 2px; font-size: 0.8rem;
+            transition: 0.3s; border: none; cursor: pointer;
         }
-        .btn:hover { background: #A68545; transform: translateY(-3px); }
-        .btn-maps { background: transparent; color: var(--dorado-champagne); border: 1px solid var(--dorado-champagne); box-shadow: none; }
-        .btn-maps:hover { background: var(--dorado-champagne); color: white; }
-
-        .final-frase {
-            margin: 60px auto 0;
-            max-width: 500px;
-            font-style: italic;
-            color: #777;
-            line-height: 1.8;
-            font-size: 1rem;
+        .btn-gold { background: var(--dorado); color: white; }
+        .btn-outline { border: 1px solid var(--dorado); color: var(--dorado); }
+        
+        .btn::before {
+            content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shine 3s infinite;
         }
 
-        .music-btn {
-            position: fixed; bottom: 30px; right: 30px;
-            background: var(--dorado-champagne); width: 60px; height: 60px;
-            border-radius: 50%; display: flex; justify-content: center;
-            align-items: center; cursor: pointer; z-index: 1000;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15); animation: pulse 2s infinite;
-            font-size: 25px; color: white;
+        .frase-final { font-style: italic; font-size: 0.95rem; margin-top: 60px; color: #777; line-height: 1.8; }
+
+        /* --- MÚSICA BOTÓN --- */
+        .music-player {
+            position: fixed; bottom: 30px; left: 30px; z-index: 100;
+            background: white; border-radius: 50px; padding: 10px 20px;
+            display: flex; align-items: center; gap: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 1px solid var(--dorado-suave);
+        }
+        .play-btn { 
+            background: var(--dorado); width: 35px; height: 35px; 
+            border-radius: 50%; color: white; display: flex; 
+            align-items: center; justify-content: center; cursor: pointer;
         }
 
-        @keyframes pulse { 0% {box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7);} 70% {box-shadow: 0 0 0 15px rgba(197, 160, 89, 0);} 100% {box-shadow: 0 0 0 0 rgba(197, 160, 89, 0);} }
-
-        @media (max-width: 768px) {
-            .main-title { font-size: 3.5rem; }
-            .names-child { font-size: 3rem; }
-            .btn { width: 90%; }
-        }
+        @media (max-width: 480px) { h1 { font-size: 3.5rem; } .padrinos-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-    <img src="https://i.postimg.cc/k47vBq3Y/pampas-floral.png" class="floral-corner top-left">
-    <img src="https://i.postimg.cc/k47vBq3Y/pampas-floral.png" class="floral-corner bottom-right">
+    <img src="https://www.transparentpng.com/download/floral/wheat-decoration-png-free-download-GjP4Sj.png" class="pampas pampas-tl">
+    <img src="https://www.transparentpng.com/download/floral/wheat-decoration-png-free-download-GjP4Sj.png" class="pampas pampas-br">
 
-    <div class="main-container">
-        <div class="header-section">
-            <p>NUESTRA UNIÓN</p>
-            <h1 class="main-title">Wilson & Erika</h1>
-            <div class="date-top">22 . AGOSTO . 2026</div>
+    <div class="container reveal">
+        <header>
+            <div class="save-date">SAVE THE DATE</div>
+            <h1>Wilson & Erika</h1>
+            <p style="letter-spacing: 3px; font-weight: 500;">22 . AGOSTO . 2026</p>
+        </header>
+
+        <div class="photo-box">
+            <img src="https://i.postimg.cc/5yrRY29V/Whats-App-Image-2026-04-18-at-3-53-29-PM.jpg" alt="Wilson y Erika">
         </div>
 
-        <div class="photo-frame">
-            <img src="https://i.postimg.cc/5yrRY29V/Whats-App-Image-2026-04-18-at-3-53-29-PM.jpg" class="couple-photo">
+        <div class="blessing">
+            "Con la bendición de Dios y nuestros padres,<br>
+            tenemos el honor de invitarte a celebrar nuestra unión."
         </div>
 
-        <div class="details-section">
-            <p class="blessing">"Con la bendición de Dios y nuestros padres"</p>
-            
-            <p>Te invitamos a la celebración de nuestro matrimonio y el bautizo de nuestra hija:</p>
-            <div class="names-child">Ailany Cataleya</div>
+        <div class="divider"></div>
 
-            <div class="details-grid">
-                <div class="padrinos-sec">
-                    <b>Padrinos de Boda</b>
-                    ✨ José Maria Chauca<br>✨ Blanca Guallpa
-                </div>
-                <div class="padrinos-sec">
-                    <b>Padrinos de Bautizo</b>
-                    ✨ Carlos Fajardo<br>✨ Teresa Chauca
-                </div>
+        <p>Acompáñanos al matrimonio de Wilson y Erika y al bautizo de nuestra pequeña:</p>
+        <div class="child-name">Ailany Cataleya</div>
+
+        <div class="padrinos-grid">
+            <div class="padrinos-item">
+                <h3>Padrinos de Boda</h3>
+                <p>José Maria Chauca</p>
+                <p>Blanca Guallpa</p>
             </div>
-
-            <h2>La Ceremonia</h2>
-            <p>Santuario de la Virgen de "El Rocío"<br>Biblián, Ecuador<br>Hora: 3:30 PM</p>
-            
-            <a href="https://maps.app.goo.gl/BgeHhKkM3vX7R9mK7" target="_blank" class="btn btn-maps">📍 Ver Ubicación en Mapas</a>
-            <br>
-            <a href="https://wa.me/593987311469?text=¡Hola!+Confirmamos+nuestra+asistencia+al+evento+de+Wilson+y+Erika" class="btn">Confirmar Asistencia</a>
-
-            <p class="final-frase">
-                "El amor nos ha llevado a este momento mágico. Los invitamos a ser testigos de nuestra promesa de amor"
-            </p>
+            <div class="padrinos-item">
+                <h3>Padrinos de Bautizo</h3>
+                <p>Carlos Fajardo</p>
+                <p>Teresa Chauca</p>
+            </div>
         </div>
+
+        <div class="info-boda">
+            <h2 style="font-family: 'Cinzel'; font-size: 1.2rem;">Ceremonia Religiosa</h2>
+            <p>Santuario de la Virgen del Rocío<br>Biblián, Ecuador | 3:30 PM</p>
+        </div>
+
+        <div class="actions">
+            <a href="https://maps.app.goo.gl/9ZpC6fH9p4m1B5XF6" target="_blank" class="btn btn-gold">📍 Ver Ubicación en GPS</a>
+            <a href="https://wa.me/593987311469?text=¡Hola!+Confirmamos+nuestra+asistencia+con+mucho+gusto." target="_blank" class="btn btn-outline">✉️ Confirmar Asistencia</a>
+        </div>
+
+        <p class="frase-final">
+            "El amor nos ha llevado a este momento mágico. Los invitamos a ser testigos de nuestra promesa de amor."
+        </p>
     </div>
 
-    <div id="player"></div>
-    <div class="music-btn" onclick="toggleMusic()">🎵</div>
+    <div class="music-player">
+        <span style="font-size: 0.7rem; font-weight: bold; color: var(--dorado);">MÚSICA</span>
+        <div class="play-btn" id="musicAction" onclick="toggleMusic()">▶</div>
+    </div>
+
+    <div id="youtube-player"></div>
 
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
         let player;
-        let playing = false;
         function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
+            player = new YT.Player('youtube-player', {
                 height: '0', width: '0', videoId: 'ISrzMO-F53w',
                 playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': 'ISrzMO-F53w' }
             });
         }
+
         function toggleMusic() {
-            if(!playing) { player.playVideo(); document.querySelector('.music-btn').innerHTML = "⏸️"; }
-            else { player.pauseVideo(); document.querySelector('.music-btn').innerHTML = "🎵"; }
-            playing = !playing;
+            const btn = document.getElementById('musicAction');
+            if (player.getPlayerState() === 1) {
+                player.pauseVideo();
+                btn.innerText = "▶";
+            } else {
+                player.playVideo();
+                btn.innerText = "⏸";
+            }
         }
     </script>
 </body>
