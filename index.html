@@ -3,344 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wilson & Erika | Nuestra Unión de Amor</title>
+    <title>Wilson & Erika | Nuestra Unión</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --crema-seda: #FAF5EF;
+            --crema-claro: #FDF5E6;
             --blanco: #FFFFFF;
-            --dorado-mate: #C5A059;
-            --texto-oscuro: #3A3530;
-            --lineas: rgba(197, 160, 89, 0.2);
+            --dorado-bronce: #A68942;
+            --texto: #4A443F;
+            --sombra: rgba(0, 0, 0, 0.08);
         }
 
-        * { box-sizing: border-box; scroll-behavior: smooth; }
-        
+        * { box-sizing: border-box; }
         body { 
-            margin: 0; background-color: var(--crema-seda); color: var(--texto-oscuro); 
-            font-family: 'Cormorant Garamond', serif; overflow: hidden; /* Evita scroll antes de abrir */
-            text-align: center; display: flex; justify-content: center; align-items: center; height: 100vh;
+            margin: 0; background-color: #EFEBE7; color: var(--texto); 
+            font-family: 'Cormorant Garamond', serif; overflow: hidden;
+            display: flex; justify-content: center; align-items: center; height: 100vh;
         }
 
-        /* --- PANTALLA DE INICIO: SOBRE DE CARTA ANIMADO (ESPAÑOL) --- */
-        #envelope-scene {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--crema-seda); display: flex; justify-content: center; align-items: center;
-            z-index: 1000; transition: opacity 1s ease 1s, transform 1s ease 1s;
-            cursor: pointer;
+        /* --- ESCENA DEL SOBRE (CARTA REALISTA) --- */
+        #envelope-container {
+            position: relative; width: 100%; max-width: 420px; height: 300px;
+            background-color: var(--crema-claro); border-radius: 5px;
+            box-shadow: 0 20px 40px var(--sombra); cursor: pointer;
+            z-index: 2000; transition: transform 0.8s ease, opacity 0.8s ease;
+            display: flex; justify-content: center; align-items: center;
         }
 
-        .envelope-wrapper {
-            width: 90%; max-width: 450px; position: relative;
-            transition: transform 1s ease;
-        }
-
-        /* Solapa Triangular del Sobre */
-        .envelope-flap {
-            width: 0; height: 0;
-            border-left: 225px solid transparent;
-            border-right: 225px solid transparent;
-            border-top: 150px solid rgba(197, 160, 89, 0.4); /* Dorado sutil */
-            position: absolute; top: -150px; left: 0;
-            transform-origin: bottom;
-            transition: transform 1s ease;
-            z-index: 2;
+        /* Solapa del sobre */
+        .flap {
+            position: absolute; top: 0; left: 0; width: 0; height: 0;
+            border-left: 210px solid transparent; border-right: 210px solid transparent;
+            border-top: 160px solid #E5DED0; z-index: 3;
+            transform-origin: top; transition: transform 0.6s ease;
         }
 
         .envelope-body {
-            width: 100%; height: 250px;
-            background: var(--blanco); border: 1px solid var(--lineas);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-            position: relative; z-index: 1; display: flex; justify-content: center; align-items: center; flex-direction: column;
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--crema-claro); border: 1px solid #E2D9C8; z-index: 2;
         }
 
-        .envelope-names { font-family: 'Cinzel', serif; font-size: 2rem; color: var(--dorado-mate); font-weight: 700; letter-spacing: 3px; }
-        .open-text { font-family: 'Cormorant Garamond', serif; font-size: 1rem; letter-spacing: 3px; text-transform: uppercase; color: #888; margin-top: 15px; }
-
-        /* Sello de Cera Metálico */
         .seal {
-            width: 80px; height: 80px; background-color: var(--dorado-mate);
-            border-radius: 50%; color: white; display: flex; justify-content: center; align-items: center;
-            font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: 700;
-            position: absolute; bottom: -40px; left: calc(50% - 40px);
-            box-shadow: 0 5px 15px rgba(197, 160, 89, 0.3);
-            z-index: 3; animation: pulse-seal 2.5s infinite;
+            position: absolute; top: 120px; left: calc(50% - 40px);
+            width: 80px; height: 80px; background-color: var(--dorado-bronce);
+            border-radius: 50%; z-index: 4; display: flex; justify-content: center;
+            align-items: center; color: white; font-family: 'Cinzel', serif;
+            font-size: 0.8rem; letter-spacing: 2px; font-weight: 700;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: transform 0.4s;
         }
-        @keyframes pulse-seal { 0% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.5); } 70% { box-shadow: 0 0 0 15px rgba(197, 160, 89, 0); } 100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); } }
+        .seal:hover { transform: scale(1.1); }
 
-        /* Estado Abierto del Sobre */
-        .open .envelope-flap { transform: rotateX(180deg); z-index: 0; }
-        .open .envelope-wrapper { transform: translateY(50px); }
-
-        /* --- CONTENIDO PRINCIPAL (CREMA Y BLANCO, SIN VERDE) --- */
-        #main-content {
-            opacity: 0; width: 100%; max-width: 650px;
-            overflow-y: auto; height: 100vh; position: relative; z-index: 1;
-            transition: opacity 1s ease 1s;
-            background-color: var(--crema-seda);
-            padding: 80px 25px;
+        .envelope-text {
+            font-family: 'Cinzel', serif; font-size: 1.5rem; letter-spacing: 3px;
+            color: var(--dorado-bronce); margin-top: 60px; z-index: 5; position: relative;
         }
 
-        /* --- DECORACIONES FLORALES BLANCAS EN MOVIMIENTO --- */
-        .flower-dec {
-            position: fixed; width: 180px; opacity: 0.5; z-index: 0;
-            animation: sway 7s infinite ease-in-out;
+        /* Animación de apertura */
+        .open-envelope .flap { transform: rotateX(180deg); z-index: 1; }
+        .open-envelope { transform: translateY(300px); opacity: 0; pointer-events: none; }
+
+        /* --- CONTENIDO DE LA INVITACIÓN --- */
+        #main-card {
+            opacity: 0; visibility: hidden; width: 95%; max-width: 600px;
+            height: 90vh; background-color: var(--blanco); overflow-y: auto;
+            position: absolute; z-index: 1; border: 1px solid var(--dorado-bronce);
+            padding: 60px 30px; transition: opacity 1s ease 0.5s, visibility 1s;
+            box-shadow: 0 0 50px rgba(0,0,0,0.05);
         }
-        .flower-top-left { top: -30px; left: -30px; }
-        .flower-bottom-right { bottom: -30px; right: -30px; transform: rotate(180deg); }
 
-        @keyframes sway { 0%, 100% { transform: rotate(-3deg) translate(0,0); } 50% { transform: rotate(3deg) translate(8px, 8px); } }
+        /* --- FLORES ANIMADAS (MOVIMIENTO REAL) --- */
+        .flower {
+            position: fixed; width: 200px; opacity: 0.4; pointer-events: none;
+            z-index: 500; animation: sway 8s infinite ease-in-out;
+        }
+        .f1 { top: -40px; left: -40px; }
+        .f2 { bottom: -40px; right: -40px; transform: rotate(180deg); }
 
-        /* --- ANIMACIONES DE CONTENIDO --- */
-        .fade-in { opacity: 0; transform: translateY(20px); transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
+        @keyframes sway {
+            0%, 100% { transform: rotate(-5deg) scale(1); }
+            50% { transform: rotate(5deg) scale(1.05) translate(10px, 10px); }
+        }
+
+        /* --- DISEÑO DE TITULOS Y TEXTO --- */
+        .fade-in { opacity: 0; transform: translateY(25px); transition: 1.2s all ease-out; }
         .visible { opacity: 1; transform: translateY(0); }
 
-        /* --- DISEÑO DE TARJETA CON FILOS Y BORDES DORADOS --- */
-        .card-structure {
-            background-color: var(--blanco);
-            padding: 60px 40px;
-            border: 1px solid var(--dorado-mate); /* Filo dorado principal */
-            box-shadow: 0 15px 45px rgba(0,0,0,0.04);
-            position: relative; z-index: 2;
+        .title-gold {
+            font-family: 'Cinzel', serif; font-size: 1rem; letter-spacing: 5px;
+            color: var(--dorado-bronce); font-weight: 700; margin-bottom: 20px;
         }
 
-        /* --- JUEGO DE LETRAS ELEGANTES Y LEGIBLES (CINZEL Y GARAMOND) --- */
-        .intro-grace { font-family: 'Cinzel', serif; font-size: 0.95rem; letter-spacing: 5px; color: var(--dorado-mate); margin-bottom: 30px; font-weight: 700; }
-        .intro-desc { font-weight: 300; font-size: 1.15rem; line-height: 1.8; max-width: 90%; margin: 0 auto 50px; font-style: italic; }
+        .names {
+            font-family: 'Cinzel', serif; font-size: 3rem; color: var(--texto);
+            margin: 15px 0; font-weight: 700; border-top: 1px solid var(--dorado-bronce);
+            border-bottom: 1px solid var(--dorado-bronce); display: inline-block; padding: 10px 20px;
+        }
 
-        .celebration-label { font-family: 'Cinzel', serif; font-size: 1rem; letter-spacing: 4px; color: var(--texto-oscuro); margin: 60px 0 15px; }
-        
-        /* NOMBRES PRINCIPALES: LETRA ROMANA ELEGANTE, GRANDE Y LEIBLE (SIN CURSIVA) */
-        .names-elegant { font-family: 'Cinzel', serif; font-size: 3.5rem; color: var(--dorado-mate); margin: 0; font-weight: 700; line-height: 1.1; letter-spacing: 2px; text-transform: uppercase; }
-        .daughter-intro { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; margin: 20px 0; letter-spacing: 1px; }
-        .daughter-name-elegant { font-family: 'Cinzel', serif; font-size: 2.8rem; color: var(--dorado-mate); margin: 5px 0 50px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .daughter {
+            font-family: 'Cinzel', serif; font-size: 2.2rem; color: var(--dorado-bronce);
+            margin: 10px 0 40px;
+        }
 
-        /* FOTO CON MARCO DORADO FINO */
         .photo-frame {
-            margin: 50px auto; width: 100%; max-width: 480px;
-            padding: 15px; background: var(--blanco);
-            border: 2px solid var(--dorado-mate); /* Filo dorado */
-            box-shadow: 0 25px 60px rgba(0,0,0,0.06);
+            border: 1px solid var(--dorado-bronce); padding: 10px; margin: 40px auto;
+            max-width: 450px; background: white;
         }
-        .photo-frame img { width: 100%; display: block; filter: contrast(1.02); }
+        .photo-frame img { width: 100%; display: block; }
 
-        /* PADRINOS (ORDENADO Y SIN EMOJIS) */
-        .padrinos-box {
-            margin: 60px 0; padding: 50px 20px;
-            border-top: 1px solid var(--lineas);
-            border-bottom: 1px solid var(--lineas);
+        .padrinos-section {
+            background-color: var(--crema-claro); padding: 40px 20px; margin: 50px 0;
+            border-radius: 2px; border: 1px solid rgba(166, 137, 66, 0.1);
         }
-        .section-label { font-family: 'Cinzel', serif; font-size: 0.85rem; letter-spacing: 4px; color: var(--dorado-mate); font-weight: 700; margin-bottom: 35px; }
-        .padrino-group { margin-bottom: 35px; }
-        .padrino-group:last-child { margin-bottom: 0; }
-        .padrino-group h3 { font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 3px; color: var(--texto-oscuro); margin-bottom: 12px; font-weight: 700; }
-        .padrino-group p { font-size: 1.1rem; font-weight: 400; text-transform: uppercase; letter-spacing: 1.5px; margin: 4px 0; }
 
-        /* DETALLES LOGÍSTICOS CON MARCO Y FILO DORADO */
-        .details-framed {
-            margin: 70px 0; padding: 40px;
-            border: 3px solid var(--dorado-mate); /* Filo dorado grueso */
-            display: inline-block;
-        }
-        .details-framed p { margin: 12px 0; font-size: 1.2rem; letter-spacing: 2px; }
-        .details-framed b { color: var(--dorado-mate); font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: 700; }
-
-        /* BOTONES DE CALIDAD SUPREMA */
         .btn {
-            display: block; width: 100%; max-width: 340px; margin: 25px auto;
-            padding: 22px; text-decoration: none; font-family: 'Cinzel', serif;
-            font-size: 0.85rem; letter-spacing: 3px; font-weight: 700;
-            transition: 0.5s; text-transform: uppercase; border-radius: 2px;
+            display: inline-block; width: 100%; max-width: 300px; padding: 20px;
+            margin: 15px 0; text-decoration: none; font-family: 'Cinzel', serif;
+            font-size: 0.8rem; letter-spacing: 3px; font-weight: 700;
+            transition: 0.4s; text-transform: uppercase;
         }
-        .btn-gold { background: var(--dorado-mate); color: var(--blanco); border: none; box-shadow: 0 10px 25px rgba(197, 160, 89, 0.25); }
-        .btn-outline { border: 1px solid var(--dorado-mate); color: var(--dorado-mate); background: transparent; }
-        .btn-gold:hover { background: var(--texto-oscuro); box-shadow: 0 15px 35px rgba(0,0,0,0.1); transform: translateY(-4px); }
-        .btn-outline:hover { background: var(--dorado-mate); color: var(--blanco); transform: translateY(-4px); }
+        .btn-gold { background: var(--dorado-bronce); color: white; border: none; }
+        .btn-outline { border: 1px solid var(--dorado-bronce); color: var(--dorado-bronce); }
+        .btn:hover { background: var(--texto); color: white; transform: translateY(-3px); }
 
-        /* FRASE FINAL GRANDE, CENTRALIZADA Y ELEGANTE */
-        .final-quote-box { margin-top: 120px; padding: 60px 20px; background-color: rgba(250,245,239,0.5); }
-        .final-quote { 
-            font-family: 'Cormorant Garamond', serif; font-style: italic; 
-            font-size: 2.3rem; color: var(--dorado-mate); 
-            line-height: 1.5; max-width: 580px; margin: 0 auto;
+        .final-quote {
+            font-size: 2.2rem; font-style: italic; color: var(--dorado-bronce);
+            margin: 100px auto 40px; line-height: 1.4; max-width: 500px;
         }
 
-        /* --- MÚSICA (SUTÍL) --- */
-        .music-toggle {
-            position: fixed; bottom: 30px; left: 30px; z-index: 1100;
-            background: var(--blanco); padding: 12px 25px; border-radius: 2px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06); display: flex; align-items: center;
-            border-left: 3px solid var(--dorado-mate); cursor: pointer;
-            transition: transform 0.3s;
+        /* --- MÚSICA --- */
+        .music-btn {
+            position: fixed; bottom: 20px; left: 20px; z-index: 3000;
+            background: white; border: 1px solid var(--dorado-bronce);
+            padding: 10px 20px; font-family: 'Cinzel', serif; font-size: 0.6rem;
+            cursor: pointer; display: none;
         }
-        .music-toggle:hover { transform: scale(1.05); }
-        .music-toggle span { font-family: 'Cinzel', serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; margin-left: 10px; color: var(--dorado-mate); }
 
-        /* Responsive */
         @media (max-width: 600px) {
-            .names-elegant { font-size: 2.5rem; }
-            .daughter-name-elegant { font-size: 2.2rem; }
-            .final-quote { font-size: 1.7rem; }
-            .flower-dec { width: 120px; }
-            .envelope-flap { border-left: 175px solid transparent; border-right: 175px solid transparent; border-top: 120px solid rgba(197, 160, 89, 0.4); top: -120px; }
-            .padrinos-box { padding: 30px 10px; }
-            .details-framed { padding: 25px; }
+            .names { font-size: 1.8rem; }
+            .daughter { font-size: 1.5rem; }
+            .final-quote { font-size: 1.6rem; }
+            .flower { width: 130px; }
         }
     </style>
 </head>
 <body>
 
-    <div id="envelope-scene">
-        <div class="envelope-wrapper" onclick="openInvitation()">
-            <div class="envelope-flap"></div>
-            <div class="envelope-body">
-                <div class="envelope-names">W & E</div>
-                <div class="open-text">Haz click para abrir</div>
-                <div class="seal">amor</div>
+    <div id="envelope-container" onclick="openLetter()">
+        <div class="flap"></div>
+        <div class="envelope-body">
+            <div class="envelope-text">W & E</div>
+        </div>
+        <div class="seal">CLICK</div>
+    </div>
+
+    <div id="main-card">
+        <img src="https://i.postimg.cc/k47vBq3Y/pampas-floral.png" class="flower f1">
+        <img src="https://i.postimg.cc/k47vBq3Y/pampas-floral.png" class="flower f2">
+
+        <header class="fade-in">
+            <div class="title-gold">CON PROFUNDA ALEGRÍA Y BAJO LA GRACIA DE DIOS</div>
+            <p style="font-size: 1.1rem; max-width: 80%; margin: 0 auto;">Nos complace invitarte a ser parte de un momento único en nuestras vidas, donde el amor y la fe se unen:</p>
+        </header>
+
+        <div class="fade-in" style="margin-top: 50px;">
+            <div class="title-gold" style="font-size: 0.8rem;">💍 NUESTRA BODA</div>
+            <h1 class="names">WILSON & ERIKA</h1>
+            <div style="margin-top: 30px;">Y el bautizo de nuestra amada hija</div>
+            <h2 class="daughter">AILANY CATALEYA</h2>
+        </div>
+
+        <div class="photo-frame fade-in">
+            <img src="https://i.postimg.cc/5yrRY29V/Whats-App-Image-2026-04-18-at-3-53-29-PM.jpg" alt="Wilson y Erika">
+        </div>
+
+        <div class="padrinos-section fade-in">
+            <div class="title-gold" style="font-size: 0.7rem;">ACOMPAÑADOS CON CARIÑO POR:</div>
+            <div style="margin-bottom: 30px;">
+                <b style="letter-spacing: 2px;">PADRINOS DE BODA</b><br>
+                JOSE MARÍA CHAUCA<br>BLANCA GUALLPA
             </div>
+            <div>
+                <b style="letter-spacing: 2px;">PADRINOS DE BAUTIZO</b><br>
+                CARLOS FAJARDO<br>TERESA CHAUCA
+            </div>
+        </div>
+
+        <div class="fade-in" style="margin: 60px 0;">
+            <p>FECHA: <b>22 DE AGOSTO 2026</b></p>
+            <p>HORA: <b>3:30 PM</b></p>
+            <p style="margin-top: 30px; letter-spacing: 2px; color: var(--dorado-bronce); font-weight: 700;">SANTUARIO DE LA VIRGEN DEL ROCÍO</p>
+            <p style="font-size: 0.9rem;">BIBLIÁN</p>
+        </div>
+
+        <div class="fade-in">
+            <a href="https://www.google.com/maps/dir//Santuario+de+la+Virgen+del+Roc%C3%ADo,+Bibli%C3%A1n/@-2.711881,-78.889073,17z" target="_blank" class="btn btn-gold">VER UBICACIÓN EN GPS</a>
+            <a href="https://wa.me/593987311469" target="_blank" class="btn btn-outline">CONFIRMAR ASISTENCIA</a>
+        </div>
+
+        <div class="final-quote fade-in">
+            "El amor nos ha llevado a este momento mágico. Los invitamos a ser testigos de nuestra promesa de amor eterno."
         </div>
     </div>
 
-    <div id="main-content">
-        <img src="https://i.postimg.cc/k47vBq3Y/pampas-floral.png" class="flower-dec flower-top-left" alt="decoración floral">
-        <img src="https://i.postimg.cc/k47vBq3Y/pampas-floral.png" class="flower-dec flower-bottom-right" alt="decoración floral">
-
-        <div class="card-structure">
-            <header class="fade-in">
-                <div class="intro-grace">CON PROFUNDA ALEGRÍA Y BAJO LA GRACIA DE DIOS</div>
-                <div class="intro-desc">
-                    Nos complace invitarte a ser parte de un momento único e inolvidable en nuestras vidas, donde el amor y la fe se unen en una sola celebración:
-                </div>
-            </header>
-
-            <div class="fade-in">
-                <div class="celebration-label">NUESTRA BODA</div>
-                <h1 class="names-elegant">Wilson & Erika</h1>
-                <div class="daughter-intro">Junto al Bautizo de nuestra amada hija</div>
-                <div class="daughter-name-elegant">Ailany Cataleya</div>
-            </div>
-
-            <div class="photo-frame fade-in">
-                <img src="https://i.postimg.cc/5yrRY29V/Whats-App-Image-2026-04-18-at-3-53-29-PM.jpg" alt="Wilson y Erika">
-            </div>
-
-            <div class="padrinos-box fade-in">
-                <div class="section-label">Acompañados con cariño por:</div>
-                
-                <div class="padrino-group">
-                    <h3>PADRINOS DE BODA</h3>
-                    <p>José María Chauca</p>
-                    <p>Blanca Guallpa</p>
-                </div>
-                
-                <div class="padrino-group">
-                    <h3>PADRINOS DE BAUTIZO</h3>
-                    <p>Carlos Fajardo</p>
-                    <p>Teresa Chauca</p>
-                </div>
-            </div>
-
-            <div class="details-framed fade-in">
-                <p>FECHA: <b>22 DE AGOSTO 2026</b></p>
-                <p>HORA: <b>15:30 HORAS</b></p>
-                <p style="margin-top: 25px;">LUGAR:</p>
-                <p style="font-family: 'Cinzel', serif; font-size: 1.4rem; color: var(--texto-oscuro); font-weight: 700; letter-spacing: 2px;">
-                    Santuario de la Virgen del Rocío
-                </p>
-                <p style="font-size: 1rem; letter-spacing: 2px; color: #666; font-weight: 300;">BIBLIÁN</p>
-            </div>
-
-            <div class="fade-in">
-                <a href="https://maps.app.goo.gl/9R3sKxW3G8e5mY2f6" target="_blank" class="btn btn-gold">VER UBICACIÓN EN GPS</a>
-                <a href="https://wa.me/593987311469?text=Hola!+Es+un+honor+confirmar+nuestra+asistencia+a+vuestro+evento." target="_blank" class="btn btn-outline">CONFIRMAR ASISTENCIA</a>
-            </div>
-
-            <div class="final-quote-box fade-in">
-                <div class="final-quote">
-                    "El amor nos ha llevado a este momento mágico. Los invitamos a ser testigos de nuestra promesa de amor eterno."
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="music-toggle" id="musicToggle" onclick="toggleMusic()" style="display: none;">
-        <div id="playBtn" style="width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 8px solid var(--dorado-mate);"></div>
-        <span>ESCUCHAR MELODÍA - ARCANO</span>
-    </div>
+    <button class="music-btn" id="mBtn" onclick="toggleMusic()">MÚSICA: ON/OFF</button>
 
     <div id="youtube-player"></div>
 
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-        // Función para abrir la invitación animadamente
-        function openInvitation() {
-            const envelopeScene = document.getElementById('envelope-scene');
-            const content = document.getElementById('main-content');
-            const musicBtn = document.getElementById('musicToggle');
+        function openLetter() {
+            document.getElementById('envelope-container').classList.add('open-envelope');
+            const card = document.getElementById('main-card');
+            card.style.visibility = 'visible';
+            card.style.opacity = '1';
+            document.body.style.overflow = 'auto';
+            document.getElementById('mBtn').style.display = 'block';
             
-            // Añade la clase 'open' para iniciar la animación del sobre
-            envelopeScene.classList.add('open');
-            
-            // Espera a que termine la animación del sobre (1s) para mostrar el contenido
+            // Iniciar animaciones de aparición
             setTimeout(() => {
-                envelopeScene.style.opacity = '0';
-                envelopeScene.style.transform = 'scale(1.2)';
-                
-                content.style.opacity = '1';
-                content.style.zIndex = '10'; // Trae el contenido al frente
-                document.body.style.overflow = 'auto'; // Habilita el scroll
-                
-                // Activa el botón de música
-                musicBtn.style.display = 'flex';
-                
-                // Oculta el sobre por completo después de 1s adicional
-                setTimeout(() => {
-                    envelopeScene.style.display = 'none';
-                    // Inicia el Intersection Observer para las animaciones fade-in de la tarjeta
-                    initObserver();
-                }, 1000);
-            }, 1000); // Duración de la animación del sobre
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) entry.target.classList.add("visible");
+                    });
+                }, { threshold: 0.1 });
+                document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+            }, 600);
         }
 
-        // Animaciones fade-in al hacer scroll
-        function initObserver() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) entry.target.classList.add("visible");
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
-        }
-
-        // Configuración de Música (Arcano)
         let player;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
                 height: '0', width: '0', videoId: 'ISrzMO-F53w',
-                playerVars: { 
-                    'autoplay': 0, 
-                    'loop': 1, 
-                    'playlist': 'ISrzMO-F53w',
-                    'modestbranding': 1,
-                    'controls': 0
-                }
+                playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': 'ISrzMO-F53w' }
             });
         }
 
         function toggleMusic() {
-            const btnIcon = document.getElementById('playBtn');
-            if (player.getPlayerState() === 1) {
-                player.pauseVideo();
-                btnIcon.style.borderLeft = "8px solid var(--dorado-mate)";
-                btnIcon.style.background = "none";
-            } else {
-                player.playVideo();
-                btnIcon.style.background = "none";
-                btnIcon.style.borderTop = "5px solid transparent";
-                btnIcon.style.borderBottom = "5px solid transparent";
-                btnIcon.style.borderLeft = "8px solid var(--dorado-mate)";
-            }
+            if (player.getPlayerState() === 1) { player.pauseVideo(); } 
+            else { player.playVideo(); }
         }
     </script>
 </body>
