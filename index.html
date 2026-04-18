@@ -4,58 +4,226 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nuestra Boda</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
     <style>
+        /* --- 1. CONFIGURACIÓN BASE --- */
+        :root {
+            --primary: #d4af37; /* Dorado Elegante */
+            --primary-hover: #b8962e;
+            --text-dark: #2c3e50;
+            --text-light: #ffffff;
+            --bg-crema: #fffaf0;
+        }
+
+        * { box-sizing: border-box; }
+
         body {
-            margin: 0; padding: 0; font-family: 'Montserrat', sans-serif;
-            background-color: #fffaf0; text-align: center; color: #4a4a4a;
+            margin: 0; padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-crema);
+            color: var(--text-dark);
+            text-align: center;
+            overflow-x: hidden; /* Evita scroll horizontal */
         }
+
+        /* --- 2. FONDO PRINCIPAL CON TU FOTO --- */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
-            url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop');
-            background-size: cover; background-position: center;
-            height: 80vh; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; color: white;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.5)), 
+                        url('TU_LINK_DE_FOTO_DIRECTO'); /* <--- CAMBIA ESTO */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Efecto Parallax suave */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-light);
+            padding: 20px;
         }
-        h1 { font-family: 'Great Vibes', cursive; font-size: 5rem; margin: 0; }
-        .section { padding: 50px 20px; }
-        .date { font-size: 1.5rem; letter-spacing: 3px; color: #d4af37; font-weight: bold; }
+
+        /* --- 3. ESTILOS DE TEXTO --- */
+        .hero p {
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            opacity: 0; animation: fadeIn 2s forwards; /* Animación */
+        }
+
+        .hero h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 5rem;
+            margin: 0;
+            color: var(--text-light);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            opacity: 0; animation: fadeIn 2s forwards 0.5s; /* Animación con retraso */
+        }
+
+        /* --- 4. SECCIÓN DE DETALLES --- */
+        .details {
+            padding: 80px 20px;
+            background-color: white;
+            position: relative;
+            z-index: 1; /* Para que esté sobre los pétalos si los hay */
+        }
+
+        .details h2 {
+            font-family: 'Great Vibes', cursive;
+            color: var(--primary);
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+
+        .date-box {
+            border-top: 2px solid #eee;
+            border-bottom: 2px solid #eee;
+            padding: 20px 0;
+            margin: 30px auto;
+            max-width: 300px;
+        }
+
+        .date-text {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        .time-text {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            font-weight: 400;
+        }
+
+        /* --- 5. CUENTA REGRESIVA ESTILIZADA --- */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 40px 0;
+        }
+
+        .countdown-item {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 15px;
+            min-width: 80px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .countdown-number {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .countdown-label {
+            font-size: 0.8rem;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        /* --- 6. BOTÓN INTERACTIVO --- */
         .btn {
-            display: inline-block; padding: 15px 30px; background: #d4af37;
-            color: white; text-decoration: none; border-radius: 50px;
-            margin-top: 20px; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: inline-block;
+            padding: 18px 40px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+            cursor: pointer;
         }
-        .countdown { font-size: 2rem; margin: 20px 0; color: #d4af37; }
+
+        .btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-3px); /* Efecto de levitación */
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6);
+        }
+
+        /* --- 7. ANIMACIONES (Keyframes) --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- 8. ADAPTACIÓN PARA MÓVILES (Responsivo) --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3.5rem; }
+            .hero p { font-size: 1rem; }
+            .details h2 { font-size: 2.8rem; }
+            .date-text { font-size: 1.6rem; }
+            .countdown-number { font-size: 2rem; }
+            .countdown-item { min-width: 65px; padding: 10px; }
+        }
+
     </style>
 </head>
 <body>
 
     <div class="hero">
         <p>ESTÁS INVITADO A LA BODA DE</p>
-        <h1>Tú & Tu Pareja</h1>
-        <p>¡NOS CASAMOS!</p>
+        <h1>Tú & Tu Pareja</h1> <p>¡NOS CASAMOS!</p>
     </div>
 
-    <div class="section">
-        <div class="date">15 . MAYO . 2026</div>
-        <p>A las 18:00 horas</p>
+    <div class="details">
+        <h2>Save the Date</h2>
         
-        <div id="reloj" class="countdown"></div>
+        <div class="date-box">
+            <div class="date-text">15 . MAYO . 2026</div> <div class="time-text">A las 18:00 horas</div> </div>
+
+        <div class="countdown" id="reloj">
+            <div class="countdown-item">
+                <div class="countdown-number" id="dias">00</div>
+                <div class="countdown-label">Días</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="horas">00</div>
+                <div class="countdown-label">Horas</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="minutos">00</div>
+                <div class="countdown-label">Min</div>
+            </div>
+        </div>
 
         <h3>Lugar</h3>
-        <p>Hacienda Los Olivos<br>Calle Principal #123, Ciudad</p>
-        
-        <a href="https://wa.me/TUNUMERO?text=Confirmamos+asistencia" class="btn">Confirmar por WhatsApp</a>
-    </div>
+        <p>Hacienda Los Olivos<br>Calle Principal #123, Ciudad</p> <a href="https://wa.me/TUNUMERO?text=Confirmamos+asistencia" class="btn">Confirmar Asistencia</a> </div>
 
     <script>
-        const weddingDate = new Date("May 15, 2026 18:00:00").getTime();
-        setInterval(function() {
+        // --- CONFIGURACIÓN DE TU FECHA ---
+        const weddingDate = new Date("May 15, 2026 18:00:00").getTime(); // <--- CAMBIA ESTO
+
+        // --- LÓGICA DEL RELOJ ---
+        function updateCountdown() {
             const now = new Date().getTime();
-            const d = weddingDate - now;
-            const days = Math.floor(d / (1000 * 60 * 60 * 24));
-            document.getElementById("reloj").innerHTML = days + " días para el gran día";
-        }, 1000);
+            const distance = weddingDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+            document.getElementById("dias").innerHTML = days < 10 ? "0" + days : days;
+            document.getElementById("horas").innerHTML = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutos").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("reloj").innerHTML = "<h3>¡Hoy es el gran día!</h3>";
+            }
+        }
+
+        updateCountdown();
+        const countdownInterval = setInterval(updateCountdown, 1000);
+
     </script>
 </body>
 </html>
