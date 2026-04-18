@@ -1,214 +1,198 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wilson & Erika | Nuestra Unión de Amor</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --crema-seda: #FAF5EF;
-            --blanco: #FFFFFF;
-            --dorado-mate: #C5A059;
-            --texto-oscuro: #3A3530;
-            --lineas: rgba(197, 160, 89, 0.2);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        * { box-sizing: border-box; scroll-behavior: smooth; }
-        
-        body { 
-            margin: 0; background-color: var(--crema-seda); color: var(--texto-oscuro); 
-            font-family: 'Cormorant Garamond', serif; overflow: hidden;
-            text-align: center; display: flex; justify-content: center; align-items: center; height: 100vh;
-        }
+<title>Wilson & Erika</title>
 
-        /* --- PANTALLA DE INICIO: SOBRE DE CARTA --- */
-        #envelope-scene {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--crema-seda); display: flex; justify-content: center; align-items: center;
-            z-index: 1000; transition: opacity 1s ease, transform 1s ease;
-            cursor: pointer;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Great+Vibes&family=Cormorant+Garamond:wght@300;500&display=swap" rel="stylesheet">
 
-        .envelope-wrapper { width: 90%; max-width: 450px; position: relative; transition: transform 0.8s ease; }
+<style>
 
-        .envelope-flap {
-            width: 0; height: 0;
-            border-left: 225px solid transparent; border-right: 225px solid transparent;
-            border-top: 150px solid rgba(197, 160, 89, 0.4);
-            position: absolute; top: -150px; left: 0;
-            transform-origin: bottom; transition: transform 0.6s ease; z-index: 2;
-        }
+:root{
+    --crema:#fdfaf6;
+    --blanco:#ffffff;
+    --dorado:#c6a96b;
+    --texto:#2b2b2b;
+}
 
-        .envelope-body {
-            width: 100%; height: 250px;
-            background: var(--blanco); border: 1px solid var(--lineas);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-            position: relative; z-index: 1; display: flex; justify-content: center; align-items: center; flex-direction: column;
-        }
+body{
+    margin:0;
+    background: var(--crema);
+    font-family:'Cormorant Garamond', serif;
+    overflow:hidden;
+}
 
-        .envelope-names { font-family: 'Cinzel', serif; font-size: 2rem; color: var(--dorado-mate); font-weight: 700; letter-spacing: 3px; }
-        .open-text { font-family: 'Cormorant Garamond', serif; font-size: 1rem; letter-spacing: 3px; text-transform: uppercase; color: #888; margin-top: 15px; }
+/* SOBRE */
+#inicio{
+    position:fixed;
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:var(--crema);
+    z-index:1000;
+}
 
-        .seal {
-            width: 80px; height: 80px; background-color: var(--dorado-mate);
-            border-radius: 50%; color: white; display: flex; justify-content: center; align-items: center;
-            font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700;
-            position: absolute; bottom: -40px; left: calc(50% - 40px);
-            box-shadow: 0 5px 15px rgba(197, 160, 89, 0.3);
-            z-index: 3; animation: pulse-seal 2.5s infinite;
-        }
+.carta{
+    width:320px;
+    padding:40px;
+    background:var(--blanco);
+    border:1px solid #eee;
+    box-shadow:0 15px 40px rgba(0,0,0,0.1);
+    text-align:center;
+    cursor:pointer;
+    transition:.3s;
+}
 
-        @keyframes pulse-seal { 0% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.5); } 70% { box-shadow: 0 0 0 15px rgba(197, 160, 89, 0); } 100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); } }
+.carta:hover{
+    transform:scale(1.03);
+}
 
-        .open .envelope-flap { transform: rotateX(180deg); }
-        .open .envelope-wrapper { transform: translateY(100vh); opacity: 0; }
+.carta h1{
+    font-family:'Great Vibes', cursive;
+    font-size:40px;
+    color:var(--dorado);
+}
 
-        /* --- CONTENIDO PRINCIPAL --- */
-        #main-content {
-            opacity: 0; width: 100%; max-width: 650px;
-            overflow-y: auto; height: 100vh; position: relative; z-index: 1;
-            background-color: var(--crema-seda); padding: 80px 25px; visibility: hidden;
-            transition: opacity 1s ease;
-        }
+.carta p{
+    letter-spacing:3px;
+    font-size:12px;
+}
 
-        .flower-dec { position: fixed; width: 180px; opacity: 0.3; z-index: 0; animation: sway 7s infinite ease-in-out; pointer-events: none; }
-        .flower-top-left { top: -30px; left: -30px; }
-        .flower-bottom-right { bottom: -30px; right: -30px; transform: rotate(180deg); }
+/* CONTENIDO */
+#contenido{
+    display:none;
+    padding:50px 20px;
+    max-width:700px;
+    margin:auto;
+    text-align:center;
+}
 
-        @keyframes sway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+/* FLORES SUAVES */
+body::before{
+    content:"";
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:url('https://www.transparenttextures.com/patterns/white-floral.png');
+    opacity:0.2;
+}
 
-        .card-structure { background-color: var(--blanco); padding: 60px 40px; border: 1px solid var(--dorado-mate); box-shadow: 0 15px 45px rgba(0,0,0,0.04); position: relative; z-index: 2; }
+/* TEXTOS */
+.titulo{
+    font-family:'Playfair Display', serif;
+    letter-spacing:2px;
+    color:var(--dorado);
+}
 
-        .intro-grace { font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 4px; color: var(--dorado-mate); font-weight: 700; }
-        .names-elegant { font-family: 'Cinzel', serif; font-size: 3rem; color: var(--dorado-mate); margin: 20px 0; font-weight: 700; text-transform: uppercase; }
-        .daughter-name-elegant { font-family: 'Cinzel', serif; font-size: 2.2rem; color: var(--dorado-mate); margin: 10px 0 40px; font-weight: 700; text-transform: uppercase; }
+.nombres{
+    font-family:'Great Vibes', cursive;
+    font-size:60px;
+    color:var(--dorado);
+}
 
-        .photo-frame { margin: 40px auto; width: 100%; padding: 10px; border: 1px solid var(--dorado-mate); }
-        .photo-frame img { width: 100%; display: block; }
+.bebe{
+    font-family:'Playfair Display', serif;
+    font-size:35px;
+    color:#444;
+}
 
-        .padrinos-box { margin: 40px 0; padding: 30px 0; border-top: 1px solid var(--lineas); border-bottom: 1px solid var(--lineas); }
-        .padrino-group h3 { font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 2px; color: var(--dorado-mate); }
+.detalles{
+    margin-top:30px;
+    line-height:2;
+}
 
-        .btn { display: block; width: 100%; max-width: 300px; margin: 15px auto; padding: 18px; text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 2px; font-weight: 700; text-transform: uppercase; transition: 0.4s; }
-        .btn-gold { background: var(--dorado-mate); color: white; border: none; }
-        .btn-outline { border: 1px solid var(--dorado-mate); color: var(--dorado-mate); }
-        .btn:hover { background: var(--texto-oscuro); color: white; }
+/* MARCO */
+.marco{
+    border:1px solid #eee;
+    padding:20px;
+    margin:30px 0;
+    background:var(--blanco);
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+}
 
-        .music-toggle {
-            position: fixed; bottom: 20px; left: 20px; z-index: 1100;
-            background: white; padding: 10px 20px; border-radius: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1); cursor: pointer; display: none; align-items: center;
-        }
+/* BOTONES */
+.btn{
+    display:block;
+    margin:15px auto;
+    padding:15px;
+    width:250px;
+    text-decoration:none;
+    border:1px solid var(--dorado);
+    color:var(--dorado);
+    transition:.3s;
+}
 
-        .fade-in { opacity: 0; transform: translateY(20px); transition: 1s; }
-        .visible { opacity: 1; transform: translateY(0); }
+.btn:hover{
+    background:var(--dorado);
+    color:white;
+}
 
-        @media (max-width: 600px) {
-            .names-elegant { font-size: 2rem; }
-            .envelope-flap { border-left: 175px solid transparent; border-right: 175px solid transparent; }
-        }
-    </style>
+.frase{
+    margin-top:60px;
+    font-style:italic;
+    font-size:22px;
+    color:var(--dorado);
+}
+
+</style>
 </head>
+
 <body>
 
-    <div id="envelope-scene" onclick="openInvitation()">
-        <div class="envelope-wrapper">
-            <div class="envelope-flap"></div>
-            <div class="envelope-body">
-                <div class="envelope-names">W & E</div>
-                <div class="open-text">Toca para abrir</div>
-                <div class="seal">AMOR</div>
-            </div>
-        </div>
+<!-- SOBRE -->
+<div id="inicio" onclick="abrir()">
+    <div class="carta">
+        <h1>Wilson & Erika</h1>
+        <p>ABRIR INVITACIÓN</p>
+    </div>
+</div>
+
+<!-- CONTENIDO -->
+<div id="contenido">
+
+    <p class="titulo">CON LA BENDICIÓN DE DIOS</p>
+
+    <h1 class="nombres">Wilson & Erika</h1>
+
+    <p>Junto al bautizo de nuestra hija</p>
+
+    <div class="bebe">Ailany Cataleya</div>
+
+    <div class="marco">
+        <p><b>Padrinos de boda</b></p>
+        <p>José María Chauca</p>
+        <p>Blanca Guallpa</p>
+
+        <p><b>Padrinos de bautizo</b></p>
+        <p>Carlos Fajardo</p>
+        <p>Teresa Chauca</p>
     </div>
 
-    <div id="main-content">
-        <img src="https://i.ibb.co/k47vBq3Y/pampas-floral.png" class="flower-dec flower-top-left">
-        <img src="https://i.ibb.co/k47vBq3Y/pampas-floral.png" class="flower-dec flower-bottom-right">
-
-        <div class="card-structure">
-            <div class="fade-in">
-                <div class="intro-grace">BAJO LA GRACIA DE DIOS</div>
-                <p style="font-style: italic;">Nos complace invitarte a celebrar:</p>
-                <div class="celebration-label" style="font-family: 'Cinzel'; margin-top: 30px;">NUESTRA BODA</div>
-                <h1 class="names-elegant">Wilson & Erika</h1>
-                <p>Y el Bautizo de nuestra hija</p>
-                <h2 class="daughter-name-elegant">Ailany Cataleya</h2>
-            </div>
-
-            <div class="photo-frame fade-in">
-                <img src="https://i.ibb.co/5yrRY29V/novios.jpg" alt="Wilson y Erika">
-            </div>
-
-            <div class="padrinos-box fade-in">
-                <div class="padrino-group">
-                    <h3>PADRINOS DE BODA</h3>
-                    <p>José María Chauca & Blanca Guallpa</p>
-                </div>
-                <div class="padrino-group" style="margin-top: 20px;">
-                    <h3>PADRINOS DE BAUTIZO</h3>
-                    <p>Carlos Fajardo & Teresa Chauca</p>
-                </div>
-            </div>
-
-            <div class="fade-in">
-                <p>FECHA: <b>22 DE AGOSTO 2026</b></p>
-                <p>LUGAR: <b>SANTUARIO VIRGEN DEL ROCÍO</b></p>
-                <p>BIBLIÁN | 15:30 HORAS</p>
-            </div>
-
-            <div class="fade-in" style="margin-top: 30px;">
-                <a href="https://maps.app.goo.gl/ZqGjYqB5Y2J2" target="_blank" class="btn btn-gold">UBICACIÓN GPS</a>
-                <a href="https://wa.me/593987311469" target="_blank" class="btn btn-outline">CONFIRMAR</a>
-            </div>
-        </div>
+    <div class="detalles">
+        <p><b>Fecha:</b> 22 de agosto 2026</p>
+        <p><b>Hora:</b> 3:30 PM</p>
+        <p><b>Lugar:</b> Santuario de la Virgen del Rocío</p>
     </div>
 
-    <div class="music-toggle" id="musicToggle" onclick="toggleMusic()">
-        <span id="musicStatus">🎵 ESCUCHAR MÚSICA</span>
+    <a class="btn" href="https://wa.me/593987311469">Confirmar asistencia</a>
+
+    <div class="frase">
+        "El amor nos ha llevado a este momento mágico. Los invitamos a ser testigos de nuestra promesa de amor."
     </div>
 
-    <div id="youtube-player"></div>
+</div>
 
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script>
-        let player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('youtube-player', {
-                height: '0', width: '0', videoId: 'ISrzMO-F53w',
-                playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': 'ISrzMO-F53w' }
-            });
-        }
+<script>
+function abrir(){
+    document.getElementById("inicio").style.display="none";
+    document.getElementById("contenido").style.display="block";
+    document.body.style.overflow="auto";
+}
+</script>
 
-        function openInvitation() {
-            document.getElementById('envelope-scene').classList.add('open');
-            setTimeout(() => {
-                document.getElementById('envelope-scene').style.display = 'none';
-                const content = document.getElementById('main-content');
-                content.style.visibility = 'visible';
-                content.style.opacity = '1';
-                document.body.style.overflow = 'auto';
-                document.getElementById('musicToggle').style.display = 'flex';
-                
-                // Animaciones fade-in
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add("visible"); });
-                }, { threshold: 0.1 });
-                document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
-            }, 800);
-        }
-
-        function toggleMusic() {
-            const status = document.getElementById('musicStatus');
-            if (player.getPlayerState() === 1) {
-                player.pauseVideo();
-                status.innerText = "🔇 MÚSICA PAUSADA";
-            } else {
-                player.playVideo();
-                status.innerText = "🎵 SONANDO: ARCANO";
-            }
-        }
-    </script>
 </body>
 </html>
