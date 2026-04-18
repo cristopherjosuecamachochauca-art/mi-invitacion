@@ -3,227 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuestra Boda</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <title>Wilson & Erika | Boda y Bautizo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* --- 1. CONFIGURACIÓN BASE --- */
         :root {
-            --primary: #d4af37; /* Dorado Elegante */
-            --primary-hover: #b8962e;
-            --text-dark: #2c3e50;
-            --text-light: #ffffff;
-            --bg-crema: #fffaf0;
+            --crema-seda: #FAF5EF;
+            --dorado-champagne: #C5A059;
+            --texto-oscuro: #3A3530;
+            --blanco: #FFFFFF;
         }
 
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
             margin: 0; padding: 0;
+            background-color: var(--crema-seda);
+            color: var(--texto-oscuro);
             font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-crema);
-            color: var(--text-dark);
             text-align: center;
-            overflow-x: hidden; /* Evita scroll horizontal */
+            overflow-x: hidden;
         }
 
-        /* --- 2. FONDO PRINCIPAL CON TU FOTO --- */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.5)), 
-                        url('TU_LINK_DE_FOTO_DIRECTO'); /* <--- CAMBIA ESTO */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed; /* Efecto Parallax suave */
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: var(--text-light);
-            padding: 20px;
+        .floral-corner {
+            position: fixed; width: 300px; z-index: 10; pointer-events: none; opacity: 0.6;
+        }
+        .top-left { top: -40px; left: -40px; }
+        .bottom-right { bottom: -40px; right: -40px; transform: rotate(180deg); }
+
+        .main-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 20px 100px;
+            opacity: 0;
+            animation: openingEffect 2s ease-out forwards;
         }
 
-        /* --- 3. ESTILOS DE TEXTO --- */
-        .hero p {
-            font-size: 1.2rem;
-            letter-spacing: 4px;
-            font-weight: 300;
-            margin-bottom: 10px;
-            opacity: 0; animation: fadeIn 2s forwards; /* Animación */
+        @keyframes openingEffect {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
-        .hero h1 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 5rem;
-            margin: 0;
-            color: var(--text-light);
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            opacity: 0; animation: fadeIn 2s forwards 0.5s; /* Animación con retraso */
+        .header-section { margin-bottom: 40px; }
+        .header-section p { font-family: 'Cinzel', serif; font-size: 1rem; letter-spacing: 5px; color: var(--texto-oscuro); margin-bottom: 10px; }
+        .main-title { font-family: 'Great Vibes', cursive; font-size: 5rem; color: var(--dorado-champagne); margin: 0; line-height: 1.1; }
+        .date-top { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; font-weight: 300; letter-spacing: 3px; margin-top: 15px; }
+
+        .photo-frame {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 50px;
+            background-color: var(--blanco);
+            padding: 12px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            border: 1px solid rgba(197, 160, 89, 0.2);
         }
 
-        /* --- 4. SECCIÓN DE DETALLES --- */
-        .details {
-            padding: 80px 20px;
-            background-color: white;
-            position: relative;
-            z-index: 1; /* Para que esté sobre los pétalos si los hay */
+        .couple-photo { width: 100%; height: auto; display: block; }
+
+        .blessing { font-style: italic; color: var(--dorado-champagne); margin-bottom: 30px; font-weight: 400; font-size: 1.1rem; padding: 0 20px; }
+        
+        h2 { font-family: 'Cinzel', serif; color: var(--texto-oscuro); font-size: 1.8rem; margin: 40px 0 10px; font-weight: 700; }
+        .names-child { font-family: 'Great Vibes', cursive; font-size: 3.8rem; color: var(--dorado-champagne); margin: 10px 0; }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 40px auto;
+            border-top: 1px solid rgba(197, 160, 89, 0.2);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+            padding: 30px 0;
+            max-width: 650px;
         }
 
-        .details h2 {
-            font-family: 'Great Vibes', cursive;
-            color: var(--primary);
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-        }
+        .padrinos-sec { font-size: 0.9rem; line-height: 1.8; color: var(--texto-oscuro); }
+        .padrinos-sec b { color: var(--dorado-champagne); display: block; margin-bottom: 5px; font-family: 'Cinzel', serif; letter-spacing: 1px; }
 
-        .date-box {
-            border-top: 2px solid #eee;
-            border-bottom: 2px solid #eee;
-            padding: 20px 0;
-            margin: 30px auto;
-            max-width: 300px;
-        }
-
-        .date-text {
-            font-size: 2rem;
-            color: var(--primary);
-            font-weight: 600;
-            letter-spacing: 2px;
-        }
-
-        .time-text {
-            font-size: 1.2rem;
-            color: var(--text-dark);
-            font-weight: 400;
-        }
-
-        /* --- 5. CUENTA REGRESIVA ESTILIZADA --- */
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 40px 0;
-        }
-
-        .countdown-item {
-            background: #fff;
-            border: 1px solid #eee;
-            border-radius: 10px;
-            padding: 15px;
-            min-width: 80px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        .countdown-number {
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        .countdown-label {
-            font-size: 0.8rem;
-            color: #888;
-            text-transform: uppercase;
-        }
-
-        /* --- 6. BOTÓN INTERACTIVO --- */
+        /* Botones */
         .btn {
-            display: inline-block;
-            padding: 18px 40px;
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
-            cursor: pointer;
+            display: inline-block; padding: 18px 40px;
+            background: var(--dorado-champagne); color: white;
+            text-decoration: none; border-radius: 0;
+            font-family: 'Cinzel', serif; font-weight: bold;
+            transition: 0.4s; margin: 15px 5px;
+            letter-spacing: 2px; font-size: 0.85rem;
+            box-shadow: 0 10px 30px rgba(197, 160, 89, 0.2);
+            min-width: 250px;
+        }
+        .btn:hover { background: #A68545; transform: translateY(-3px); }
+        .btn-maps { background: transparent; color: var(--dorado-champagne); border: 1px solid var(--dorado-champagne); box-shadow: none; }
+        .btn-maps:hover { background: var(--dorado-champagne); color: white; }
+
+        .final-frase {
+            margin: 60px auto 0;
+            max-width: 500px;
+            font-style: italic;
+            color: #777;
+            line-height: 1.8;
+            font-size: 1rem;
         }
 
-        .btn:hover {
-            background: var(--primary-hover);
-            transform: translateY(-3px); /* Efecto de levitación */
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6);
+        .music-btn {
+            position: fixed; bottom: 30px; right: 30px;
+            background: var(--dorado-champagne); width: 60px; height: 60px;
+            border-radius: 50%; display: flex; justify-content: center;
+            align-items: center; cursor: pointer; z-index: 1000;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15); animation: pulse 2s infinite;
+            font-size: 25px; color: white;
         }
 
-        /* --- 7. ANIMACIONES (Keyframes) --- */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes pulse { 0% {box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7);} 70% {box-shadow: 0 0 0 15px rgba(197, 160, 89, 0);} 100% {box-shadow: 0 0 0 0 rgba(197, 160, 89, 0);} }
 
-        /* --- 8. ADAPTACIÓN PARA MÓVILES (Responsivo) --- */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 3.5rem; }
-            .hero p { font-size: 1rem; }
-            .details h2 { font-size: 2.8rem; }
-            .date-text { font-size: 1.6rem; }
-            .countdown-number { font-size: 2rem; }
-            .countdown-item { min-width: 65px; padding: 10px; }
+            .main-title { font-size: 3.5rem; }
+            .names-child { font-size: 3rem; }
+            .btn { width: 90%; }
         }
-
     </style>
 </head>
 <body>
 
-    <div class="hero">
-        <p>ESTÁS INVITADO A LA BODA DE</p>
-        <h1>Tú & Tu Pareja</h1> <p>¡NOS CASAMOS!</p>
-    </div>
+    <img src="https://i.postimg.cc/k47vBq3Y/pampas-floral.png" class="floral-corner top-left">
+    <img src="https://i.postimg.cc/k47vBq3Y/pampas-floral.png" class="floral-corner bottom-right">
 
-    <div class="details">
-        <h2>Save the Date</h2>
-        
-        <div class="date-box">
-            <div class="date-text">15 . MAYO . 2026</div> <div class="time-text">A las 18:00 horas</div> </div>
-
-        <div class="countdown" id="reloj">
-            <div class="countdown-item">
-                <div class="countdown-number" id="dias">00</div>
-                <div class="countdown-label">Días</div>
-            </div>
-            <div class="countdown-item">
-                <div class="countdown-number" id="horas">00</div>
-                <div class="countdown-label">Horas</div>
-            </div>
-            <div class="countdown-item">
-                <div class="countdown-number" id="minutos">00</div>
-                <div class="countdown-label">Min</div>
-            </div>
+    <div class="main-container">
+        <div class="header-section">
+            <p>NUESTRA UNIÓN</p>
+            <h1 class="main-title">Wilson & Erika</h1>
+            <div class="date-top">22 . AGOSTO . 2026</div>
         </div>
 
-        <h3>Lugar</h3>
-        <p>Hacienda Los Olivos<br>Calle Principal #123, Ciudad</p> <a href="https://wa.me/TUNUMERO?text=Confirmamos+asistencia" class="btn">Confirmar Asistencia</a> </div>
+        <div class="photo-frame">
+            <img src="https://i.postimg.cc/5yrRY29V/Whats-App-Image-2026-04-18-at-3-53-29-PM.jpg" class="couple-photo">
+        </div>
 
+        <div class="details-section">
+            <p class="blessing">"Con la bendición de Dios y nuestros padres"</p>
+            
+            <p>Te invitamos a la celebración de nuestro matrimonio y el bautizo de nuestra hija:</p>
+            <div class="names-child">Ailany Cataleya</div>
+
+            <div class="details-grid">
+                <div class="padrinos-sec">
+                    <b>Padrinos de Boda</b>
+                    ✨ José Maria Chauca<br>✨ Blanca Guallpa
+                </div>
+                <div class="padrinos-sec">
+                    <b>Padrinos de Bautizo</b>
+                    ✨ Carlos Fajardo<br>✨ Teresa Chauca
+                </div>
+            </div>
+
+            <h2>La Ceremonia</h2>
+            <p>Santuario de la Virgen de "El Rocío"<br>Biblián, Ecuador<br>Hora: 3:30 PM</p>
+            
+            <a href="https://maps.app.goo.gl/BgeHhKkM3vX7R9mK7" target="_blank" class="btn btn-maps">📍 Ver Ubicación en Mapas</a>
+            <br>
+            <a href="https://wa.me/593987311469?text=¡Hola!+Confirmamos+nuestra+asistencia+al+evento+de+Wilson+y+Erika" class="btn">Confirmar Asistencia</a>
+
+            <p class="final-frase">
+                "El amor nos ha llevado a este momento mágico. Los invitamos a ser testigos de nuestra promesa de amor"
+            </p>
+        </div>
+    </div>
+
+    <div id="player"></div>
+    <div class="music-btn" onclick="toggleMusic()">🎵</div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-        // --- CONFIGURACIÓN DE TU FECHA ---
-        const weddingDate = new Date("May 15, 2026 18:00:00").getTime(); // <--- CAMBIA ESTO
-
-        // --- LÓGICA DEL RELOJ ---
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = weddingDate - now;
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-
-            document.getElementById("dias").innerHTML = days < 10 ? "0" + days : days;
-            document.getElementById("horas").innerHTML = hours < 10 ? "0" + hours : hours;
-            document.getElementById("minutos").innerHTML = minutes < 10 ? "0" + minutes : minutes;
-
-            if (distance < 0) {
-                clearInterval(countdownInterval);
-                document.getElementById("reloj").innerHTML = "<h3>¡Hoy es el gran día!</h3>";
-            }
+        let player;
+        let playing = false;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '0', width: '0', videoId: 'ISrzMO-F53w',
+                playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': 'ISrzMO-F53w' }
+            });
         }
-
-        updateCountdown();
-        const countdownInterval = setInterval(updateCountdown, 1000);
-
+        function toggleMusic() {
+            if(!playing) { player.playVideo(); document.querySelector('.music-btn').innerHTML = "⏸️"; }
+            else { player.pauseVideo(); document.querySelector('.music-btn').innerHTML = "🎵"; }
+            playing = !playing;
+        }
     </script>
 </body>
 </html>
