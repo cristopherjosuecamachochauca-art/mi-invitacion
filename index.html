@@ -3,162 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wilson & Erika | Nuestra Unión</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@300;600&display=swap" rel="stylesheet">
+    <title>Wilson & Erika | Nuestra Unión de Amor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --crema-fondo: #FDF5E6;
-            --blanco-puro: #FFFFFF;
-            --dorado-bronce: #A68942;
-            --texto-principal: #4A443F;
+            --crema-seda: #FAF5EF;
+            --blanco: #FFFFFF;
+            --dorado-mate: #C5A059;
+            --texto-oscuro: #3A3530;
+            --lineas: rgba(197, 160, 89, 0.2);
         }
 
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+        
         body { 
-            margin: 0; background-color: #F4F1EE; color: var(--texto-principal); 
+            margin: 0; background-color: var(--crema-seda); color: var(--texto-oscuro); 
             font-family: 'Cormorant Garamond', serif; overflow: hidden;
-            display: flex; justify-content: center; align-items: center; height: 100vh;
+            text-align: center; display: flex; justify-content: center; align-items: center; height: 100vh;
         }
 
-        /* SOBRE REALISTA */
-        #envelope-wrapper {
-            position: relative; width: 90%; max-width: 420px; height: 300px;
-            background-color: var(--crema-fondo); box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-            cursor: pointer; z-index: 2000; transition: 0.8s all ease;
-            display: flex; justify-content: center; align-items: center; border: 1px solid #E2D9C8;
+        /* --- PANTALLA DE INICIO: SOBRE DE CARTA --- */
+        #envelope-scene {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--crema-seda); display: flex; justify-content: center; align-items: center;
+            z-index: 1000; transition: opacity 1s ease, transform 1s ease;
+            cursor: pointer;
         }
 
-        .flap {
-            position: absolute; top: 0; left: 0; width: 0; height: 0;
-            border-left: 210px solid transparent; border-right: 210px solid transparent;
-            border-top: 160px solid #E5DED0; z-index: 3;
-            transform-origin: top; transition: 0.6s;
+        .envelope-wrapper { width: 90%; max-width: 450px; position: relative; transition: transform 0.8s ease; }
+
+        .envelope-flap {
+            width: 0; height: 0;
+            border-left: 225px solid transparent; border-right: 225px solid transparent;
+            border-top: 150px solid rgba(197, 160, 89, 0.4);
+            position: absolute; top: -150px; left: 0;
+            transform-origin: bottom; transition: transform 0.6s ease; z-index: 2;
         }
+
+        .envelope-body {
+            width: 100%; height: 250px;
+            background: var(--blanco); border: 1px solid var(--lineas);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            position: relative; z-index: 1; display: flex; justify-content: center; align-items: center; flex-direction: column;
+        }
+
+        .envelope-names { font-family: 'Cinzel', serif; font-size: 2rem; color: var(--dorado-mate); font-weight: 700; letter-spacing: 3px; }
+        .open-text { font-family: 'Cormorant Garamond', serif; font-size: 1rem; letter-spacing: 3px; text-transform: uppercase; color: #888; margin-top: 15px; }
 
         .seal {
-            position: absolute; top: 120px; width: 85px; height: 85px; 
-            background: var(--dorado-bronce); border-radius: 50%; z-index: 4; 
-            display: flex; justify-content: center; align-items: center; 
-            color: white; font-family: 'Cinzel', serif; font-size: 0.8rem; font-weight: 700;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3); border: 2px solid #BD9B54;
+            width: 80px; height: 80px; background-color: var(--dorado-mate);
+            border-radius: 50%; color: white; display: flex; justify-content: center; align-items: center;
+            font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700;
+            position: absolute; bottom: -40px; left: calc(50% - 40px);
+            box-shadow: 0 5px 15px rgba(197, 160, 89, 0.3);
+            z-index: 3; animation: pulse-seal 2.5s infinite;
         }
 
-        .open-env { transform: translateY(100vh) scale(0.5); opacity: 0; pointer-events: none; }
-        .open-env .flap { transform: rotateX(180deg); }
+        @keyframes pulse-seal { 0% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.5); } 70% { box-shadow: 0 0 0 15px rgba(197, 160, 89, 0); } 100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); } }
 
-        /* INVITACIÓN PRINCIPAL */
-        #main-card {
-            opacity: 0; visibility: hidden; width: 95%; max-width: 600px;
-            height: 95vh; background: var(--blanco-puro); border: 1px solid var(--dorado-bronce);
-            position: absolute; z-index: 1; overflow-y: auto; padding: 40px 20px;
-            transition: 1s all ease 0.5s; box-shadow: 0 0 40px rgba(0,0,0,0.1);
+        .open .envelope-flap { transform: rotateX(180deg); }
+        .open .envelope-wrapper { transform: translateY(100vh); opacity: 0; }
+
+        /* --- CONTENIDO PRINCIPAL --- */
+        #main-content {
+            opacity: 0; width: 100%; max-width: 650px;
+            overflow-y: auto; height: 100vh; position: relative; z-index: 1;
+            background-color: var(--crema-seda); padding: 80px 25px; visibility: hidden;
+            transition: opacity 1s ease;
         }
 
-        /* FLORES EN MOVIMIENTO */
-        .flower {
-            position: fixed; width: 180px; opacity: 0.4; z-index: 500;
-            animation: sway 7s infinite ease-in-out; pointer-events: none;
-        }
-        .f-top { top: -30px; left: -30px; }
-        .f-bot { bottom: -30px; right: -30px; transform: rotate(180deg); }
+        .flower-dec { position: fixed; width: 180px; opacity: 0.3; z-index: 0; animation: sway 7s infinite ease-in-out; pointer-events: none; }
+        .flower-top-left { top: -30px; left: -30px; }
+        .flower-bottom-right { bottom: -30px; right: -30px; transform: rotate(180deg); }
 
-        @keyframes sway {
-            0%, 100% { transform: rotate(-5deg) translate(0,0); }
-            50% { transform: rotate(5deg) translate(10px, 10px); }
+        @keyframes sway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+
+        .card-structure { background-color: var(--blanco); padding: 60px 40px; border: 1px solid var(--dorado-mate); box-shadow: 0 15px 45px rgba(0,0,0,0.04); position: relative; z-index: 2; }
+
+        .intro-grace { font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 4px; color: var(--dorado-mate); font-weight: 700; }
+        .names-elegant { font-family: 'Cinzel', serif; font-size: 3rem; color: var(--dorado-mate); margin: 20px 0; font-weight: 700; text-transform: uppercase; }
+        .daughter-name-elegant { font-family: 'Cinzel', serif; font-size: 2.2rem; color: var(--dorado-mate); margin: 10px 0 40px; font-weight: 700; text-transform: uppercase; }
+
+        .photo-frame { margin: 40px auto; width: 100%; padding: 10px; border: 1px solid var(--dorado-mate); }
+        .photo-frame img { width: 100%; display: block; }
+
+        .padrinos-box { margin: 40px 0; padding: 30px 0; border-top: 1px solid var(--lineas); border-bottom: 1px solid var(--lineas); }
+        .padrino-group h3 { font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 2px; color: var(--dorado-mate); }
+
+        .btn { display: block; width: 100%; max-width: 300px; margin: 15px auto; padding: 18px; text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 2px; font-weight: 700; text-transform: uppercase; transition: 0.4s; }
+        .btn-gold { background: var(--dorado-mate); color: white; border: none; }
+        .btn-outline { border: 1px solid var(--dorado-mate); color: var(--dorado-mate); }
+        .btn:hover { background: var(--texto-oscuro); color: white; }
+
+        .music-toggle {
+            position: fixed; bottom: 20px; left: 20px; z-index: 1100;
+            background: white; padding: 10px 20px; border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); cursor: pointer; display: none; align-items: center;
         }
 
-        .gold-title { font-family: 'Cinzel', serif; color: var(--dorado-bronce); letter-spacing: 4px; font-weight: 700; }
-        
-        .names { 
-            font-family: 'Cinzel', serif; font-size: 2.8rem; margin: 20px 0; 
-            border-top: 1px solid var(--dorado-bronce); border-bottom: 1px solid var(--dorado-bronce);
-            display: inline-block; padding: 10px 30px; color: var(--texto-principal);
-        }
-
-        .photo-container {
-            margin: 30px auto; width: 100%; max-width: 400px;
-            padding: 12px; background: white; border: 1px solid var(--dorado-bronce);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        }
-        .photo-container img { width: 100%; display: block; border-radius: 2px; }
-
-        .btn {
-            display: block; width: 280px; margin: 15px auto; padding: 18px;
-            text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.75rem;
-            letter-spacing: 2px; font-weight: 700; transition: 0.4s; text-transform: uppercase;
-        }
-        .btn-gold { background: var(--dorado-bronce); color: white; border: none; }
-        .btn-line { border: 1px solid var(--dorado-bronce); color: var(--dorado-bronce); }
-        .btn:hover { background: #333; color: white; transform: translateY(-3px); }
-
-        .fade-in { opacity: 0; transform: translateY(20px); transition: 1s; text-align: center; }
+        .fade-in { opacity: 0; transform: translateY(20px); transition: 1s; }
         .visible { opacity: 1; transform: translateY(0); }
 
-        @media (max-width: 500px) { 
-            .names { font-size: 1.8rem; }
-            .flap { border-left: 175px solid transparent; border-right: 175px solid transparent; }
+        @media (max-width: 600px) {
+            .names-elegant { font-size: 2rem; }
+            .envelope-flap { border-left: 175px solid transparent; border-right: 175px solid transparent; }
         }
     </style>
 </head>
 <body>
 
-    <div id="envelope-wrapper" onclick="openInvitation()">
-        <div class="flap"></div>
-        <div style="font-family: 'Cinzel', serif; color: var(--dorado-bronce); font-size: 1.8rem; letter-spacing: 5px;">W & E</div>
-        <div class="seal">CLICK</div>
-    </div>
-
-    <div id="main-card">
-        <img src="https://i.ibb.co/k47vBq3Y/pampas-floral.png" class="flower f-top">
-        <img src="https://i.ibb.co/k47vBq3Y/pampas-floral.png" class="flower f-bot">
-
-        <div class="fade-in">
-            <div class="gold-title" style="font-size: 0.8rem;">BAJO LA BENDICIÓN DE DIOS</div>
-            <h1 class="names">WILSON & ERIKA</h1>
-            <div style="margin: 15px 0; font-style: italic; font-size: 1.2rem;">Y el Bautizo de nuestra hija</div>
-            <h2 class="gold-title" style="font-size: 2.2rem;">AILANY CATALEYA</h2>
-        </div>
-
-        <div class="photo-container fade-in">
-            <img src="https://i.ibb.co/5yrRY29V/novios.jpg" alt="Wilson y Erika">
-        </div>
-
-        <div class="fade-in" style="background: #FAF9F6; padding: 30px; margin: 30px 0; border: 1px solid #EEE;">
-            <div class="gold-title" style="font-size: 0.7rem; margin-bottom: 15px;">NUESTROS PADRINOS</div>
-            <p><b>BODA:</b> JOSÉ M. CHAUCA & BLANCA GUALLPA</p>
-            <p><b>BAUTIZO:</b> CARLOS FAJARDO & TERESA CHAUCA</p>
-        </div>
-
-        <div class="fade-in" style="margin: 40px 0;">
-            <p style="letter-spacing: 2px;">SÁBADO, 22 DE AGOSTO 2026</p>
-            <p class="gold-title" style="font-size: 1.3rem;">SANTUARIO DE LA VIRGEN DEL ROCÍO</p>
-            <p>BIBLIÁN | 15:30 HORAS</p>
-        </div>
-
-        <div class="fade-in">
-            <a href="https://www.google.com/maps/dir//Santuario+de+la+Virgen+del+Roc%C3%ADO,+Bibli%C3%A1n" target="_blank" class="btn btn-gold">VER UBICACIÓN EN GPS</a>
-            <a href="https://wa.me/593987311469" target="_blank" class="btn btn-line">CONFIRMAR ASISTENCIA</a>
-        </div>
-
-        <div class="fade-in" style="margin-top: 60px; font-size: 2rem; font-style: italic; color: var(--dorado-bronce);">
-            "Nuestra promesa de amor eterno"
+    <div id="envelope-scene" onclick="openInvitation()">
+        <div class="envelope-wrapper">
+            <div class="envelope-flap"></div>
+            <div class="envelope-body">
+                <div class="envelope-names">W & E</div>
+                <div class="open-text">Toca para abrir</div>
+                <div class="seal">AMOR</div>
+            </div>
         </div>
     </div>
 
+    <div id="main-content">
+        <img src="https://i.ibb.co/k47vBq3Y/pampas-floral.png" class="flower-dec flower-top-left">
+        <img src="https://i.ibb.co/k47vBq3Y/pampas-floral.png" class="flower-dec flower-bottom-right">
+
+        <div class="card-structure">
+            <div class="fade-in">
+                <div class="intro-grace">BAJO LA GRACIA DE DIOS</div>
+                <p style="font-style: italic;">Nos complace invitarte a celebrar:</p>
+                <div class="celebration-label" style="font-family: 'Cinzel'; margin-top: 30px;">NUESTRA BODA</div>
+                <h1 class="names-elegant">Wilson & Erika</h1>
+                <p>Y el Bautizo de nuestra hija</p>
+                <h2 class="daughter-name-elegant">Ailany Cataleya</h2>
+            </div>
+
+            <div class="photo-frame fade-in">
+                <img src="https://i.ibb.co/5yrRY29V/novios.jpg" alt="Wilson y Erika">
+            </div>
+
+            <div class="padrinos-box fade-in">
+                <div class="padrino-group">
+                    <h3>PADRINOS DE BODA</h3>
+                    <p>José María Chauca & Blanca Guallpa</p>
+                </div>
+                <div class="padrino-group" style="margin-top: 20px;">
+                    <h3>PADRINOS DE BAUTIZO</h3>
+                    <p>Carlos Fajardo & Teresa Chauca</p>
+                </div>
+            </div>
+
+            <div class="fade-in">
+                <p>FECHA: <b>22 DE AGOSTO 2026</b></p>
+                <p>LUGAR: <b>SANTUARIO VIRGEN DEL ROCÍO</b></p>
+                <p>BIBLIÁN | 15:30 HORAS</p>
+            </div>
+
+            <div class="fade-in" style="margin-top: 30px;">
+                <a href="https://maps.app.goo.gl/ZqGjYqB5Y2J2" target="_blank" class="btn btn-gold">UBICACIÓN GPS</a>
+                <a href="https://wa.me/593987311469" target="_blank" class="btn btn-outline">CONFIRMAR</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="music-toggle" id="musicToggle" onclick="toggleMusic()">
+        <span id="musicStatus">🎵 ESCUCHAR MÚSICA</span>
+    </div>
+
+    <div id="youtube-player"></div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-        function openInvitation() {
-            document.getElementById('envelope-wrapper').classList.add('open-env');
-            const card = document.getElementById('main-card');
-            card.style.visibility = 'visible'; 
-            card.style.opacity = '1';
-            document.body.style.overflow = 'auto';
+        let player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '0', width: '0', videoId: 'ISrzMO-F53w',
+                playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': 'ISrzMO-F53w' }
+            });
+        }
 
+        function openInvitation() {
+            document.getElementById('envelope-scene').classList.add('open');
             setTimeout(() => {
-                const obs = new IntersectionObserver((entries) => {
-                    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-                }, {threshold: 0.1});
-                document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
-            }, 500);
+                document.getElementById('envelope-scene').style.display = 'none';
+                const content = document.getElementById('main-content');
+                content.style.visibility = 'visible';
+                content.style.opacity = '1';
+                document.body.style.overflow = 'auto';
+                document.getElementById('musicToggle').style.display = 'flex';
+                
+                // Animaciones fade-in
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add("visible"); });
+                }, { threshold: 0.1 });
+                document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+            }, 800);
+        }
+
+        function toggleMusic() {
+            const status = document.getElementById('musicStatus');
+            if (player.getPlayerState() === 1) {
+                player.pauseVideo();
+                status.innerText = "🔇 MÚSICA PAUSADA";
+            } else {
+                player.playVideo();
+                status.innerText = "🎵 SONANDO: ARCANO";
+            }
         }
     </script>
 </body>
