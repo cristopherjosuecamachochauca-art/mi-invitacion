@@ -1,197 +1,489 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Invitación Wilson & Erika</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación Wilson & Erika</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<!-- FUENTES -->
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&display=swap" rel="stylesheet">
+        body {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #f5f5dc 0%, #fff8e7 50%, #fdf5e6 100%);
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
 
-<style>
+        /* Fondo de rosas */
+        .rosas-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
 
-/* FONDO GENERAL */
-body{
-  margin:0;
-  font-family: 'Playfair Display', serif;
-  background: linear-gradient(#fdf6f0,#ffffff);
-  overflow:hidden;
-}
+        .rosa {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle at 30% 30%, #fff 0%, #f8f8f8 50%, transparent 70%);
+            border-radius: 50% 20% 50% 20%;
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
 
-/* SOBRE */
-#sobre{
-  position:fixed;
-  width:100%;
-  height:100%;
-  background: linear-gradient(#f3e5d8,#fff);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  cursor:pointer;
-  z-index:10;
-}
+        .rosa:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .rosa:nth-child(2) { top: 20%; right: 15%; animation-delay: -5s; }
+        .rosa:nth-child(3) { bottom: 20%; left: 20%; animation-delay: -10s; }
+        .rosa:nth-child(4) { bottom: 10%; right: 10%; animation-delay: -15s; }
 
-#sobre h2{
-  font-family:'Great Vibes', cursive;
-  font-size:40px;
-}
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+            100% { transform: translateY(0px) rotate(360deg); }
+        }
 
-/* CONTENIDO */
-#contenido{
-  display:none;
-  text-align:center;
-  padding:20px;
-  animation:fade 2s;
-}
+        /* Pantalla inicial - Carta cerrada */
+        .carta-cerrada {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #f9f5f0 0%, #e8d9c6 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            cursor: pointer;
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
 
-/* CARTA */
-.carta{
-  max-width:600px;
-  margin:auto;
-  background:white;
-  padding:30px;
-  border-radius:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.2);
-  border:3px solid #e6d5c3;
-}
+        .carta-cerrada.abrir {
+            transform: perspective(1000px) rotateY(-120deg) scale(0.9);
+            opacity: 0;
+        }
 
-/* NOMBRES */
-.nombres{
-  font-family:'Great Vibes';
-  font-size:50px;
-  color:#b89b72;
-}
+        .sobre {
+            width: 320px;
+            max-width: 90vw;
+            height: 450px;
+            background: linear-gradient(145deg, #fdf2e6 0%, #f0e6d2 100%);
+            border: 8px solid #d4c4a8;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 
+                0 20px 40px rgba(0,0,0,0.1),
+                inset 0 1px 0 rgba(255,255,255,0.8),
+                inset 0 -1px 0 rgba(0,0,0,0.1);
+            animation: pulse 2s infinite;
+        }
 
-/* FOTO */
-.foto img{
-  width:100%;
-  border-radius:15px;
-  margin:15px 0;
-}
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 20px 40px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.8); }
+            50% { box-shadow: 0 25px 50px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.9); }
+        }
 
-/* BOTONES */
-.btn{
-  display:inline-block;
-  margin:10px;
-  padding:12px 20px;
-  background:#b89b72;
-  color:white;
-  text-decoration:none;
-  border-radius:10px;
-}
+        .pestaña {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            width: 60px;
+            height: 30px;
+            background: linear-gradient(145deg, #e8d9c6 0%, #d4c4a8 100%);
+            border-radius: 0 15px 0 15px;
+            border: 3px solid #c4b4a0;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
 
-/* FRASE FINAL */
-.frase{
-  margin-top:20px;
-  font-style:italic;
-  font-size:18px;
-  color:#6b4f3a;
-}
+        .pestaña:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
 
-/* ANIMACIONES */
-@keyframes fade{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1;}
-}
+        .titulo-inicial {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(28px, 5vw, 42px);
+            color: #8b4513;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
+            text-align: center;
+            z-index: 5;
+        }
 
-/* BOTÓN MÚSICA */
-.music{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#b89b72;
-  color:white;
-  padding:15px;
-  border-radius:50%;
-  cursor:pointer;
-}
+        .subtitulo-inicial {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(18px, 4vw, 24px);
+            color: #a0522d;
+            text-align: center;
+            z-index: 5;
+        }
 
-</style>
+        /* Contenido de la carta */
+        .contenido-carta {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #fdf2e6 0%, #f9f5f0 100%);
+            display: none;
+            flex-direction: column;
+            padding: 20px;
+            overflow-y: auto;
+            z-index: 999;
+        }
+
+        .contenido-carta.mostrar {
+            display: flex;
+        }
+
+        .carta-interior {
+            max-width: 380px;
+            margin: 0 auto;
+            background: linear-gradient(145deg, #ffffff 0%, #f8f4f0 100%);
+            border: 12px solid #e0d0b0;
+            border-radius: 25px;
+            padding: 40px 30px;
+            box-shadow: 
+                0 30px 60px rgba(0,0,0,0.15),
+                inset 0 2px 0 rgba(255,255,255,1),
+                inset 0 -2px 0 rgba(0,0,0,0.05);
+            position: relative;
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Foto de los novios */
+        .foto-novios {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #f0e6d9, #e8d9c6);
+            border-radius: 20px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .foto-novios img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        .corazon-foto {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 30px;
+            color: #ff69b4;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* Nombres principales */
+        .nombres-principales {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .nombres {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(32px, 8vw, 48px);
+            color: #8b4513;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.9);
+            margin-bottom: 5px;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .bebe {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(22px, 6vw, 32px);
+            color: #d2691e;
+            background: linear-gradient(45deg, #fff8dc, #f0e68c);
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            box-shadow: 0 8px 20px rgba(210, 105, 30, 0.2);
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        /* Padrinos */
+        .seccion-padrinos {
+            margin: 30px 0;
+        }
+
+        .padrinos-titulo {
+            font-size: 20px;
+            color: #8b4513;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .padrinos-titulo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #d4af37, #ffd700);
+            border-radius: 2px;
+        }
+
+        .padrino {
+            background: linear-gradient(145deg, #fff 0%, #f8f8f8 100%);
+            padding: 15px 20px;
+            margin: 10px 0;
+            border-left: 5px solid #d4af37;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out both;
+        }
+
+        .padrino:nth-child(1) { animation-delay: 0.6s; }
+        .padrino:nth-child(2) { animation-delay: 0.7s; }
+        .padrino:nth-child(3) { animation-delay: 0.8s; }
+        .padrino:nth-child(4) { animation-delay: 0.9s; }
+
+        .padrino:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        /* Detalles evento */
+        .detalles-evento {
+            background: linear-gradient(145deg, #f9f5f0 0%, #fff 100%);
+            border: 2px solid #e0d0b0;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 25px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .detalles-evento::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .detalle {
+            font-size: 18px;
+            color: #654321;
+            margin: 12px 0;
+            animation: fadeInUp 1s ease-out 1s both;
+        }
+
+        .fecha {
+            font-size: 22px;
+            font-weight: 700;
+            color: #8b4513;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+        }
+
+        /* Botones */
+        .botones {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 140px;
+            padding: 15px 25px;
+            background: linear-gradient(145deg, #fff 0%, #f8f4f0 100%);
+            border: 3px solid #d4af37;
+            border-radius: 30px;
+            color: #8b4513;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
+            background: linear-gradient(145deg, #fff8dc 0%, #f0e6d9 100%);
+        }
+
+        /* Frase final */
+        .frase-final {
+            background: linear-gradient(145deg, #fff8dc 0%, #f5f5dc 100%);
+            border: 4px solid #ffd700;
+            border-radius: 25px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+            position: relative;
+            animation: fadeInUp 1s ease-out 1.2s both;
+        }
+
+        .frase-final::before {
+            content: '✦';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: #ffd700;
+        }
+
+        .frase-texto {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(18px, 4vw, 24px);
+            color: #8b4513;
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.9);
+        }
+
+        /* Botón música */
+        .music-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(145deg, #ffd700 0%, #ffed4e 100%);
+            border: none;
+            border-radius: 50%;
+            color: #8b4513;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+            z-index: 1001;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsivo */
+        @media (max-width: 480px) {
+            .sobre { width: 90vw; height: 400px; }
+            .carta-interior { padding: 25px 20px; }
+            .botones { flex-direction: column; align-items: center; }
+        }
+
+        /* Ocultar scroll */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(#d4af37, #ffd700);
+            border-radius: 4px;
+        }
+    </style>
 </head>
-
 <body>
+    <!-- Fondo de rosas -->
+    <div class="rosas-bg">
+        <div class="rosa"></div>
+        <div class="rosa"></div>
+        <div class="rosa"></div>
+        <div class="rosa"></div>
+    </div>
 
-<!-- SOBRE -->
-<div id="sobre" onclick="abrir()">
-  <h2>💌 Toca para abrir</h2>
-</div>
-
-<!-- CONTENIDO -->
-<div id="contenido">
-
-<div class="carta">
-
-<div class="nombres">Wilson & Erika</div>
-
-<p>Con la bendición de Dios y el amor que nos une,</p>
-<p>tenemos la alegría de invitarte a nuestra boda</p>
-
-<h3>Y al bautizo de nuestra hija</h3>
-<h2>Ailany Cataleya</h2>
-
-<div class="foto">
-<img src="Foto.jpeg">
-</div>
-
-<p><b>Padrinos de boda</b><br>
-José María Chauca<br>
-Blanca Guallpa</p>
-
-<p><b>Padrinos de bautizo</b><br>
-Carlos Fajardo<br>
-Teresa Chauca</p>
-
-<p><b>Fecha:</b> 22 de Agosto 2026</p>
-<p><b>Hora:</b> 3:30 PM</p>
-<p><b>Lugar:</b> Santuario de la Virgen del Rocío</p>
-
-<a class="btn" target="_blank"
-href="https://www.google.com/maps/search/?api=1&query=Santuario+de+la+Virgen+del+Roc%C3%ADo+Biblian">
-📍 Ver ubicación
-</a>
-
-<a class="btn" target="_blank"
-href="https://wa.me/593987311469?text=Confirmo%20mi%20asistencia%20a%20la%20boda%20y%20bautizo">
-💬 Confirmar asistencia
-</a>
-
-<div class="frase">
-“El amor nos ha llevado a este momento mágico.  
-Te invitamos a ser testigo de nuestra promesa de amor.”
-</div>
-
-</div>
-</div>
-
-<!-- MÚSICA -->
-<div class="music" onclick="toggleMusic()">▶</div>
-
-<audio id="audio">
-<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_115b9b7d31.mp3">
-</audio>
-
-<script>
-
-function abrir(){
-  document.getElementById("sobre").style.display="none";
-  document.getElementById("contenido").style.display="block";
-  document.body.style.overflow="auto";
-}
-
-let playing=false;
-function toggleMusic(){
-  const audio=document.getElementById("audio");
-
-  if(!playing){
-    audio.play();
-    playing=true;
-  }else{
-    audio.pause();
-    playing=false;
-  }
-}
-
-</script>
-
-</body>
-</html>
+    <!-- Carta cerrada -->
+    <div class="carta-cerrada" id="cartaCerrada" onclick="abrirCarta()">
+        <div class="sobre">
+            <div class="pestaña"></div>
+            <div class
