@@ -1,351 +1,196 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>Invitación | Wilson & Erika</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --cream:#f8f1e7;
-      --cream-2:#fffaf4;
-      --gold:#c8a96a;
-      --text:#4b3b33;
-      --rose:#f3d8dc;
-      --shadow: 0 20px 60px rgba(72, 52, 43, .18);
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0;height:100%;font-family:"Cormorant Garamond",serif;background:
-      radial-gradient(circle at top, #fffdf9 0%, var(--cream) 45%, #f4e7d9 100%);
-      color:var(--text); overflow:hidden;}
-    body::before, body::after{
-      content:"";
-      position:fixed; inset:auto;
-      width:220px; height:220px;
-      background: radial-gradient(circle, rgba(255,255,255,.9) 0 16%, rgba(243,216,220,.5) 17% 28%, rgba(255,255,255,0) 29%);
-      filter: blur(1px);
-      opacity:.6;
-      pointer-events:none;
-      animation: float 8s ease-in-out infinite;
-    }
-    body::before{top:-40px; left:-40px; transform:rotate(15deg)}
-    body::after{bottom:-50px; right:-50px; transform:rotate(-20deg); animation-delay:-3s}
-    @keyframes float{50%{transform:translateY(12px) rotate(8deg)}}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    .splash{
-      position:fixed; inset:0; display:grid; place-items:center; z-index:5;
-      background:
-        radial-gradient(circle at center, rgba(255,255,255,.35), rgba(0,0,0,.08));
-      backdrop-filter: blur(4px);
-      padding:20px;
-    }
-    .envelope-wrap{
-      position:relative; width:min(92vw,420px); aspect-ratio: 4/3;
-      display:grid; place-items:center; cursor:pointer;
-      perspective:1200px;
-      filter: drop-shadow(var(--shadow));
-    }
-    .envelope{
-      position:absolute; inset:20% 12% 10% 12%;
-      background: linear-gradient(180deg, #fff 0%, #f7efe7 100%);
-      border:1px solid rgba(200,169,106,.45);
-      border-radius:18px;
-      overflow:hidden;
-      transform-style:preserve-3d;
-    }
-    .envelope .front{
-      position:absolute; inset:0;
-      background:
-        linear-gradient(135deg, transparent 49%, rgba(200,169,106,.22) 50% 51%, transparent 52%),
-        linear-gradient(-135deg, transparent 49%, rgba(200,169,106,.22) 50% 51%, transparent 52%),
-        linear-gradient(180deg, #ffffff, #f4eadf);
-    }
-    .seal{
-      position:absolute; left:50%; top:52%; transform:translate(-50%,-50%);
-      width:72px; height:72px; border-radius:50%;
-      background: radial-gradient(circle at 30% 30%, #fff 0 18%, #f8dfe2 19% 44%, #d9b07a 45% 58%, #b98b55 59% 100%);
-      box-shadow:0 6px 18px rgba(0,0,0,.12);
-    }
-    .seal::before,.seal::after{
-      content:""; position:absolute; background:#fff; border-radius:50%;
-    }
-    .seal::before{width:12px;height:28px;left:18px;top:18px;transform:rotate(35deg)}
-    .seal::after{width:12px;height:28px;right:18px;top:18px;transform:rotate(-35deg)}
+<title>Invitación</title>
 
-    .card{
-      position:absolute; width:86%; max-width:380px; height:88%;
-      background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(255,250,244,.98));
-      border:1px solid rgba(200,169,106,.45);
-      border-radius:22px;
-      box-shadow: 0 18px 40px rgba(0,0,0,.12);
-      transform: translateY(40px) scale(.94);
-      opacity:0;
-      pointer-events:none;
-      overflow:hidden;
-    }
-    .card.show{
-      animation: rise 1s ease forwards .35s;
-    }
-    @keyframes rise{
-      0%{opacity:0; transform:translateY(45px) scale(.94)}
-      100%{opacity:1; transform:translateY(-20px) scale(1)}
-    }
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&display=swap" rel="stylesheet">
 
-    .ribbon{
-      height:10px;
-      background: linear-gradient(90deg, transparent, rgba(200,169,106,.8), rgba(255,255,255,.9), rgba(200,169,106,.8), transparent);
-    }
-    .card-inner{
-      height:100%;
-      padding:18px 18px 24px;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-      overflow:auto;
-    }
-    .title{
-      text-align:center;
-      line-height:1;
-      margin-top:2px;
-    }
-    .title .small{
-      display:block; letter-spacing:.22em; text-transform:uppercase;
-      font-size:.84rem; color:#7b675c;
-    }
-    .title h1{
-      margin:6px 0 0; font-family:"Great Vibes",cursive; font-weight:400;
-      font-size:3rem; color:#7b4f55;
-    }
-    .subtitle{
-      text-align:center; font-size:1.15rem; margin-top:-4px;
-    }
-    .photo{
-      border-radius:18px; overflow:hidden;
-      border:1px solid rgba(200,169,106,.35);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.6);
-      aspect-ratio: 4/3;
-      background:#fff;
-    }
-    .photo img{width:100%; height:100%; object-fit:cover; display:block}
-    .info{
-      display:grid; gap:10px;
-    }
-    .box{
-      background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(248,241,231,.92));
-      border:1px solid rgba(200,169,106,.25);
-      border-radius:16px;
-      padding:12px 14px;
-      box-shadow:0 10px 20px rgba(0,0,0,.05);
-    }
-    .box h3{
-      margin:0 0 6px; color:#7b4f55; font-size:1.1rem;
-      letter-spacing:.03em;
-    }
-    .box p{margin:2px 0; font-size:1.05rem}
-    .date-grid{
-      display:grid; grid-template-columns:1fr 1fr; gap:10px;
-    }
-    .highlight{
-      text-align:center;
-      padding:14px 12px;
-      border-radius:16px;
-      background:
-        linear-gradient(135deg, rgba(255,255,255,.95), rgba(243,216,220,.45));
-      border:1px solid rgba(200,169,106,.35);
-      font-size:1.08rem;
-      font-style:italic;
-      box-shadow:0 12px 24px rgba(0,0,0,.06);
-    }
-    .highlight strong{
-      display:block;
-      font-family:"Great Vibes",cursive;
-      font-size:1.8rem;
-      font-weight:400;
-      color:#8f5f64;
-      margin-bottom:4px;
-    }
-    .actions{
-      display:grid; grid-template-columns:1fr 1fr; gap:10px;
-      margin-top:auto;
-    }
-    .btn{
-      text-decoration:none; text-align:center;
-      padding:12px 14px;
-      border-radius:14px;
-      border:1px solid rgba(200,169,106,.35);
-      background:linear-gradient(180deg, #fff, #f4eadf);
-      color:#59453c;
-      font-size:1.02rem;
-      font-weight:600;
-      box-shadow:0 10px 18px rgba(0,0,0,.06);
-      transition:.25s transform, .25s box-shadow, .25s background;
-    }
-    .btn:hover{transform:translateY(-2px); box-shadow:0 14px 24px rgba(0,0,0,.1)}
-    .btn.primary{
-      background:linear-gradient(180deg, #d7b57a, #b99258);
-      color:#fff;
-      border-color:rgba(0,0,0,.05);
-    }
-    .hint{
-      text-align:center;
-      color:#81695f;
-      font-size:1rem;
-      margin-top:8px;
-      animation:pulse 1.8s ease-in-out infinite;
-    }
-    @keyframes pulse{50%{opacity:.55}}
-    .flowers{
-      position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:1;
-    }
-    .flower{
-      position:absolute; width:18px; height:18px;
-      background: radial-gradient(circle, #fff 0 30%, #f7dce0 31% 58%, rgba(255,255,255,0) 59%);
-      opacity:.78;
-      filter: blur(.2px);
-      animation: drift linear infinite;
-    }
-    @keyframes drift{
-      from{transform:translateY(110vh) rotate(0deg)}
-      to{transform:translateY(-20vh) rotate(360deg)}
-    }
-    .music{
-      position:fixed; right:16px; bottom:16px; z-index:10;
-      width:56px; height:56px; border-radius:50%;
-      border:none; cursor:pointer;
-      background:linear-gradient(180deg,#d7b57a,#b99258);
-      color:#fff; font-size:1.2rem; box-shadow:0 14px 24px rgba(0,0,0,.18);
-    }
-    .backdrop{
-      position:fixed; inset:0; z-index:3; display:none;
-      background: radial-gradient(circle at top, rgba(255,255,255,.08), rgba(0,0,0,.12));
-    }
-    .open .card{pointer-events:auto}
-    .open .splash{display:none}
-    .open body{overflow:auto}
-    .open .backdrop{display:block}
-    @media (max-width:520px){
-      .card{width:92%; height:88%}
-      .title h1{font-size:2.7rem}
-      .subtitle{font-size:1rem}
-      .date-grid,.actions{grid-template-columns:1fr}
-      .card-inner{padding:14px}
-    }
-  </style>
+<style>
+
+body{
+  margin:0;
+  font-family:'Playfair Display', serif;
+  background: linear-gradient(#fdf6f0,#ffffff);
+  overflow:hidden;
+}
+
+/* SOBRE */
+#inicio{
+  position:fixed;
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#f3e5d8;
+  cursor:pointer;
+}
+
+#inicio h1{
+  font-family:'Great Vibes';
+  font-size:50px;
+}
+
+/* CONTENIDO */
+#contenido{
+  display:none;
+  text-align:center;
+  padding:20px;
+  animation:fade 2s;
+}
+
+/* CARTA */
+.carta{
+  max-width:600px;
+  margin:auto;
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+  border:2px solid #e6d5c3;
+}
+
+/* NOMBRES */
+.nombres{
+  font-family:'Great Vibes';
+  font-size:55px;
+  color:#b89b72;
+}
+
+/* FOTO */
+.foto img{
+  width:100%;
+  border-radius:15px;
+  margin:20px 0;
+}
+
+/* BOTONES */
+.btn{
+  display:inline-block;
+  margin:10px;
+  padding:12px 20px;
+  background:#b89b72;
+  color:white;
+  text-decoration:none;
+  border-radius:10px;
+}
+
+/* FRASE */
+.frase{
+  margin-top:20px;
+  font-style:italic;
+  font-size:18px;
+  color:#6b4f3a;
+}
+
+/* ANIMACIÓN */
+@keyframes fade{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1;}
+}
+
+/* MÚSICA */
+.music{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#b89b72;
+  color:white;
+  padding:15px;
+  border-radius:50%;
+  cursor:pointer;
+}
+
+</style>
 </head>
+
 <body>
-  <div class="flowers" id="flowers"></div>
 
-  <div class="backdrop"></div>
+<!-- SOBRE -->
+<div id="inicio" onclick="abrir()">
+  <h1>💌 Toca para abrir</h1>
+</div>
 
-  <div class="splash" onclick="abrirCarta()">
-    <div class="envelope-wrap" aria-label="Abrir invitación">
-      <div class="card" id="card">
-        <div class="ribbon"></div>
-        <div class="card-inner">
-          <div class="title">
-            <span class="small">Invitación especial</span>
-            <h1>Wilson & Erika</h1>
-          </div>
+<!-- CONTENIDO -->
+<div id="contenido">
 
-          <div class="subtitle">Con amor y alegría, junto al bautizo de nuestra hija</div>
+<div class="carta">
 
-          <div class="photo">
-            <img src="Foto.jpeg" alt="Foto de Wilson y Erika">
-          </div>
+<div class="nombres">Wilson & Erika</div>
 
-          <div class="info">
-            <div class="box">
-              <h3>Ailany Cataleya</h3>
-              <p>Nuestra amada bautizada</p>
-            </div>
+<p>Con la bendición de Dios,</p>
+<p>tenemos el honor de invitarte a nuestra boda</p>
 
-            <div class="date-grid">
-              <div class="box">
-                <h3>Padrinos de boda</h3>
-                <p>José Maria Chauca</p>
-                <p>Blanca Guallpa</p>
-              </div>
-              <div class="box">
-                <h3>Padrinos de bautizo</h3>
-                <p>Carlos Fajardo</p>
-                <p>Teresa Chauca</p>
-              </div>
-            </div>
+<h3>Y al bautizo de nuestra hija</h3>
+<h2>Ailany Cataleya</h2>
 
-            <div class="box">
-              <h3>Fecha y hora</h3>
-              <p><strong>22 de agosto de 2026</strong></p>
-              <p>3:30 p. m.</p>
-            </div>
+<div class="foto">
+<img src="Foto.jpeg">
+</div>
 
-            <div class="box">
-              <h3>Lugar de ceremonia</h3>
-              <p>Santuario de la Virgen del Rocío</p>
-              <p>Biblián, Cañar</p>
-            </div>
+<p><b>Padrinos de boda</b><br>
+José María Chauca<br>
+Blanca Guallpa</p>
 
-            <div class="highlight">
-              <strong>Mensaje de amor</strong>
-              “El amor nos ha llevado a este momento mágico. Los invitamos a ser testigos de nuestra promesa de amor.”
-            </div>
+<p><b>Padrinos de bautizo</b><br>
+Carlos Fajardo<br>
+Teresa Chauca</p>
 
-            <div class="actions">
-              <a class="btn primary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Santuario+de+la+Virgen+del+Roc%C3%ADo+Biblian">📍 Ver ubicación</a>
-              <a class="btn" target="_blank" href="https://wa.me/593987311469?text=Confirmo%20mi%20asistencia%20a%20la%20invitaci%C3%B3n">💬 Confirmar asistencia</a>
-            </div>
-          </div>
-        </div>
-      </div>
+<p><b>Fecha:</b> 22 de Agosto 2026</p>
+<p><b>Hora:</b> 3:30 PM</p>
+<p><b>Lugar:</b> Santuario de la Virgen del Rocío</p>
 
-      <div class="envelope">
-        <div class="front"></div>
-        <div class="seal"></div>
-      </div>
-    </div>
-    <div class="hint">Toca para abrir la invitación</div>
-  </div>
+<a class="btn" target="_blank"
+href="https://www.google.com/maps/search/?api=1&query=Santuario+de+la+Virgen+del+Roc%C3%ADo+Biblian">
+📍 Ver ubicación
+</a>
 
-  <button class="music" onclick="toggleMusic()" id="musicBtn">▶</button>
+<a class="btn" target="_blank"
+href="https://wa.me/593987311469?text=Confirmo%20mi%20asistencia">
+💬 Confirmar asistencia
+</a>
 
-  <audio id="audio" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-  </audio>
+<div class="frase">
+“El amor nos ha llevado a este momento mágico.  
+Te invitamos a ser testigo de nuestra promesa de amor.”
+</div>
 
-  <script>
-    const root = document.documentElement;
-    const flowers = document.getElementById('flowers');
-    for (let i = 0; i < 24; i++) {
-      const f = document.createElement('div');
-      f.className = 'flower';
-      f.style.left = Math.random() * 100 + 'vw';
-      f.style.animationDuration = (8 + Math.random() * 10) + 's';
-      f.style.animationDelay = (-Math.random() * 12) + 's';
-      f.style.transform = `scale(${0.7 + Math.random() * 1.4})`;
-      flowers.appendChild(f);
-    }
+</div>
+</div>
 
-    function abrirCarta(){
-      document.body.classList.add('open');
-      const c = document.getElementById('card');
-      c.classList.add('show');
-    }
+<!-- MÚSICA -->
+<div class="music" onclick="toggleMusic()">▶</div>
 
-    let playing = false;
-    function toggleMusic(){
-      const audio = document.getElementById('audio');
-      const btn = document.getElementById('musicBtn');
-      if(!playing){
-        audio.play();
-        btn.textContent = '⏸';
-        playing = true;
-      }else{
-        audio.pause();
-        btn.textContent = '▶';
-        playing = false;
-      }
-    }
-  </script>
+<audio id="audio">
+<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_115b9b7d31.mp3">
+</audio>
+
+<script>
+
+function abrir(){
+  document.getElementById("inicio").style.display="none";
+  document.getElementById("contenido").style.display="block";
+  document.body.style.overflow="auto";
+}
+
+let playing=false;
+
+function toggleMusic(){
+  let audio=document.getElementById("audio");
+
+  if(!playing){
+    audio.play();
+    playing=true;
+  }else{
+    audio.pause();
+    playing=false;
+  }
+}
+
+</script>
+
 </body>
 </html>
