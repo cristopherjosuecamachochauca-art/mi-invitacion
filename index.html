@@ -1,1 +1,289 @@
-<h2>PRUEBA CAMBIO</h2>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación Wilson & Erika</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-crema: #fdfaf5;
+            --color-oro: #c5a059;
+            --texto-oscuro: #4a4a4a;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #e5e5e5;
+            overflow: hidden;
+        }
+
+        /* --- EFECTO DE SOBRE --- */
+        #contenedor-sobre {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            transition: transform 1.5s ease-in-out;
+        }
+
+        .sobre {
+            position: relative;
+            width: 350px;
+            height: 250px;
+            background-color: var(--color-oro);
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sobre::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-left: 175px solid transparent;
+            border-right: 175px solid transparent;
+            border-top: 130px solid #d4af37;
+            z-index: 2;
+        }
+
+        .sello {
+            background: white;
+            padding: 15px;
+            border-radius: 50%;
+            font-family: 'Great Vibes', cursive;
+            color: var(--color-oro);
+            font-size: 1.5rem;
+            z-index: 3;
+            border: 2px solid var(--color-oro);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* --- CONTENIDO DE LA CARTA --- */
+        #contenido-carta {
+            height: 100vh;
+            overflow-y: auto;
+            background-color: var(--color-crema);
+            padding: 40px 20px;
+            text-align: center;
+            display: none; /* Se activa al abrir el sobre */
+        }
+
+        .borde-elegante {
+            border: 2px solid var(--color-oro);
+            padding: 30px 15px;
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            color: var(--color-oro);
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitulo {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--texto-oscuro);
+        }
+
+        .nombre-bebe {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--color-oro);
+            margin: 20px 0;
+        }
+
+        .foto-novios {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid var(--color-oro);
+            margin: 20px auto;
+            object-fit: cover;
+            display: block;
+        }
+
+        .seccion-padrinos {
+            margin: 30px 0;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        h3 {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-oro);
+        }
+
+        .padrinos-nombres {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--texto-oscuro);
+        }
+
+        .detalles-misa {
+            background: #fdfaf5;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .frase-final {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--color-oro);
+            margin: 40px 0;
+            padding: 0 20px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: block;
+            background-color: var(--color-oro);
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            margin: 10px auto;
+            border-radius: 50px;
+            max-width: 200px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        /* --- EFECTO ROSAS BLANCAS --- */
+        .petalo {
+            position: fixed;
+            top: -10%;
+            background: white;
+            border-radius: 50% 0 50% 50%;
+            width: 15px;
+            height: 15px;
+            opacity: 0.7;
+            pointer-events: none;
+            animation: caida 10s linear infinite;
+        }
+
+        @keyframes caida {
+            0% { transform: translateY(0) rotate(0deg); left: 10%; }
+            100% { transform: translateY(110vh) rotate(360deg); left: 90%; }
+        }
+
+        /* --- CONTROL MÚSICA --- */
+        #musica-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            border: 1px solid var(--color-oro);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            z-index: 200;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="miMusica" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="musica-toggle" onclick="gestionarMusica()">🎵</div>
+
+    <div id="contenedor-sobre" onclick="abrirInvitacion()">
+        <div class="sobre">
+            <div class="sello">W & E</div>
+        </div>
+    </div>
+
+    <div id="contenido-carta">
+        <div class="borde-elegante">
+            <h1>Wilson & Erika</h1>
+            <p class="subtitulo">Tienen el honor de invitarlos a su boda y al bautizo de su pequeña hija</p>
+            
+            <div class="nombre-bebe">Ailany Cataleya</div>
+
+            <img src="https://via.placeholder.com/200" alt="Wilson y Erika" class="foto-novios">
+
+            <div class="seccion-padrinos">
+                <h3>Padrinos de Boda</h3>
+                <p class="padrinos-nombres">José Maria Chauca<br>Blanca Guallpa</p>
+
+                <h3>Padrinos de Bautizo</h3>
+                <p class="padrinos-nombres">Carlos Fajardo<br>Teresa Chauca</p>
+            </div>
+
+            <div class="detalles-misa">
+                <p><strong>Fecha:</strong> 22 de Agosto, 2026</p>
+                <p><strong>Hora:</strong> 3:30 PM</p>
+                <p><strong>Lugar:</strong> Santuario de la Virgen del Rocío</p>
+            </div>
+
+            <a href="https://maps.app.goo.gl/3fX8Wz6W8Wz6W8Wz6" class="btn" target="_blank">📍 Ver Ubicación</a>
+            
+            <a href="https://wa.me/593987311469?text=Hola%20Wilson%20y%20Erika,%20confirmo%20mi%20asistencia%20con%20mucho%20gusto." class="btn" target="_blank">💬 Confirmar WhatsApp</a>
+
+            <div class="frase-final">
+                "El amor nos ha llevado a este momento mágico. Los invitamos a ser testigos de nuestra promesa de amor."
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function abrirInvitacion() {
+            // Animación de salida del sobre
+            document.getElementById('contenedor-sobre').style.transform = 'translateY(-150%)';
+            setTimeout(() => {
+                document.getElementById('contenedor-sobre').style.display = 'none';
+                document.getElementById('contenido-carta').style.display = 'block';
+                document.body.style.overflow = 'auto';
+                // Intentar iniciar música
+                gestionarMusica();
+                crearRosas();
+            }, 1000);
+        }
+
+        function gestionarMusica() {
+            const audio = document.getElementById('miMusica');
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+
+        // Crear efecto de pétalos cayendo
+        function crearRosas() {
+            for (let i = 0; i < 20; i++) {
+                let petalo = document.createElement('div');
+                petalo.className = 'petalo';
+                petalo.style.left = Math.random() * 100 + 'vw';
+                petalo.style.animationDelay = Math.random() * 5 + 's';
+                petalo.style.opacity = Math.random();
+                document.body.appendChild(petalo);
+            }
+        }
+    </script>
+</body>
+</html>
