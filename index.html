@@ -2,146 +2,137 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invitación Bautizo</title>
 
-<title>Invitación</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&display=swap" rel="stylesheet">
+<!-- FUENTES ELEGANTES -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 
 <style>
-
 body{
   margin:0;
-  font-family:'Playfair Display', serif;
-  background: linear-gradient(#fdf6f0,#ffffff);
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(#fce4ec,#ffffff);
   overflow:hidden;
 }
 
-/* SOBRE */
+/* PANTALLA INICIAL */
 #inicio{
-  position:fixed;
-  width:100%;
-  height:100%;
+  height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:#f3e5d8;
-  cursor:pointer;
 }
 
-#inicio h1{
-  font-family:'Great Vibes';
-  font-size:50px;
+.sobre{
+  width:250px;
+  height:180px;
+  background:#fff;
+  border-radius:10px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  cursor:pointer;
+  transition:0.5s;
+}
+
+.sobre:hover{
+  transform:scale(1.1);
+}
+
+.sobre p{
+  font-family:'Great Vibes',cursive;
+  font-size:30px;
+  color:#d81b60;
 }
 
 /* CONTENIDO */
 #contenido{
   display:none;
-  text-align:center;
-  padding:20px;
-  animation:fade 2s;
-}
-
-/* CARTA */
-.carta{
-  max-width:600px;
-  margin:auto;
-  background:white;
   padding:30px;
-  border-radius:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.2);
-  border:2px solid #e6d5c3;
+  text-align:center;
+  animation:fadeIn 2s;
 }
 
-/* NOMBRES */
-.nombres{
-  font-family:'Great Vibes';
-  font-size:55px;
-  color:#b89b72;
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(50px);}
+  to{opacity:1; transform:translateY(0);}
 }
 
-/* FOTO */
-.foto img{
-  width:100%;
+h1{
+  font-family:'Great Vibes',cursive;
+  font-size:50px;
+  color:#d81b60;
+}
+
+.card{
+  background:white;
+  padding:20px;
   border-radius:15px;
-  margin:20px 0;
+  box-shadow:0 5px 20px rgba(0,0,0,0.1);
+  margin:20px auto;
+  max-width:400px;
 }
 
-/* BOTONES */
 .btn{
   display:inline-block;
   margin:10px;
-  padding:12px 20px;
-  background:#b89b72;
+  padding:10px 20px;
+  background:#d81b60;
   color:white;
+  border-radius:25px;
   text-decoration:none;
-  border-radius:10px;
+  transition:0.3s;
 }
 
-/* FRASE */
-.frase{
-  margin-top:20px;
-  font-style:italic;
-  font-size:18px;
-  color:#6b4f3a;
+.btn:hover{
+  background:#ad1457;
 }
 
-/* ANIMACIÓN */
-@keyframes fade{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1;}
-}
-
-/* MÚSICA */
+/* BOTÓN MÚSICA */
 .music{
   position:fixed;
   bottom:20px;
   right:20px;
-  background:#b89b72;
+  background:#d81b60;
   color:white;
-  padding:15px;
+  width:50px;
+  height:50px;
   border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
   cursor:pointer;
+  box-shadow:0 5px 15px rgba(0,0,0,0.3);
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- SOBRE -->
-<div id="inicio" onclick="abrir()">
-  <h1>💌 Toca para abrir</h1>
+<!-- INICIO -->
+<div id="inicio">
+  <div class="sobre" onclick="abrir()">
+    <p>💌 Abrir</p>
+  </div>
 </div>
 
 <!-- CONTENIDO -->
 <div id="contenido">
 
-<div class="carta">
+<h1>Mi Bautizo</h1>
 
-<div class="nombres">Wilson & Erika</div>
-
-<p>Con la bendición de Dios,</p>
-<p>tenemos el honor de invitarte a nuestra boda</p>
-
-<h3>Y al bautizo de nuestra hija</h3>
-<h2>Ailany Cataleya</h2>
-
-<div class="foto">
-<img src="Foto.jpeg">
+<div class="card">
+  <b>Padrinos</b><br>
+  Carlos Fajardo<br>
+  Teresa Chauca
 </div>
 
-<p><b>Padrinos de boda</b><br>
-José María Chauca<br>
-Blanca Guallpa</p>
-
-<p><b>Padrinos de bautizo</b><br>
-Carlos Fajardo<br>
-Teresa Chauca</p>
-
-<p><b>Fecha:</b> 22 de Agosto 2026</p>
-<p><b>Hora:</b> 3:30 PM</p>
-<p><b>Lugar:</b> Santuario de la Virgen del Rocío</p>
+<div class="card">
+  <b>Fecha:</b> 22 de Agosto 2026<br>
+  <b>Hora:</b> 3:30 PM<br>
+  <b>Lugar:</b> Santuario Virgen del Rocío
+</div>
 
 <a class="btn" target="_blank"
 href="https://www.google.com/maps/search/?api=1&query=Santuario+de+la+Virgen+del+Roc%C3%ADo+Biblian">
@@ -153,23 +144,20 @@ href="https://wa.me/593987311469?text=Confirmo%20mi%20asistencia">
 💬 Confirmar asistencia
 </a>
 
-<div class="frase">
-“El amor nos ha llevado a este momento mágico.  
-Te invitamos a ser testigo de nuestra promesa de amor.”
-</div>
+<p style="margin-top:20px; font-style:italic;">
+“El amor nos ha llevado a este momento mágico.”
+</p>
 
-</div>
 </div>
 
 <!-- MÚSICA -->
 <div class="music" onclick="toggleMusic()">▶</div>
 
-<audio id="audio">
+<audio id="audio" loop>
 <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_115b9b7d31.mp3">
 </audio>
 
 <script>
-
 function abrir(){
   document.getElementById("inicio").style.display="none";
   document.getElementById("contenido").style.display="block";
@@ -189,7 +177,6 @@ function toggleMusic(){
     playing=false;
   }
 }
-
 </script>
 
 </body>
