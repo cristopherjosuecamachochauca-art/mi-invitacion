@@ -1,1 +1,492 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:linear-gradient(
+180deg,
+#FFFDF9 0%,
+#FAF4ED 40%,
+#F7EEE4 70%,
+#FFFDF9 100%
+);
+color:#5D4A3D;
+overflow-x:hidden;
+}
+
+/* ========= BOTÓN MÚSICA ========= */
+
+#musicBtn{
+position:fixed;
+bottom:20px;
+right:20px;
+width:60px;
+height:60px;
+border-radius:50%;
+background:#C8A56A;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+cursor:pointer;
+z-index:9999;
+font-size:1.2rem;
+box-shadow:0 10px 25px rgba(0,0,0,.18);
+transition:.3s;
+}
+
+#musicBtn:hover{
+transform:scale(1.08);
+}
+
+/* ========= PORTADA ========= */
+
+#welcome{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:25px;
+background:
+radial-gradient(circle at top,#FFF8F1,#F8EEE3);
+}
+
+.intro-content{
+text-align:center;
+max-width:500px;
+width:100%;
+}
+
+/* NOMBRE PRINCIPAL */
+
+.cover-title{
+font-family:'Cormorant Garamond',serif;
+font-size:4.2rem;
+font-weight:700;
+letter-spacing:3px;
+color:#B88A4A;
+margin-bottom:10px;
+text-shadow:
+0 3px 10px rgba(184,138,74,.15);
+}
+
+/* INICIALES */
+
+.monogram{
+font-family:'Cormorant Garamond',serif;
+font-size:5rem;
+font-weight:700;
+letter-spacing:10px;
+color:#D7C1A0;
+
+text-shadow:
+1px 1px 0 #fff,
+2px 2px 8px rgba(0,0,0,.15);
+
+margin-bottom:15px;
+}
+
+/* FRASE */
+
+.forever{
+font-family:'Cormorant Garamond',serif;
+font-size:1.3rem;
+font-style:italic;
+color:#8E6A4A;
+margin-bottom:35px;
+}
+
+/* CARTA */
+
+.envelope{
+width:320px;
+height:210px;
+margin:auto;
+position:relative;
+cursor:pointer;
+transition:.4s;
+}
+
+.envelope:hover{
+transform:translateY(-6px);
+}
+
+/* SOBRE */
+
+.envelope::before{
+content:"";
+position:absolute;
+width:100%;
+height:100%;
+background:#F5E8D7;
+border-radius:12px;
+box-shadow:
+0 20px 45px rgba(0,0,0,.12);
+}
+
+/* SOLAPA */
+
+.envelope::after{
+content:"";
+position:absolute;
+left:0;
+top:0;
+width:100%;
+height:110px;
+background:#E8D4BA;
+
+clip-path:polygon(
+0 0,
+100% 0,
+50% 100%
+);
+}
+
+/* SELLO */
+
+.seal{
+position:absolute;
+left:50%;
+top:78px;
+transform:translateX(-50%);
+
+width:70px;
+height:70px;
+
+border-radius:50%;
+
+background:
+linear-gradient(
+145deg,
+#D5B27A,
+#B88A4A
+);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+font-family:'Cormorant Garamond',serif;
+font-size:1.8rem;
+font-weight:bold;
+
+color:white;
+
+z-index:5;
+
+box-shadow:
+0 8px 20px rgba(0,0,0,.18);
+}
+
+.envelope-text{
+position:absolute;
+bottom:25px;
+width:100%;
+text-align:center;
+font-weight:500;
+color:#7B624D;
+z-index:2;
+}
+
+/* ========= CONTENIDO ========= */
+
+#invitationContent{
+display:none;
+}
+
+/* HERO */
+
+.hero{
+padding:90px 20px 60px;
+text-align:center;
+}
+
+.ornament{
+width:200px;
+height:3px;
+background:#D5B27A;
+margin:0 auto 40px;
+position:relative;
+}
+
+.ornament::before,
+.ornament::after{
+content:"✦";
+position:absolute;
+top:-14px;
+font-size:24px;
+color:#D5B27A;
+}
+
+.ornament::before{
+left:-10px;
+}
+
+.ornament::after{
+right:-10px;
+}
+
+.main-title{
+font-family:'Cormorant Garamond',serif;
+font-size:5.5rem;
+font-weight:700;
+color:#B88A4A;
+letter-spacing:2px;
+}
+
+.main-title span{
+font-style:italic;
+}
+
+.subtitle{
+margin-top:15px;
+letter-spacing:2px;
+text-transform:uppercase;
+font-size:.95rem;
+}
+
+.baby-name{
+font-family:'Cormorant Garamond',serif;
+font-size:2.5rem;
+margin-top:12px;
+color:#765B47;
+}
+
+.couple-photo{
+width:360px;
+max-width:92%;
+margin-top:35px;
+padding:10px;
+background:white;
+border-radius:30px;
+border:1px solid rgba(184,138,74,.2);
+box-shadow:
+0 20px 45px rgba(0,0,0,.12);
+}
+
+.quote{
+max-width:760px;
+margin:40px auto;
+padding:0 15px;
+
+font-family:'Cormorant Garamond',serif;
+font-size:2rem;
+font-style:italic;
+line-height:1.8;
+color:#8B6A4B;
+}
+
+/* ========= CONTADOR ========= */
+
+.countdown-section{
+padding:70px 20px;
+text-align:center;
+}
+
+.countdown-section h2{
+font-family:'Cormorant Garamond',serif;
+font-size:3rem;
+letter-spacing:3px;
+text-transform:uppercase;
+color:#B88A4A;
+margin-bottom:35px;
+}
+
+#countdown{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+max-width:750px;
+margin:auto;
+}
+
+#countdown div{
+background:white;
+padding:25px;
+border-radius:25px;
+border:1px solid rgba(184,138,74,.15);
+box-shadow:
+0 12px 30px rgba(0,0,0,.08);
+}
+
+#countdown span{
+display:block;
+font-size:2.4rem;
+font-weight:bold;
+color:#B88A4A;
+}
+
+/* ========= TARJETAS ========= */
+
+.card{
+width:90%;
+max-width:850px;
+
+margin:45px auto;
+
+padding:50px;
+
+background:white;
+
+border-radius:30px;
+
+position:relative;
+
+box-shadow:
+0 15px 45px rgba(0,0,0,.08);
+
+text-align:center;
+}
+
+.card::before{
+content:"";
+
+position:absolute;
+
+top:15px;
+left:15px;
+right:15px;
+bottom:15px;
+
+border:
+1px solid rgba(184,138,74,.15);
+
+border-radius:20px;
+pointer-events:none;
+}
+
+.card h2{
+font-family:'Cormorant Garamond',serif;
+font-size:2.5rem;
+color:#B88A4A;
+margin-bottom:25px;
+}
+
+.card p{
+margin:12px 0;
+line-height:1.8;
+}
+
+.card hr{
+margin:30px auto;
+width:70%;
+border:none;
+height:1px;
+background:#E6D6C3;
+}
+
+/* ========= BOTONES ========= */
+
+.btn{
+display:inline-block;
+
+margin-top:20px;
+
+padding:15px 35px;
+
+background:#C8A56A;
+
+color:white;
+
+text-decoration:none;
+
+border-radius:50px;
+
+font-weight:600;
+
+box-shadow:
+0 8px 20px rgba(200,165,106,.25);
+
+transition:.3s;
+}
+
+.btn:hover{
+transform:translateY(-3px);
+}
+
+.whatsapp{
+background:#25D366;
+}
+
+/* ========= FINAL ========= */
+
+.final{
+padding:100px 20px;
+text-align:center;
+
+background:
+linear-gradient(
+180deg,
+#FAF5EF,
+#F1E5D6
+);
+}
+
+.final h2{
+font-family:'Cormorant Garamond',serif;
+font-size:4rem;
+color:#B88A4A;
+margin-bottom:15px;
+}
+
+.final p{
+font-size:1.05rem;
+}
+
+/* ========= RESPONSIVE ========= */
+
+@media(max-width:768px){
+
+.cover-title{
+font-size:3rem;
+}
+
+.monogram{
+font-size:4rem;
+}
+
+.envelope{
+width:280px;
+height:190px;
+}
+
+.main-title{
+font-size:3.3rem;
+}
+
+.baby-name{
+font-size:2rem;
+}
+
+.quote{
+font-size:1.5rem;
+}
+
+.countdown-section h2{
+font-size:2.2rem;
+}
+
+#countdown{
+grid-template-columns:repeat(2,1fr);
+}
+
+.card{
+padding:35px 25px;
+}
+
+.card h2{
+font-size:2rem;
+}
+
+.final h2{
+font-size:2.8rem;
+}
+
+}
