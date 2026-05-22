@@ -1,4 +1,4 @@
-const envelope = document.getElementById("envelope");
+const openBtn = document.getElementById("openInvitation");
 const welcome = document.getElementById("welcome");
 const content = document.getElementById("invitationContent");
 
@@ -11,48 +11,43 @@ let musicPlaying = false;
    ABRIR INVITACIÓN
 ========================== */
 
-envelope.addEventListener("click", () => {
+openBtn.addEventListener("click", () => {
 
-    const flap = document.querySelector(".flap");
-
-    flap.style.transform = "rotateX(180deg)";
-    flap.style.transformOrigin = "top";
-
-    envelope.style.transform = "translateY(-20px)";
+    welcome.style.transition = "opacity 1s ease";
+    welcome.style.opacity = "0";
 
     setTimeout(() => {
 
-        welcome.style.opacity = "0";
+        welcome.style.display = "none";
+
+        content.style.display = "block";
+
+        content.style.opacity = "0";
 
         setTimeout(() => {
+            content.style.transition = "opacity 1.2s ease";
+            content.style.opacity = "1";
+        }, 100);
 
-            welcome.style.display = "none";
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
 
-            content.style.display = "block";
-
-            content.style.opacity = "0";
-
-            setTimeout(() => {
-                content.style.transition = "opacity 1.2s ease";
-                content.style.opacity = "1";
-            }, 100);
-
-        }, 800);
-
-    }, 700);
+    }, 1000);
 
     music.play()
         .then(() => {
             musicPlaying = true;
         })
         .catch(() => {
-            console.log("Audio bloqueado por el navegador.");
+            console.log("Audio bloqueado por el navegador");
         });
 
 });
 
 /* ==========================
-   BOTÓN DE MÚSICA
+   BOTÓN MÚSICA
 ========================== */
 
 musicBtn.addEventListener("click", () => {
@@ -86,15 +81,13 @@ musicBtn.addEventListener("click", () => {
 const weddingDate =
 new Date("August 22, 2026 15:30:00").getTime();
 
-const countdown = setInterval(() => {
+function updateCountdown() {
 
     const now = new Date().getTime();
 
     const distance = weddingDate - now;
 
     if (distance < 0) {
-
-        clearInterval(countdown);
 
         document.getElementById("countdown").innerHTML =
         "<h2>¡Hoy es el gran día! ❤️</h2>";
@@ -128,4 +121,7 @@ const countdown = setInterval(() => {
     document.getElementById("minutes").textContent = minutes;
     document.getElementById("seconds").textContent = seconds;
 
-}, 1000);
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
