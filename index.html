@@ -3,87 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wilson & Erika | Nuestra Boda</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;600&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
+    <title>Wilson & Erika | Boda & Bautizo</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <!-- Animaciones AOS -->
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
 
+<body>
+    <!-- PARTÍCULAS ANIMADAS DE FONDO -->
+    <div class="bg-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- MUSICA -->
     <audio id="bgMusic" loop>
         <source src="Sera por que te amo - Arcano (2).mp3" type="audio/mpeg">
     </audio>
 
-    <div id="musicBtn"><i class="fa-solid fa-music"></i></div>
+    <!-- BOTÓN MUSICA 3D -->
+    <div id="musicBtn">
+        <i class="fa-solid fa-music"></i>
+    </div>
 
+    <!-- PORTADA 3D -->
     <section id="welcome">
-        <div class="intro-container" data-aos="zoom-in">
-            <h1 class="names">Wilson <span>&</span> Erika</h1>
+        <div class="intro-content">
+            <h1 class="cover-title">WILSON & ERIKA</h1>
+
             <div class="monogram">WE</div>
-            <p class="date-hero">22 • 08 • 2026</p>
-            <div id="openInvitation" class="btn-open">
-                <span>Abrir Invitación</span>
+
+            <p class="forever">• Finalmente para siempre •</p>
+
+            <div id="openInvitation" class="envelope">
+                <div class="seal">WE</div>
+                <div class="envelope-text">Tocar para abrir</div>
             </div>
         </div>
     </section>
 
-    <main id="invitationContent">
-        
-        <section class="hero-section">
-            <div class="photo-frame" data-aos="fade-up">
-                <img src="Foto.jpeg" alt="Wilson y Erika">
-            </div>
-            <h2 class="section-title">Nuestra Unión</h2>
-            <p class="quote">“El amor nos ha llevado a este momento mágico. Los invitamos a ser testigos de nuestra promesa de amor.”</p>
+    <!-- CONTENIDO -->
+    <div id="invitationContent">
+        <section class="hero">
+            <div class="ornament"></div>
+
+            <h1 class="main-title">Wilson <span>&</span> Erika</h1>
+
+            <p class="subtitle">Boda y Bautizo de</p>
+
+            <h2 class="baby-name">Ailany Cataleya</h2>
+
+            <img src="Foto.jpeg" alt="Wilson y Erika" class="couple-photo">
+
+            <p class="quote">
+                "El amor nos ha llevado a este momento mágico.
+                Los invitamos a ser testigos de nuestra promesa de amor."
+            </p>
         </section>
 
-        <section class="countdown-section" data-aos="fade-up">
-            <h2 class="section-title">Faltan</h2>
+        <!-- CUENTA REGRESIVA 3D -->
+        <section class="countdown-section" data-aos="fade-up" data-aos-duration="1200">
+            <h2>Nuestro Gran Día</h2>
+
             <div id="countdown">
-                <div class="time-box"><span id="days">0</span><p>Días</p></div>
-                <div class="time-box"><span id="hours">0</span><p>Horas</p></div>
-                <div class="time-box"><span id="minutes">0</span><p>Minutos</p></div>
-                <div class="time-box"><span id="seconds">0</span><p>Segundos</p></div>
+                <div>
+                    <span id="days">0</span>
+                    <p>Días</p>
+                </div>
+
+                <div>
+                    <span id="hours">0</span>
+                    <p>Horas</p>
+                </div>
+
+                <div>
+                    <span id="minutes">0</span>
+                    <p>Minutos</p>
+                </div>
+
+                <div>
+                    <span id="seconds">0</span>
+                    <p>Segundos</p>
+                </div>
             </div>
         </section>
 
-        <section class="event-grid">
-            <div class="card" data-aos="flip-left">
-                <i class="fa-solid fa-church icon-style"></i>
-                <h3>Ceremonia</h3>
-                <p>Santuario Virgen del Rocío, Biblián</p>
-                <p><strong>3:30 PM</strong></p>
-                <a href="#" class="btn-location">Ver Ubicación</a>
-            </div>
+        <!-- CEREMONIA 3D -->
+        <section class="card" data-aos="fade-right" data-aos-duration="1200">
+            <h2>
+                <i class="fa-solid fa-church"></i>
+                Ceremonia
+            </h2>
 
-            <div class="card" data-aos="flip-right">
-                <i class="fa-solid fa-champagne-glasses icon-style"></i>
-                <h3>Recepción</h3>
-                <p>El Camping</p>
-                <p><strong>7:00 PM</strong></p>
-                <a href="#" class="btn-location">Cómo llegar</a>
-            </div>
-        </section>
+            <p>Santuario Virgen del Rocío</p>
+            <p>Biblián</p>
+            <p>22 de Agosto de 2026</p>
+            <p>3:30 PM</p>
 
-        <section class="card-padrinos" data-aos="fade-up">
-            <h3>Nuestros Padrinos</h3>
-            <div class="godparents-grid">
-                <div><h4>Boda</h4><p>José Chauca & Blanca Guallpa</p></div>
-                <div><h4>Bautizo</h4><p>Carlos Fajardo & Teresa Chauca</p></div>
-            </div>
-        </section>
-
-        <section class="rsvp-section" data-aos="zoom-in">
-            <h2>¿Nos acompañas?</h2>
-            <a href="https://wa.me/593987311469" class="btn-whatsapp">
-                <i class="fa-brands fa-whatsapp"></i> Confirmar Asistencia
+            <a class="btn" href="https://maps.app.goo.gl/ToNCguLj2eez11EFA" target="_blank">
+                <i class="fa-solid fa-location-dot"></i>
+                Ver ubicación
             </a>
         </section>
-    </main>
 
+        <!-- RECEPCION 3D -->
+        <section class="card" data-aos="fade-left" data-aos-duration="1200">
+            <h2>
+                <i class="fa-solid fa-champagne-glasses"></i>
+                Recepción
+            </h2>
+
+            <p>El Camping</p>
+            <p>7:00 PM</p>
+
+            <a class="btn" href="https://maps.app.goo.gl/naa9VoLhbB48xhJr9" target="_blank">
+                <i class="fa-solid fa-location-dot"></i>
+                Cómo llegar
+            </a>
+        </section>
+
+        <!-- PADRINOS 3D -->
+        <section class="card" data-aos="zoom-in" data-aos-duration="1200">
+            <h2>Padrinos de Boda</h2>
+            <p>José María Chauca</p>
+            <p>Blanca Guallpa</p>
+
+            <hr>
+
+            <h2>Padrinos de Bautizo</h2>
+            <p>Carlos Fajardo</p>
+            <p>Teresa Chauca</p>
+        </section>
+
+        <!-- CONFIRMACION 3D -->
+        <section class="card" data-aos="fade-up" data-aos-duration="1200">
+            <h2>Confirmación</h2>
+            <p>Tu presencia será muy importante para nosotros.</p>
+
+            <a class="btn whatsapp" href="https://wa.me/593987311469?text=Hola,%20confirmo%20mi%20asistencia%20a%20la%20boda%20y%20bautizo%20de%20Wilson%20y%20Erika." target="_blank">
+                <i class="fa-brands fa-whatsapp"></i>
+                Confirmar asistencia
+            </a>
+        </section>
+
+        <!-- FINAL 3D -->
+        <section class="final" data-aos="zoom-in" data-aos-duration="1200">
+            <h2>Gracias por acompañarnos</h2>
+            <p>Esperamos compartir este día tan especial contigo.</p>
+        </section>
+    </div>
+
+    <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-    <script>AOS.init({ duration: 1000, once: true });</script>
     <script src="script.js"></script>
 </body>
 </html>
