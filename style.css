@@ -122,14 +122,22 @@ radial-gradient(circle at top,#FFF8F1,#F8EEE3);
 
 .intro-content{
 
-text-align:center;
+    width:100%;
+    max-width:700px;
 
-max-width:500px;
+    margin:auto;
 
-width:100%;
+    text-align:center;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
 
 }
-
 
 
 /* NOMBRE PRINCIPAL */
@@ -216,17 +224,21 @@ margin-bottom:35px;
 
 .envelope{
 
-width:320px;
+    width:320px;
+    height:210px;
 
-height:210px;
+    position:relative;
 
-margin:auto;
+    margin:40px auto;
 
-position:relative;
+    left:0;
+    right:0;
 
-cursor:pointer;
+    display:block;
 
-transition:.4s;
+    cursor:pointer;
+
+    transition:.4s;
 
 }
 
