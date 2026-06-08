@@ -368,19 +368,19 @@ window.addEventListener("load", () => {
 
 
 
-}); 
+} 
 
 async function guardarAsistencia() {
     const nombre = document.getElementById("nombre").value;
     const personas = document.getElementById("personas").value;
 
-    if (nombre === "" || personas === "") {
-        alert("Por favor completa todos los campos.");
+    if (!nombre || !personas) {
+        alert("Completa todos los campos");
         return;
     }
 
     try {
-        await fetch("TU_URL_AQUI", {
+        const response = await fetch("TU_URL_AQUI", {
             method: "POST",
             body: new URLSearchParams({
                 nombre: nombre,
@@ -388,13 +388,13 @@ async function guardarAsistencia() {
             })
         });
 
-        alert("¡Gracias por confirmar tu asistencia!");
+        const text = await response.text();
+        console.log("RESPUESTA DEL SERVIDOR:", text);
 
-        document.getElementById("nombre").value = "";
-        document.getElementById("personas").value = "";
+        alert("¡Guardado correctamente!");
 
     } catch (error) {
-        console.error(error);
-        alert("Error al guardar. Revisa consola.");
+        console.error("ERROR:", error);
+        alert("Error real: " + error.message);
     }
 }
