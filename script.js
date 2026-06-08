@@ -370,4 +370,51 @@ window.addEventListener("load", () => {
 
 }); 
 
+async function guardarAsistencia() {
 
+    const nombre =
+    document.getElementById("nombre").value;
+
+    const personas =
+    document.getElementById("personas").value;
+
+    if(nombre === "" || personas === ""){
+
+        alert("Por favor completa todos los campos.");
+        return;
+
+    }
+
+    try{
+
+        await fetch(
+            "https://script.google.com/macros/s/AKfycbwOGEVjQ-mEXYlBjF2fHIX1WBL1SZAIeakcf5hsTz7257LduaWBZlh0DZ74sT7rQqMC/exec",
+            {
+                method:"POST",
+
+                headers:{
+                    "Content-Type":"application/json"
+                },
+
+                body:JSON.stringify({
+                    nombre:nombre,
+                    personas:personas
+                })
+            }
+        );
+
+        alert("¡Gracias por confirmar tu asistencia!");
+
+        document.getElementById("nombre").value = "";
+        document.getElementById("personas").value = "";
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        alert("Ocurrió un error al guardar la información.");
+
+    }
+
+}
