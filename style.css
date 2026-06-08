@@ -443,113 +443,99 @@ display:none;
 
 
 .hero{
+    text-align:center;
 
-padding:90px 20px 60px;
+    display:flex;
 
-text-align:center;
+    flex-direction:column;
 
+    justify-content:center;
+
+    align-items:center;
+
+    padding:80px 20px;
 }
 
+.event-title{
 
+    width:100%;
 
-.ornament{
+    text-align:center;
 
-width:200px;
+    font-family:'Cormorant Garamond',serif;
 
-height:3px;
+    font-size:1.5rem;
 
-background:#D5B27A;
+    letter-spacing:10px;
 
-margin:0 auto 40px;
+    text-transform:uppercase;
 
-position:relative;
+    color:#B88A4A;
 
+    font-weight:600;
+
+    margin-bottom:15px;
 }
-
-
-
-.ornament::before,
-
-.ornament::after{
-
-content:"✦";
-
-position:absolute;
-
-top:-14px;
-
-font-size:24px;
-
-color:#D5B27A;
-
-}
-
-
-
-.ornament::before{
-
-left:-10px;
-
-}
-
-
-
-.ornament::after{
-
-right:-10px;
-
-}
-
-
 
 .main-title{
 
-font-family:'Cormorant Garamond',serif;
+    width:100%;
 
-font-size:5.5rem;
+    text-align:center;
 
-font-weight:700;
+    font-family:'Cormorant Garamond',serif;
 
-color:#B88A4A;
+    font-size:5rem;
 
-letter-spacing:2px;
+    font-weight:700;
 
+    color:#B88A4A;
+
+    text-transform:uppercase;
+
+    letter-spacing:4px;
+
+    margin-bottom:25px;
 }
-
-
 
 .main-title span{
-
-font-style:italic;
-
+    font-style:italic;
 }
 
+.divider{
 
+    width:220px;
 
-.subtitle{
+    height:2px;
 
-margin-top:15px;
+    margin:25px auto;
 
-letter-spacing:2px;
-
-text-transform:uppercase;
-
-font-size:.95rem;
-
+    background:
+    linear-gradient(
+    to right,
+    transparent,
+    #D5B27A,
+    transparent
+    );
 }
-
-
 
 .baby-name{
 
-font-family:'Cormorant Garamond',serif;
+    width:100%;
 
-font-size:2.5rem;
+    text-align:center;
 
-margin-top:12px;
+    font-family:'Cormorant Garamond',serif;
 
-color:#765B47;
+    font-size:3.2rem;
 
+    color:#765B47;
+
+    text-transform:uppercase;
+
+    letter-spacing:3px;
+
+    margin-top:15px;
 }
 
 
