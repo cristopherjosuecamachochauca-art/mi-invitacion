@@ -1,6 +1,6 @@
-/* ===================================
+/* ==========================
    ELEMENTOS
-=================================== */
+========================== */
 
 const openBtn = document.getElementById("openInvitation");
 const welcome = document.getElementById("welcome");
@@ -11,417 +11,213 @@ const musicBtn = document.getElementById("musicBtn");
 
 let musicPlaying = false;
 
-/* ===================================
-   APERTURA PREMIUM
-=================================== */
+/* ==========================
+   ANIMACIÓN DE NÚMEROS
+========================== */
+
+function animateNumber(id, value) {
+
+    const element = document.getElementById(id);
+
+    if (element.textContent != value) {
+
+        element.style.transition = "all .3s ease";
+        element.style.transform = "scale(1.25)";
+
+        setTimeout(() => {
+
+            element.style.transform = "scale(1)";
+
+        }, 300);
+
+    }
+
+    element.textContent = value;
+}
+
+/* ==========================
+   ABRIR INVITACIÓN
+========================== */
 
 openBtn.addEventListener("click", () => {
 
-    openBtn.style.pointerEvents = "none";
+    openBtn.style.transition =
+        "all 1s cubic-bezier(.22,1,.36,1)";
 
-    openBtn.animate([
-        {
-            transform: "scale(1)",
-            opacity: 1
-        },
-        {
-            transform: "scale(1.2) translateY(-40px)",
-            opacity: 0
-        }
-    ], {
-        duration: 1200,
-        easing: "ease"
-    });
+    openBtn.style.transform =
+        "translateY(-40px) scale(1.2) rotate(3deg)";
+
+    openBtn.style.opacity = "0";
 
     setTimeout(() => {
 
         welcome.style.transition =
-        "opacity 1.5s ease";
+            "all 1.5s ease";
 
         welcome.style.opacity = "0";
+        welcome.style.transform = "scale(1.15)";
+        welcome.style.filter = "blur(15px)";
 
         setTimeout(() => {
 
             welcome.style.display = "none";
 
             content.style.display = "block";
-
             content.style.opacity = "0";
-
-            content.style.transform =
-            "translateY(40px)";
+            content.style.transform = "translateY(80px)";
 
             setTimeout(() => {
 
                 content.style.transition =
-                "all 1.5s ease";
+                    "all 1.8s ease";
 
                 content.style.opacity = "1";
-
-                content.style.transform =
-                "translateY(0)";
+                content.style.transform = "translateY(0)";
 
                 window.scrollTo({
                     top: 0,
                     behavior: "smooth"
                 });
 
-            }, 200);
+            }, 100);
 
         }, 1500);
 
-    }, 1000);
+    }, 800);
 
-    startMusic();
+    music.play()
+        .then(() => {
+
+            music.volume = 0;
+
+            let fade = setInterval(() => {
+
+                if (music.volume < 0.95) {
+
+                    music.volume += 0.05;
+
+                } else {
+
+                    clearInterval(fade);
+
+                }
+
+            }, 150);
+
+            musicPlaying = true;
+
+            musicBtn.innerHTML =
+                '<i class="fa-solid fa-music"></i>';
+
+        })
+        .catch(() => {
+
+            console.log(
+                "El navegador bloqueó la reproducción automática."
+            );
+
+        });
 
 });
 
-/* ===================================
-   MUSICA
-=================================== */
-
-function startMusic(){
-
-    music.play()
-    .then(() => {
-
-        musicPlaying = true;
-
-        musicBtn.innerHTML =
-        '<i class="fa-solid fa-music"></i>';
-
-        musicBtn.classList.add("playing");
-
-    })
-    .catch(error => {
-
-        console.log(error);
-
-    });
-
-}
+/* ==========================
+   BOTÓN MÚSICA
+========================== */
 
 musicBtn.addEventListener("click", () => {
 
-    if(musicPlaying){
+    if (musicPlaying) {
 
         music.pause();
 
         musicPlaying = false;
 
         musicBtn.innerHTML =
-        '<i class="fa-solid fa-volume-xmark"></i>';
+            '<i class="fa-solid fa-volume-xmark"></i>';
 
-        musicBtn.classList.remove("playing");
-
-    }else{
+    } else {
 
         music.play();
 
         musicPlaying = true;
 
         musicBtn.innerHTML =
-        '<i class="fa-solid fa-music"></i>';
-
-        musicBtn.classList.add("playing");
+            '<i class="fa-solid fa-music"></i>';
 
     }
 
 });
 
-/* ===================================
-   CONTADOR PREMIUM
-=================================== */
+/* ==========================
+   CUENTA REGRESIVA
+========================== */
 
 const weddingDate =
-new Date("August 22, 2026 15:30:00").getTime();
+    new Date("August 22, 2026 15:30:00").getTime();
 
-function animateValue(id,value){
+function updateCountdown() {
 
-    const element =
-    document.getElementById(id);
+    const now = new Date().getTime();
 
-    if(element.textContent !== value.toString()){
+    const distance = weddingDate - now;
 
-        element.animate([
-            {
-                transform:"scale(1.3)",
-                opacity:.5
-            },
-            {
-                transform:"scale(1)",
-                opacity:1
-            }
-        ],{
-            duration:400
-        });
+    if (distance < 0) {
 
-        element.textContent = value;
-    }
-
-}
-
-function updateCountdown(){
-
-    const now =
-    new Date().getTime();
-
-    const distance =
-    weddingDate - now;
-
-    if(distance < 0){
-
-        document.getElementById(
-        "countdown"
-        ).innerHTML =
-        "<h2>❤️ ¡Hoy es el gran día! ❤️</h2>";
+        document.getElementById("countdown").innerHTML =
+            "<h2>❤️ ¡Hoy es el gran día! ❤️</h2>";
 
         return;
     }
 
     const days =
-    Math.floor(distance /
-    (1000*60*60*24));
+        Math.floor(distance / (1000 * 60 * 60 * 24));
 
     const hours =
-    Math.floor(
-    (distance %
-    (1000*60*60*24))
-    /
-    (1000*60*60)
-    );
+        Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) /
+            (1000 * 60 * 60)
+        );
 
     const minutes =
-    Math.floor(
-    (distance %
-    (1000*60*60))
-    /
-    (1000*60)
-    );
+        Math.floor(
+            (distance % (1000 * 60 * 60)) /
+            (1000 * 60)
+        );
 
     const seconds =
-    Math.floor(
-    (distance %
-    (1000*60))
-    /
-    1000
-    );
+        Math.floor(
+            (distance % (1000 * 60)) / 1000
+        );
 
-    animateValue("days",days);
-    animateValue("hours",hours);
-    animateValue("minutes",minutes);
-    animateValue("seconds",seconds);
+    animateNumber("days", days);
+    animateNumber("hours", hours);
+    animateNumber("minutes", minutes);
+    animateNumber("seconds", seconds);
 
 }
 
 updateCountdown();
 
-setInterval(updateCountdown,1000);
+setInterval(updateCountdown, 1000);
 
-/* ===================================
-   EFECTO PARALLAX
-=================================== */
+/* ==========================
+   APARICIÓN SUAVE
+========================== */
 
-window.addEventListener("scroll",() => {
-
-    const scroll =
-    window.pageYOffset;
-
-    const hero =
-    document.querySelector(".hero");
-
-    if(hero){
-
-        hero.style.transform =
-        `translateY(${scroll * 0.08}px)`;
-    }
-
-});
-
-/* ===================================
-   APARICION SUAVE
-=================================== */
-
-window.addEventListener("load",() => {
+window.addEventListener("load", () => {
 
     document.body.style.opacity = "0";
-
-    document.body.style.transition =
-    "opacity 2s ease";
+    document.body.style.transform = "translateY(20px)";
 
     setTimeout(() => {
 
+        document.body.style.transition =
+            "all 1.5s ease";
+
         document.body.style.opacity = "1";
+        document.body.style.transform =
+            "translateY(0)";
 
-    },300);
-
-});
-
-/* ===================================
-   REVELAR TARJETAS
-=================================== */
-
-const cards =
-document.querySelectorAll(".card");
-
-const observer =
-new IntersectionObserver((entries)=>{
-
-    entries.forEach(entry=>{
-
-        if(entry.isIntersecting){
-
-            entry.target.classList.add("visible");
-
-        }
-
-    });
-
-},{
-    threshold:0.2
-});
-
-cards.forEach(card => {
-
-    card.classList.add("hidden-card");
-
-    observer.observe(card);
+    }, 100);
 
 });
-
-/* ===================================
-   PETALOS FLOTANTES
-=================================== */
-
-function createPetal(){
-
-    const petal =
-    document.createElement("div");
-
-    petal.classList.add("petal");
-
-    petal.innerHTML = "🌸";
-
-    petal.style.left =
-    Math.random()*100+"vw";
-
-    petal.style.fontSize =
-    (Math.random()*15+10)+"px";
-
-    petal.style.animationDuration =
-    (Math.random()*8+6)+"s";
-
-    document.body.appendChild(petal);
-
-    setTimeout(()=>{
-
-        petal.remove();
-
-    },15000);
-
-}
-
-setInterval(createPetal,1200);
-
-/* ===================================
-   BRILLO TITULO
-=================================== */
-
-const title =
-document.querySelector(".main-title");
-
-if(title){
-
-    setInterval(()=>{
-
-        title.animate([
-            {
-                opacity:0.9
-            },
-            {
-                opacity:1
-            }
-        ],{
-            duration:1500
-        });
-
-    },2000);
-
-}
-
-/* ===================================
-   BOTON MUSICA GIRATORIO
-=================================== */
-
-setInterval(()=>{
-
-    if(musicPlaying){
-
-        musicBtn.animate([
-            {
-                transform:"rotate(0deg)"
-            },
-            {
-                transform:"rotate(360deg)"
-            }
-        ],{
-            duration:4000,
-            iterations:1
-        });
-
-    }
-
-},4000);
-.hidden-card{
-    opacity:0;
-    transform:translateY(60px);
-}
-
-.visible{
-    opacity:1;
-    transform:translateY(0);
-    transition:all 1s ease;
-}
-
-.petal{
-    position:fixed;
-    top:-50px;
-    pointer-events:none;
-    z-index:999;
-    animation:fall linear forwards;
-}
-
-@keyframes fall{
-
-    from{
-        transform:
-        translateY(-50px)
-        rotate(0deg);
-    }
-
-    to{
-        transform:
-        translateY(110vh)
-        rotate(720deg);
-    }
-
-}
-
-.playing{
-    animation:pulseMusic 2s infinite;
-}
-
-@keyframes pulseMusic{
-
-    0%{
-        transform:scale(1);
-    }
-
-    50%{
-        transform:scale(1.1);
-    }
-
-    100%{
-        transform:scale(1);
-    }
-}
