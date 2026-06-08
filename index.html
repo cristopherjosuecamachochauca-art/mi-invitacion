@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,7 +10,7 @@
 
 <link rel="stylesheet" href="style.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -21,80 +22,128 @@ href="https://unpkg.com/aos@2.3.4/dist/aos.css">
 
 <body>
 
-<!-- MUSICA -->
-
 <audio id="bgMusic" loop>
 <source src="Sera por que te amo - Arcano (2).mp3" type="audio/mpeg">
 </audio>
-
-<!-- BOTON MUSICA -->
 
 <div id="musicBtn">
 <i class="fa-solid fa-music"></i>
 </div>
 
+<!-- ========================= -->
 <!-- PORTADA -->
+<!-- ========================= -->
 
 <section id="welcome">
 
 <div class="intro-content">
 
-<h1 class="cover-title">
+<h1
+class="cover-title"
+data-aos="fade-down"
+data-aos-duration="1500">
+
 WILSON & ERIKA
+
 </h1>
 
-<div class="monogram">
-WE
-</div>
+<img
+src="156978264-w-and-e-vintage-initials-symbol-the-letters-are-surrounded-by-ornamental-elements-wedding-or.jpg"
+class="monogram-img"
+alt="Iniciales">
 
-<p class="forever">
-• Finalmente para siempre •
+<p
+class="intro-quote"
+data-aos="fade-up">
+
+“El amor nos ha llevado a este momento mágico.
+Los invitamos a ser testigos de nuestra promesa de amor.”
+
 </p>
 
-<div id="openInvitation" class="envelope">
+<div
+id="openInvitation"
+class="envelope"
+data-aos="zoom-in"
+data-aos-delay="600">
+
+<div class="envelope-back"></div>
+
+<div class="envelope-flap"></div>
 
 <div class="seal">
-WE
+
+Toca<br>
+para<br>
+abrir
+
 </div>
 
 <div class="envelope-text">
-Tocar para abrir
+
+Invitación de Boda & Bautizo
+
 </div>
 
 </div>
+
+<p class="forever">
+
+❦ Finalmente para siempre ❦
+
+</p>
 
 </div>
 
 </section>
 
+<!-- ========================= -->
 <!-- CONTENIDO -->
+<!-- ========================= -->
 
 <div id="invitationContent">
 
 <section class="hero">
 
-<div class="ornament"></div>
+<h1
+class="main-title"
+data-aos="fade-up">
 
-<h1 class="main-title">
 Wilson <span>&</span> Erika
+
 </h1>
 
-<p class="subtitle">
+<p
+class="subtitle"
+data-aos="fade-up"
+data-aos-delay="200">
+
 Boda y Bautizo de
+
 </p>
 
-<h2 class="baby-name">
+<h2
+class="baby-name"
+data-aos="zoom-in"
+data-aos-delay="400">
+
 Ailany Cataleya
+
 </h2>
 
 <img
 src="Foto.jpeg"
 alt="Wilson y Erika"
-class="couple-photo">
+class="couple-photo"
+data-aos="zoom-in-up">
 
-<p class="quote">
+<p
+class="quote"
+data-aos="fade-up">
+
 “El amor nos ha llevado a este momento mágico.
 Los invitamos a ser testigos de nuestra promesa de amor.”
+
 </p>
 
 </section>
@@ -166,7 +215,7 @@ Ver ubicación
 
 </section>
 
-<!-- RECEPCION -->
+<!-- RECEPCIÓN -->
 
 <section
 class="card"
@@ -196,33 +245,47 @@ Cómo llegar
 <!-- PADRINOS -->
 
 <section
-class="card"
+class="card padrinos"
 data-aos="zoom-in">
 
 <h2>Padrinos de Boda</h2>
 
-<p>José María Chauca</p>
-<p>Blanca Guallpa</p>
+<p class="godparent">
+José María Chauca
+</p>
+
+<p class="godparent">
+Blanca Guallpa
+</p>
 
 <hr>
 
 <h2>Padrinos de Bautizo</h2>
 
-<p>Carlos Fajardo</p>
-<p>Teresa Chauca</p>
+<p class="godparent">
+Carlos Fajardo
+</p>
+
+<p class="godparent">
+Teresa Chauca
+</p>
 
 </section>
 
-<!-- CONFIRMACION -->
+<!-- CONFIRMAR -->
 
 <section
 class="card"
 data-aos="fade-up">
 
-<h2>Confirmación</h2>
+<h2>
+Confirmación
+</h2>
 
 <p>
+
 Tu presencia será muy importante para nosotros.
+
 </p>
 
 <a
@@ -231,6 +294,7 @@ href="https://wa.me/593987311469?text=Hola,%20confirmo%20mi%20asistencia%20a%20l
 target="_blank">
 
 <i class="fa-brands fa-whatsapp"></i>
+
 Confirmar asistencia
 
 </a>
@@ -244,11 +308,15 @@ class="final"
 data-aos="zoom-in">
 
 <h2>
+
 Gracias por acompañarnos
+
 </h2>
 
 <p>
+
 Esperamos compartir este día tan especial contigo.
+
 </p>
 
 </section>
@@ -258,10 +326,12 @@ Esperamos compartir este día tan especial contigo.
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
 <script>
+
 AOS.init({
-duration:1200,
+duration:1500,
 once:true
 });
+
 </script>
 
 <script src="script.js"></script>
