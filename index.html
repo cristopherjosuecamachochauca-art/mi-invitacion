@@ -1,332 +1,89 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Wilson & Erika | Boda & Bautizo</title>
-
-<link rel="stylesheet" href="style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Poppins:wght@300;400;500&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-<link rel="stylesheet"
-href="https://unpkg.com/aos@2.3.4/dist/aos.css">
-
-<style>
-/* ========= PARTÍCULAS FLOTANTES ========= */
-.particles-container {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-pointer-events: none;
-z-index: -1;
-overflow: hidden;
-}
-
-.particle {
-position: absolute;
-width: 8px;
-height: 8px;
-background: radial-gradient(circle, rgba(212,175,55,0.8), transparent);
-border-radius: 50%;
-animation: particleFloat 15s infinite linear;
-opacity: 0;
-}
-
-.particle::before {
-content: '';
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-width: 100%;
-height: 100%;
-background: radial-gradient(circle, rgba(255,255,255,0.9), transparent);
-border-radius: 50%;
-}
-
-@keyframes particleFloat {
-0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-10% { opacity: 1; }
-90% { opacity: 0.8; }
-100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
-}
-
-/* ========= BRILLOS ========= */
-.sparkle {
-position: absolute;
-width: 4px;
-height: 4px;
-background: white;
-border-radius: 50%;
-animation: sparkle 2s infinite ease-in-out;
-}
-
-@keyframes sparkle {
-0%, 100% { opacity: 0; transform: scale(0); }
-50% { opacity: 1; transform: scale(1); }
-}
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wilson & Erika | Nuestra Boda</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;600&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
 </head>
-
 <body>
 
-<!-- Partículas flotantes -->
-<div class="particles-container" id="particles"></div>
+    <audio id="bgMusic" loop>
+        <source src="Sera por que te amo - Arcano (2).mp3" type="audio/mpeg">
+    </audio>
 
-<audio id="bgMusic" loop>
-<source src="Sera por que te amo - Arcano (2).mp3" type="audio/mpeg">
-</audio>
+    <div id="musicBtn"><i class="fa-solid fa-music"></i></div>
 
-<div id="musicBtn">
-<i class="fa-solid fa-music"></i>
-</div>
-
-<!-- ========================= -->
-<!-- PORTADA MEJORADA -->
-<!-- ========================= -->
-
-<section id="welcome">
-
-<div class="intro-content" id="introContent">
-
-<!-- Corona decorativa -->
-<div class="crown-ornament" data-aos="fade-down" data-aos-duration="1000">
-    👑
-</div>
-
-<h1 class="cover-title" data-aos="fade-up" data-aos-duration="1500">
-    <span class="title-wilson">Wilson</span>
-    <span class="title-amp">&</span>
-    <span class="title-erika">Erika</span>
-</h1>
-
-<!-- Monograma con efecto 3D -->
-<div class="monogram-container" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="300">
-    <div class="monogram-3d">
-        <div class="monogram-front">
-            <span class="monogram-letter">W</span>
-            <span class="monogram-amp">&</span>
-            <span class="monogram-letter">E</span>
-        </div>
-        <div class="monogram-shine"></div>
-    </div>
-</div>
-
-<p class="intro-quote" data-aos="fade-up" data-aos-delay="500">
-    “El amor nos ha llevado a este momento mágico.<br>
-    Los invitamos a ser testigos de nuestra promesa de amor.”
-</p>
-
-<!-- Botón abrir con efecto 3D -->
-<div id="openInvitation" class="envelope-btn" data-aos="fade-up" data-aos-delay="700">
-    <div class="envelope-body">
-        <div class="envelope-flap"></div>
-        <div class="envelope-content">
-            <span class="envelope-text">Toca para abrir</span>
-            <div class="envelope-decoration">
-                <i class="fa-solid fa-ring"></i>
+    <section id="welcome">
+        <div class="intro-container" data-aos="zoom-in">
+            <h1 class="names">Wilson <span>&</span> Erika</h1>
+            <div class="monogram">WE</div>
+            <p class="date-hero">22 • 08 • 2026</p>
+            <div id="openInvitation" class="btn-open">
+                <span>Abrir Invitación</span>
             </div>
         </div>
-    </div>
-    <div class="envelope-glow"></div>
-</div>
+    </section>
 
-</div>
-
-</section>
-
-<!-- ========================= -->
-<!-- CONTENIDO PRINCIPAL -->
-<!-- ========================= -->
-
-<section id="invitationContent">
-
-<!-- Tarjeta principal 3D -->
-<div class="main-card" id="mainCard">
-
-<!-- Borde dorado decorativo -->
-<div class="card-frame">
-    <div class="frame-corner top-left"></div>
-    <div class="frame-corner top-right"></div>
-    <div class="frame-corner bottom-left"></div>
-    <div class="frame-corner bottom-right"></div>
-    <div class="frame-line top"></div>
-    <div class="frame-line bottom"></div>
-    <div class="frame-line left"></div>
-    <div class="frame-line right"></div>
-</div>
-
-<!-- Encabezado -->
-<header class="card-header" data-aos="fade-down">
-    <div class="header-ornament">❧</div>
-    <h1 class="card-title">
-        <span class="title-wedding">Boda & Bautizo</span>
-    </h1>
-    <p class="card-subtitle">CELESTIAL CEREMONY</p>
-</header>
-
-<!-- Sección de nombres -->
-<section class="names-section">
-    <div class="names-container" data-aos="fade-up" data-aos-delay="200">
-        <div class="couple-display">
-            <div class="name-box groom">
-                <span class="name-text">Wilson</span>
-                <span class="name-ornament">♦</span>
+    <main id="invitationContent">
+        
+        <section class="hero-section">
+            <div class="photo-frame" data-aos="fade-up">
+                <img src="Foto.jpeg" alt="Wilson y Erika">
             </div>
-            <div class="heart-icon">
-                <i class="fa-solid fa-heart"></i>
+            <h2 class="section-title">Nuestra Unión</h2>
+            <p class="quote">“El amor nos ha llevado a este momento mágico. Los invitamos a ser testigos de nuestra promesa de amor.”</p>
+        </section>
+
+        <section class="countdown-section" data-aos="fade-up">
+            <h2 class="section-title">Faltan</h2>
+            <div id="countdown">
+                <div class="time-box"><span id="days">0</span><p>Días</p></div>
+                <div class="time-box"><span id="hours">0</span><p>Horas</p></div>
+                <div class="time-box"><span id="minutes">0</span><p>Minutos</p></div>
+                <div class="time-box"><span id="seconds">0</span><p>Segundos</p></div>
             </div>
-            <div class="name-box bride">
-                <span class="name-text">Erika</span>
-                <span class="name-ornament">♦</span>
+        </section>
+
+        <section class="event-grid">
+            <div class="card" data-aos="flip-left">
+                <i class="fa-solid fa-church icon-style"></i>
+                <h3>Ceremonia</h3>
+                <p>Santuario Virgen del Rocío, Biblián</p>
+                <p><strong>3:30 PM</strong></p>
+                <a href="#" class="btn-location">Ver Ubicación</a>
             </div>
-        </div>
-    </div>
-    
-    <!-- Información del bebé -->
-    <div class="baby-announcement" data-aos="fade-up" data-aos-delay="400">
-        <div class="baby-icon">👶</div>
-        <h2 class="baby-name">+ Mateo</h2>
-        <p class="baby-message">El nuevo miembro de nuestra familia</p>
-    </div>
-</section>
 
-<!-- Divisor decorativo -->
-<div class="elegant-divider" data-aos="fade-in" data-aos-delay="500">
-    <div class="divider-line"></div>
-    <div class="divider-icon">✦</div>
-    <div class="divider-line"></div>
-</div>
+            <div class="card" data-aos="flip-right">
+                <i class="fa-solid fa-champagne-glasses icon-style"></i>
+                <h3>Recepción</h3>
+                <p>El Camping</p>
+                <p><strong>7:00 PM</strong></p>
+                <a href="#" class="btn-location">Cómo llegar</a>
+            </div>
+        </section>
 
-<!-- Sección de detalles -->
-<section class="details-section" data-aos="fade-up" data-aos-delay="600">
+        <section class="card-padrinos" data-aos="fade-up">
+            <h3>Nuestros Padrinos</h3>
+            <div class="godparents-grid">
+                <div><h4>Boda</h4><p>José Chauca & Blanca Guallpa</p></div>
+                <div><h4>Bautizo</h4><p>Carlos Fajardo & Teresa Chauca</p></div>
+            </div>
+        </section>
 
-    <!-- Fecha -->
-    <div class="detail-card">
-        <div class="detail-icon">
-            <i class="fa-solid fa-calendar-days"></i>
-        </div>
-        <h3 class="detail-title">Fecha</h3>
-        <p class="detail-value">22 de Agosto de 2026</p>
-        <p class="detail-note">Sábado</p>
-    </div>
+        <section class="rsvp-section" data-aos="zoom-in">
+            <h2>¿Nos acompañas?</h2>
+            <a href="https://wa.me/593987311469" class="btn-whatsapp">
+                <i class="fa-brands fa-whatsapp"></i> Confirmar Asistencia
+            </a>
+        </section>
+    </main>
 
-    <!-- Hora -->
-    <div class="detail-card">
-        <div class="detail-icon">
-            <i class="fa-solid fa-clock"></i>
-        </div>
-        <h3 class="detail-title">Hora</h3>
-        <p class="detail-value">3:30 PM</p>
-        <p class="detail-note">Ceremonia</p>
-    </div>
-
-    <!-- Lugar ceremonia -->
-    <div class="detail-card">
-        <div class="detail-icon">
-            <i class="fa-solid fa-church"></i>
-        </div>
-        <h3 class="detail-title">Ceremonia</h3>
-        <p class="detail-value">Iglesia de San Miguel</p>
-        <p class="detail-note">Centro, Ciudad</p>
-    </div>
-
-    <!-- Recepción -->
-    <div class="detail-card">
-        <div class="detail-icon">
-            <i class="fa-solid fa-champagne-glasses"></i>
-        </div>
-        <h3 class="detail-title">Recepción</h3>
-        <p class="detail-value">Salón Eventos Luxury</p>
-        <p class="detail-note">5:00 PM - 11:00 PM</p>
-    </div>
-
-</section>
-
-<!-- Divisor -->
-<div class="elegant-divider" data-aos="fade-in">
-    <div class="divider-line"></div>
-    <div class="divider-icon">✦</div>
-    <div class="divider-line"></div>
-</div>
-
-<!-- Cuenta regresiva -->
-<section class="countdown-section" data-aos="fade-up">
-    <h2 class="countdown-title">Cuenta Regresiva</h2>
-    <div class="countdown-container">
-        <div class="countdown-item">
-            <span class="countdown-number" id="days">00</span>
-            <span class="countdown-label">Días</span>
-        </div>
-        <div class="countdown-separator">:</div>
-        <div class="countdown-item">
-            <span class="countdown-number" id="hours">00</span>
-            <span class="countdown-label">Horas</span>
-        </div>
-        <div class="countdown-separator">:</div>
-        <div class="countdown-item">
-            <span class="countdown-number" id="minutes">00</span>
-            <span class="countdown-label">Minutos</span>
-        </div>
-        <div class="countdown-separator">:</div>
-        <div class="countdown-item">
-            <span class="countdown-number" id="seconds">00</span>
-            <span class="countdown-label">Segundos</span>
-        </div>
-    </div>
-</section>
-
-<!-- Mensaje poético -->
-<section class="message-section" data-aos="fade-up">
-    <div class="message-box">
-        <p class="poem-text">
-            "Dos almas se unen en amor y fe,<br>
-            y en sus brazos un nuevo ser nacerá.<br>
-            Con gran alegría les invitamos a ser parte<br>
-            de esta celebración eterna."
-        </p>
-    </div>
-</section>
-
-<!-- Botón confirmar -->
-<div class="cta-section" data-aos="fade-up">
-    <a href="#RSVP" class="cta-button">
-        <span class="cta-text">Confirmar Asistencia</span>
-        <span class="cta-icon"><i class="fa-solid fa-arrow-right"></i></span>
-    </a>
-</div>
-
-<!-- Footer decorativo -->
-<footer class="card-footer">
-    <div class="footer-ornament">❧</div>
-    <p class="footer-message">Con amor, Wilson & Erika</p>
-</footer>
-
-</div>
-
-</section>
-
-<script src="script.js"></script>
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-
-<script>
-AOS.init({
-    duration: 1000,
-    once: true,
-    offset: 100
-});
-</script>
-
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>AOS.init({ duration: 1000, once: true });</script>
+    <script src="script.js"></script>
 </body>
-
 </html>
