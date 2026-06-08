@@ -1030,3 +1030,52 @@ font-size:2.8rem;
     }
 
 }
+.godparents-title{
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:2.8rem;
+
+    font-style:italic;
+
+    color:#B88A4A;
+
+    text-align:center;
+
+    margin-bottom:20px;
+
+}
+
+.godparent-name{
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:2rem;
+
+    font-style:italic;
+
+    color:#6D5442;
+
+    text-align:center;
+
+    margin:8px 0;
+
+}
+
+.couple-separator{
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:2.2rem;
+
+    font-style:italic;
+
+    font-weight:600;
+
+    color:#B88A4A;
+
+    text-align:center;
+
+    margin:8px 0;
+
+}
