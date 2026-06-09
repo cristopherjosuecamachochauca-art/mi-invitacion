@@ -379,11 +379,11 @@ async function guardarAsistencia() {
     }
 
     try {
-        const response = await fetch("https://script.google.com/macros/s/AKfycbw79b69v02nhMEO2arpBiCZqvrZMeSuUAzx2KGW-LUs0YNBOlMHfnoSDQ-Lif3StA31/exec", {
-            method: "POST",
-            body: new URLSearchParams({
-                nombre: nombre,
-                personas: personas
+        const response =await fetch("https://script.google.com/macros/s/AKfycbypsSw75X65JrZW7E_IJc3GWKWlCBEsOGNzBmt6d5Ux736w8QLL3WyU13VlZBr6P3tY/exec", {
+    method: "POST",
+    body: new URLSearchParams({
+        nombre: nombre,
+        personas: personas
             })
         });
 
