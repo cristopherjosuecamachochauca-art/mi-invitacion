@@ -369,6 +369,7 @@ window.addEventListener("load", () => {
 });
 
 async function guardarAsistencia() {
+
     const nombre = document.getElementById("nombre").value;
     const personas = document.getElementById("personas").value;
 
@@ -387,12 +388,12 @@ async function guardarAsistencia() {
         });
 
         const text = await response.text();
-        console.log("RESPUESTA DEL SERVIDOR:", text);
+        console.log("RESPUESTA:", text);
 
-        alert("¡Guardado correctamente!");
+        alert("Guardado correctamente");
 
     } catch (error) {
-        console.error("ERROR:", error);
-        alert("Error real: " + error.message);
+        console.error(error);
+        alert("Error al guardar");
     }
 }
