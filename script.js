@@ -366,8 +366,6 @@ window.addEventListener("load", () => {
 
     }, 100);
 
-
-
 });
 
 async function guardarAsistencia() {
