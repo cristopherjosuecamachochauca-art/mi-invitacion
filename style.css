@@ -1075,3 +1075,10 @@ font-size:2.8rem;
     margin:8px 0;
 
 }
+.baby-photo {
+    width: 220px;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border-radius: 15px;
+}
