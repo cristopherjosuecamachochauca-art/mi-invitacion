@@ -368,7 +368,7 @@ window.addEventListener("load", () => {
 
 
 
-} 
+});
 
 async function guardarAsistencia() {
     const nombre = document.getElementById("nombre").value;
